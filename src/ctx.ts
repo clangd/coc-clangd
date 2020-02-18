@@ -1,8 +1,28 @@
-import { Executable, ExtensionContext, LanguageClient, LanguageClientOptions, ServerOptions, services, workspace } from 'coc.nvim';
+import {
+  Executable,
+  ExtensionContext,
+  HandleDiagnosticsSignature,
+  LanguageClient,
+  LanguageClientOptions,
+  ServerOptions,
+  services,
+  StaticFeature,
+  workspace
+} from 'coc.nvim';
 import { existsSync } from 'fs';
-import { DidChangeTextDocumentNotification } from 'vscode-languageserver-protocol';
+import { Diagnostic, DidChangeTextDocumentNotification, TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
 import which from 'which';
 import { Config } from './config';
+
+class DiagnosticFeature implements StaticFeature {
+  initialize() {}
+  fillClientCapabilities(capabilities) {
+    // @ts-ignore
+    (capabilities.textDocument as TextDocumentClientCapabilities).publishDiagnostics?.categorySupport = true;
+    // @ts-ignore
+    (capabilities.textDocument as TextDocumentClientCapabilities).publishDiagnostics?.codeActionsInline = true;
+  }
+}
 
 export class Ctx {
   public readonly config: Config;
@@ -34,6 +54,7 @@ export class Ctx {
     const exec: Executable = {
       command: bin,
       args: this.config.arguments
+      // options: { env: { CLANGD_TRACE: '/tmp/clangd.log' } }
     };
 
     const serverOptions: ServerOptions = exec;
@@ -57,11 +78,19 @@ export class Ctx {
             params.wantDiagnostics = true;
           }
           client.sendNotification(DidChangeTextDocumentNotification.type.method, params);
+        },
+        handleDiagnostics: (uri: string, diagnostics: Diagnostic[], next: HandleDiagnosticsSignature) => {
+          for (const diagnostic of diagnostics) {
+            // @ts-ignore
+            diagnostic.source = `${diagnostic.source}(${diagnostic.category})`;
+          }
+          next(uri, diagnostics);
         }
       }
     };
 
     const client = new LanguageClient('clangd Language Server', serverOptions, clientOptions);
+    client.registerFeature(new DiagnosticFeature());
     this.context.subscriptions.push(client.start());
     this.context.subscriptions.push(services.registLanguageClient(client));
     await client.onReady();
