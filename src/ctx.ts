@@ -1,8 +1,8 @@
 import { Executable, ExtensionContext, LanguageClient, LanguageClientOptions, ServerOptions, services, workspace } from 'coc.nvim';
 import { existsSync } from 'fs';
+import { DidChangeTextDocumentNotification } from 'vscode-languageserver-protocol';
 import which from 'which';
 import { Config } from './config';
-import { DidChangeTextDocumentNotification } from 'vscode-languageserver-protocol';
 
 export class Ctx {
   public readonly config: Config;
@@ -52,8 +52,10 @@ export class Ctx {
       outputChannel,
       middleware: {
         didChange: params => {
-          // @ts-ignore
-          params.wantDiagnostics = true;
+          if (this.config.wantDiagnostics) {
+            // @ts-ignore
+            params.wantDiagnostics = true;
+          }
           client.sendNotification(DidChangeTextDocumentNotification.type.method, params);
         }
       }
