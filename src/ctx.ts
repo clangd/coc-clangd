@@ -1,14 +1,4 @@
-import {
-  Executable,
-  ExtensionContext,
-  HandleDiagnosticsSignature,
-  LanguageClient,
-  LanguageClientOptions,
-  ServerOptions,
-  services,
-  StaticFeature,
-  workspace
-} from 'coc.nvim';
+import { Executable, ExtensionContext, HandleDiagnosticsSignature, LanguageClient, LanguageClientOptions, ServerOptions, services, StaticFeature, workspace } from 'coc.nvim';
 import { existsSync } from 'fs';
 import { Diagnostic, DidChangeTextDocumentNotification, TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
 import which from 'which';
@@ -16,7 +6,7 @@ import { Config } from './config';
 
 class DiagnosticFeature implements StaticFeature {
   initialize() {}
-  fillClientCapabilities(capabilities) {
+  fillClientCapabilities(capabilities: any) {
     // @ts-ignore
     (capabilities.textDocument as TextDocumentClientCapabilities).publishDiagnostics?.categorySupport = true;
     // @ts-ignore
@@ -77,7 +67,7 @@ export class Ctx {
             // @ts-ignore
             params.wantDiagnostics = true;
           }
-          client.sendNotification(DidChangeTextDocumentNotification.type.method, params);
+          client.sendNotification(DidChangeTextDocumentNotification.type.method, params); // eslint-disable-line
         },
         handleDiagnostics: (uri: string, diagnostics: Diagnostic[], next: HandleDiagnosticsSignature) => {
           for (const diagnostic of diagnostics) {

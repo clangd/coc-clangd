@@ -52,7 +52,7 @@ export function symbolInfo(ctx: Ctx) {
 
     const position = await workspace.getCursorPosition();
     const params: TextDocumentPositionParams = {
-      textDocument: <TextDocumentIdentifier>{ uri: doc.uri },
+      textDocument: { uri: doc.uri },
       position
     };
     const details = await ctx.client.sendRequest<SymbolDetails[]>(SymbolInfoRequest.type.method, params);
