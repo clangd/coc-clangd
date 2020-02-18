@@ -2,6 +2,7 @@ import { Executable, ExtensionContext, LanguageClient, LanguageClientOptions, Se
 import { existsSync } from 'fs';
 import which from 'which';
 import { Config } from './config';
+import { DidChangeTextDocumentNotification } from 'vscode-languageserver-protocol';
 
 export class Ctx {
   public readonly config: Config;
@@ -48,7 +49,14 @@ export class Ctx {
         { scheme: 'file', pattern: cudaFilePattern }
       ],
       initializationOptions: { clangdFileStatus: true },
-      outputChannel
+      outputChannel,
+      middleware: {
+        didChange: params => {
+          // @ts-ignore
+          params.wantDiagnostics = true;
+          client.sendNotification(DidChangeTextDocumentNotification.type.method, params);
+        }
+      }
     };
 
     const client = new LanguageClient('clangd Language Server', serverOptions, clientOptions);

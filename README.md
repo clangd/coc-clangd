@@ -16,6 +16,7 @@ You need [clangd](https://clangd.github.io/installation.html) installed already,
 
 - Switch between source/header, use command `:CocCommand clangd.switchSourceHeader`
 - File status, shows on statusline
+- Force diagnostics generation
 
 ## License
 
