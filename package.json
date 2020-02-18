@@ -73,7 +73,7 @@
         },
         "clangd.wantDiagnostics": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Force diagnostics generation"
         }
       }

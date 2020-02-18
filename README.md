@@ -25,7 +25,7 @@ You need [clangd](https://clangd.github.io/installation.html) installed already,
 - `clangd.enabled`: enable `coc-clangd`, default `true`
 - `clangd.path`: path to `clangd` executable, default `clangd`
 - `clangd.arguments`: arguments for `clangd` server
-- `clangd.wantDiagnostics`: force diagnostics generation, default `true`
+- `clangd.wantDiagnostics`: force diagnostics generation, default `false`
 
 ## License
 

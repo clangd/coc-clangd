@@ -19,6 +19,6 @@ export class Config {
   }
 
   get wantDiagnostics() {
-    return this.cfg.get('wantDiagnostics', true);
+    return this.cfg.get('wantDiagnostics', false);
   }
 }
