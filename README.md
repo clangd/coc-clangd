@@ -14,11 +14,18 @@ You need [clangd](https://clangd.github.io/installation.html) installed already,
 
 `clangd` supports some features that are not in the official [Language Server Protocol specification](https://microsoft.github.io/language-server-protocol/specification), called [Protocol extensions](https://clangd.github.io/extensions.html). `coc-clangd` adds these support:
 
-- Switch between source/header, use command `:CocCommand clangd.switchSourceHeader`
-- File status, shows on statusline
-- Force diagnostics generation
+- Switch between source/header, using command `:CocCommand clangd.switchSourceHeader`
+- File status monitor, shows on statusline
+- Force diagnostics generation, default `true`
 - Diagnostic categories & inline fixes
-- Symbol info request, use command: `:CocCommand clangd.symbolInfo`
+- Symbol info under cursor, using command: `:CocCommand clangd.symbolInfo`
+
+## Configurations
+
+- `clangd.enabled`: enable `coc-clangd`, default `true`
+- `clangd.path`: path to `clangd` executable, default `clangd`
+- `clangd.arguments`: arguments for `clangd` server
+- `clangd.wantDiagnostics`: force diagnostics generation, default `true`
 
 ## License
 
