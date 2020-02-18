@@ -18,6 +18,7 @@ You need [clangd](https://clangd.github.io/installation.html) installed already,
 - File status, shows on statusline
 - Force diagnostics generation
 - Diagnostic categories & inline fixes
+- Symbol info request, use command: `:CocCommand clangd.symbolInfo`
 
 ## License
 

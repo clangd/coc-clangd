@@ -71,6 +71,10 @@
       {
         "command": "clangd.switchSourceHeader",
         "title": "Switch between source/header"
+      },
+      {
+        "command": "clangd.symbolInfo",
+        "title": "Resolve symbol info under the cursor"
       }
     ]
   }

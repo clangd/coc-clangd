@@ -26,6 +26,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
     status,
 
     commands.registerCommand('clangd.switchSourceHeader', cmds.switchSourceHeader(ctx)),
+    commands.registerCommand('clangd.symbolInfo', cmds.symbolInfo(ctx)),
 
     workspace.onDidOpenTextDocument(() => {
       status.updateStatus();

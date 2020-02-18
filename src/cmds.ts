@@ -1,9 +1,20 @@
 import { workspace } from 'coc.nvim';
-import { RequestType, TextDocumentIdentifier } from 'vscode-languageserver-protocol';
+import { RequestType, TextDocumentIdentifier, TextDocumentPositionParams } from 'vscode-languageserver-protocol';
 import { Ctx } from './ctx';
 
 namespace SwitchSourceHeaderRequest {
-  export const type = new RequestType<TextDocumentIdentifier, string | undefined, void, void>('textDocument/switchSourceHeader');
+  export const type = new RequestType<TextDocumentIdentifier, string, void, void>('textDocument/switchSourceHeader');
+}
+
+namespace SymbolInfoRequest {
+  export const type = new RequestType<TextDocumentPositionParams, string, void, void>('textDocument/symbolInfo');
+}
+
+interface SymbolDetails {
+  name: string;
+  containerName: string;
+  usr: string;
+  id?: string;
 }
 
 export function switchSourceHeader(ctx: Ctx) {
@@ -25,5 +36,32 @@ export function switchSourceHeader(ctx: Ctx) {
     }
 
     await workspace.jumpTo(dest);
+  };
+}
+
+export function symbolInfo(ctx: Ctx) {
+  return async () => {
+    if (!ctx.client) {
+      return;
+    }
+
+    const doc = await workspace.document;
+    if (!doc) {
+      return;
+    }
+
+    const position = await workspace.getCursorPosition();
+    const params: TextDocumentPositionParams = {
+      textDocument: <TextDocumentIdentifier>{ uri: doc.uri },
+      position
+    };
+    const details = await ctx.client.sendRequest<SymbolDetails[]>(SymbolInfoRequest.type.method, params);
+    if (!details.length) {
+      return;
+    }
+
+    // TODO
+    const detail = details[0];
+    workspace.showMessage(`name: ${detail.name}, containerName: ${detail.containerName}, usr: ${detail.usr}`);
   };
 }
