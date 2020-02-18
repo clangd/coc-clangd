@@ -49,16 +49,9 @@ export class Ctx {
       ],
       initializationOptions: { clangdFileStatus: true },
       outputChannel
-      // revealOutputChannelOn: RevealOutputChannelOn.Never
     };
 
     const client = new LanguageClient('clangd Language Server', serverOptions, clientOptions);
-    if (this.config.semanticHighlighting) {
-      // const semanticHighlightingFeature = new semanticHighlighting.SemanticHighlightingFeature(clangdClient, context);
-      // context.subscriptions.push(vscode.Disposable.from(semanticHighlightingFeature));
-      // clangdClient.registerFeature(semanticHighlightingFeature);
-    }
-
     this.context.subscriptions.push(client.start());
     this.context.subscriptions.push(services.registLanguageClient(client));
     await client.onReady();

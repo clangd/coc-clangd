@@ -59,11 +59,6 @@
             "type": "string"
           },
           "description": "Arguments for clangd server"
-        },
-        "clangd.semanticHighlighting": {
-          "type": "boolean",
-          "default": "true",
-          "description": "Enable semantic highlighting in clangd"
         }
       }
     },
