@@ -1,52 +1,38 @@
-import { commands, CompleteResult, ExtensionContext, sources, workspace } from 'coc.nvim';
+import { commands, ExtensionContext, workspace } from 'coc.nvim';
+import * as cmds from './cmds';
+import { Ctx } from './ctx';
+import { FileStatus } from './file_status';
 
 export async function activate(context: ExtensionContext): Promise<void> {
-  workspace.showMessage(`coc-clangd works!`);
+  const ctx = new Ctx(context);
+  if (!ctx.config.enabled) {
+    return;
+  }
 
+  const bin = ctx.resolveBin();
+  if (!bin) {
+    workspace.showMessage(`clangd is not found`, 'error');
+    return;
+  }
+
+  try {
+    await ctx.startServer(bin);
+  } catch (e) {
+    return;
+  }
+
+  const status = new FileStatus();
   context.subscriptions.push(
-    commands.registerCommand('coc-clangd.Command', async () => {
-      workspace.showMessage(`coc-clangd Commands works!`);
-    }),
+    status,
 
-    sources.createSource({
-      name: 'coc-clangd completion source', // unique id
-      shortcut: '[CS]', // [CS] is custom source
-      priority: 1,
-      triggerPatterns: [], // RegExp pattern
-      doComplete: async () => {
-        const items = await getItems();
-        return items;
-      }
-    }),
+    commands.registerCommand('clangd.switchSourceHeader', cmds.switchSourceHeader(ctx)),
 
-    workspace.registerKeymap(
-      ['n'],
-      'coc-clangd-keymap',
-      async () => {
-        workspace.showMessage(`registerKeymap`);
-      },
-      { sync: false }
-    ),
-
-    workspace.registerAutocmd({
-      event: 'InsertLeave',
-      request: true,
-      callback: () => {
-        workspace.showMessage(`registerAutocmd on InsertLeave`);
-      }
+    workspace.onDidOpenTextDocument(() => {
+      status.updateStatus();
     })
   );
-}
 
-async function getItems(): Promise<CompleteResult> {
-  return {
-    items: [
-      {
-        word: 'TestCompletionItem 1'
-      },
-      {
-        word: 'TestCompletionItem 2'
-      }
-    ]
-  };
+  ctx.client?.onNotification('textDocument/clangd.fileStatus', fileStatus => {
+    status.onFileUpdated(fileStatus);
+  });
 }
