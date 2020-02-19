@@ -17,8 +17,4 @@ export class Config {
   get arguments() {
     return this.cfg.get<string[]>('arguments', []);
   }
-
-  get wantDiagnostics() {
-    return this.cfg.get('wantDiagnostics', false);
-  }
 }
