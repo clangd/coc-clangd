@@ -1,6 +1,6 @@
 import { Executable, ExtensionContext, HandleDiagnosticsSignature, LanguageClient, LanguageClientOptions, ServerOptions, services, StaticFeature, workspace } from 'coc.nvim';
 import { existsSync } from 'fs';
-import { Diagnostic, DidChangeTextDocumentNotification, TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
+import { Diagnostic, TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
 import which from 'which';
 import { Config } from './config';
 
