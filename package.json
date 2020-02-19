@@ -70,11 +70,6 @@
             "type": "string"
           },
           "description": "Arguments for clangd server"
-        },
-        "clangd.wantDiagnostics": {
-          "type": "boolean",
-          "default": false,
-          "description": "Force diagnostics generation"
         }
       }
     },
