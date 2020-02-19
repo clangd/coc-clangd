@@ -4,7 +4,7 @@ import { Diagnostic, TextDocumentClientCapabilities } from 'vscode-languageserve
 import which from 'which';
 import { Config } from './config';
 
-class DiagnosticFeature implements StaticFeature {
+class ClangdExtensionFeature implements StaticFeature {
   initialize() {}
   fillClientCapabilities(capabilities: any) {
     const textDocument = capabilities.textDocument as TextDocumentClientCapabilities;
@@ -76,7 +76,7 @@ export class Ctx {
     };
 
     const client = new LanguageClient('clangd Language Server', serverOptions, clientOptions);
-    client.registerFeature(new DiagnosticFeature());
+    client.registerFeature(new ClangdExtensionFeature());
     this.context.subscriptions.push(client.start());
     this.context.subscriptions.push(services.registLanguageClient(client));
     await client.onReady();
