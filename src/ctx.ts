@@ -7,10 +7,13 @@ import { Config } from './config';
 class DiagnosticFeature implements StaticFeature {
   initialize() {}
   fillClientCapabilities(capabilities: any) {
-    // @ts-ignore
-    (capabilities.textDocument as TextDocumentClientCapabilities).publishDiagnostics?.categorySupport = true;
-    // @ts-ignore
-    (capabilities.textDocument as TextDocumentClientCapabilities).publishDiagnostics?.codeActionsInline = true;
+    const textDocument = capabilities.textDocument as TextDocumentClientCapabilities;
+    // @ts-ignore: clangd extension
+    textDocument.publishDiagnostics?.categorySupport = true;
+    // @ts-ignore: clangd extension
+    textDocument.publishDiagnostics?.codeActionsInline = true;
+    // @ts-ignore: clangd extension
+    textDocument.completion?.editsNearCursor = true;
   }
 }
 
