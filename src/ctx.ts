@@ -7,7 +7,7 @@ import { Config } from './config';
 class DiagnosticFeature implements StaticFeature {
   initialize() {}
   fillClientCapabilities(capabilities: any) {
-    let textDocument = capabilities.textDocument as TextDocumentClientCapabilities
+    const textDocument = capabilities.textDocument as TextDocumentClientCapabilities;
     // @ts-ignore: clangd extension
     textDocument.publishDiagnostics?.categorySupport = true;
     // @ts-ignore: clangd extension
