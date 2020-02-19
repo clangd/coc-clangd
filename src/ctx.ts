@@ -62,13 +62,6 @@ export class Ctx {
       initializationOptions: { clangdFileStatus: true },
       outputChannel,
       middleware: {
-        didChange: params => {
-          if (this.config.wantDiagnostics) {
-            // @ts-ignore
-            params.wantDiagnostics = true;
-          }
-          client.sendNotification(DidChangeTextDocumentNotification.type.method, params); // eslint-disable-line
-        },
         handleDiagnostics: (uri: string, diagnostics: Diagnostic[], next: HandleDiagnosticsSignature) => {
           for (const diagnostic of diagnostics) {
             // @ts-ignore
