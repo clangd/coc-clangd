@@ -9,8 +9,6 @@ class ClangdExtensionFeature implements StaticFeature {
   fillClientCapabilities(capabilities: any) {
     const textDocument = capabilities.textDocument as TextDocumentClientCapabilities;
     // @ts-ignore: clangd extension
-    textDocument.publishDiagnostics?.categorySupport = true;
-    // @ts-ignore: clangd extension
     textDocument.publishDiagnostics?.codeActionsInline = true;
     // @ts-ignore: clangd extension
     textDocument.completion?.editsNearCursor = true;
@@ -64,15 +62,6 @@ export class Ctx {
       ],
       initializationOptions: { clangdFileStatus: true },
       outputChannel,
-      middleware: {
-        handleDiagnostics: (uri: string, diagnostics: Diagnostic[], next: HandleDiagnosticsSignature) => {
-          for (const diagnostic of diagnostics) {
-            // @ts-ignore
-            diagnostic.source = `${diagnostic.source}(${diagnostic.category})`;
-          }
-          next(uri, diagnostics);
-        }
-      }
     };
 
     const client = new LanguageClient('clangd Language Server', serverOptions, clientOptions);
