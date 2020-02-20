@@ -9,8 +9,6 @@ class ClangdExtensionFeature implements StaticFeature {
   fillClientCapabilities(capabilities: any) {
     const textDocument = capabilities.textDocument as TextDocumentClientCapabilities;
     // @ts-ignore: clangd extension
-    textDocument.publishDiagnostics?.codeActionsInline = true;
-    // @ts-ignore: clangd extension
     textDocument.completion?.editsNearCursor = true;
   }
 }
