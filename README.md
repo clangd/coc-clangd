@@ -1,29 +1,30 @@
 # coc-clangd
 
-clangd extension for [coc.nvim][]
+This extension connects [coc.nvim][] to the [clangd][] language server.
 
 ## Quick Start
 
-1. make sure you have [clangd][] install already, and setup `compile_commands.json` for your project.
-1. install [Node.js][], `coc.nvim` and `coc-clangd` are runs on Node.js.
-1. install `coc.nvim` by `vim-plug`. Checkout [coc.nvim Wiki][] for more info.
+1. make sure you have [clangd][] installed already, and set up `compile_commands.json` for your project.
+1. install [Node.js][]. `coc.nvim` and `coc-clangd` run on Node.js.
+1. install `coc.nvim`. Instructions using `vim-plug`
+   (check out [coc.nvim Wiki][] other options):
+     - Add to `.vimrc`: `vim Plug 'neoclide/coc.nvim', {'branch': 'release'}`
+     - in vim, run `:PlugInstall`
+1. In vim, run `:CocInstall coc-clangd`
 
-   ```vim
-   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-   ```
-
-1. `:CocInstall coc-clangd`
-
-> **Note**: remove `clangd` config from `coc-settings.json` if you set
+> **Note**: If you've configured `clangd` as a languageServer in
+  `coc-settings.json`, you should remove it to avoid running clangd twice!
 
 ## Protocol extensions
 
-`clangd` supports some features that are not in the official [Language Server Protocol specification][lsp], called [Protocol extensions][]. `coc-clangd` adds these support:
+`clangd` supports some [extensions][] that are not in the official [Language Server Protocol specification][lsp].
 
-- Switch between source/header, using command `:CocCommand clangd.switchSourceHeader`
-- File status monitor, shows on statusline
-- Diagnostic inline fixes
-- Symbol info under cursor, using command: `:CocCommand clangd.symbolInfo`
+`coc-clangd` adds support for:
+
+- Switching between header and implementation file: `:CocCommand clangd.switchSourceHeader`
+- File status monitor, shows on NeoVim statusline
+- Requesting fixes along with diagnostics
+- Describe symbol under the cursor: `:CocCommand clangd.symbolInfo`
 
 ## Configurations
 
@@ -44,4 +45,4 @@ MIT
 [coc.nvim]: https://github.com/neoclide/coc.nvim
 [coc.nvim wiki]: https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
 [lsp]: https://microsoft.github.io/language-server-protocol/specification
-[protocol extensions]: https://clangd.github.io/extensions.html
+[extensions]: https://clangd.github.io/extensions.html
