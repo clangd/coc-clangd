@@ -1,6 +1,6 @@
-import { Executable, ExtensionContext, HandleDiagnosticsSignature, LanguageClient, LanguageClientOptions, ServerOptions, services, StaticFeature, workspace } from 'coc.nvim';
+import { Executable, ExtensionContext, LanguageClient, LanguageClientOptions, ServerOptions, services, StaticFeature, workspace } from 'coc.nvim';
 import { existsSync } from 'fs';
-import { Diagnostic, TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
+import { TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
 import which from 'which';
 import { Config } from './config';
 
@@ -61,7 +61,7 @@ export class Ctx {
         { scheme: 'file', pattern: cudaFilePattern }
       ],
       initializationOptions: { clangdFileStatus: true },
-      outputChannel,
+      outputChannel
     };
 
     const client = new LanguageClient('clangd Language Server', serverOptions, clientOptions);
