@@ -1,22 +1,27 @@
 # coc-clangd
 
-clangd extension for coc.nvim
+clangd extension for [coc.nvim][]
 
-## Install
+## Quick Start
 
-`:CocInstall coc-clangd`
+1. make sure you have [clangd][] install already, and setup `compile_commands.json` for your project.
+1. install [Node.js][], `coc.nvim` and `coc-clangd` are runs on Node.js.
+1. install `coc.nvim` by `vim-plug`. Checkout [coc.nvim Wiki][] for more info.
+
+   ```vim
+   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+   ```
+
+1. `:CocInstall coc-clangd`
 
 > **Note**: remove `clangd` config from `coc-settings.json` if you set
 
-You need [clangd](https://clangd.github.io/installation.html) installed already, and `compile_commands.json` for your project.
-
 ## Protocol extensions
 
-`clangd` supports some features that are not in the official [Language Server Protocol specification](https://microsoft.github.io/language-server-protocol/specification), called [Protocol extensions](https://clangd.github.io/extensions.html). `coc-clangd` adds these support:
+`clangd` supports some features that are not in the official [Language Server Protocol specification][lsp], called [Protocol extensions][]. `coc-clangd` adds these support:
 
 - Switch between source/header, using command `:CocCommand clangd.switchSourceHeader`
 - File status monitor, shows on statusline
-- Force diagnostics generation, default `true`
 - Diagnostic inline fixes
 - Symbol info under cursor, using command: `:CocCommand clangd.symbolInfo`
 
@@ -33,3 +38,10 @@ MIT
 ---
 
 > This extension is created by [create-coc-extension](https://github.com/fannheyward/create-coc-extension)
+
+[node.js]: https://nodejs.org/en/
+[clangd]: https://clangd.github.io/installation.html
+[coc.nvim]: https://github.com/neoclide/coc.nvim
+[coc.nvim wiki]: https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
+[lsp]: https://microsoft.github.io/language-server-protocol/specification
+[protocol extensions]: https://clangd.github.io/extensions.html
