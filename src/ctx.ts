@@ -1,6 +1,6 @@
-import { Executable, ExtensionContext, HandleDiagnosticsSignature, LanguageClient, LanguageClientOptions, ServerOptions, services, StaticFeature, workspace } from 'coc.nvim';
+import { Executable, ExtensionContext, LanguageClient, LanguageClientOptions, ServerOptions, services, StaticFeature, workspace } from 'coc.nvim';
 import { existsSync } from 'fs';
-import { Diagnostic, TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
+import { TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
 import which from 'which';
 import { Config } from './config';
 
@@ -8,8 +8,6 @@ class ClangdExtensionFeature implements StaticFeature {
   initialize() {}
   fillClientCapabilities(capabilities: any) {
     const textDocument = capabilities.textDocument as TextDocumentClientCapabilities;
-    // @ts-ignore: clangd extension
-    textDocument.publishDiagnostics?.categorySupport = true;
     // @ts-ignore: clangd extension
     textDocument.publishDiagnostics?.codeActionsInline = true;
     // @ts-ignore: clangd extension
@@ -63,16 +61,7 @@ export class Ctx {
         { scheme: 'file', pattern: cudaFilePattern }
       ],
       initializationOptions: { clangdFileStatus: true },
-      outputChannel,
-      middleware: {
-        handleDiagnostics: (uri: string, diagnostics: Diagnostic[], next: HandleDiagnosticsSignature) => {
-          for (const diagnostic of diagnostics) {
-            // @ts-ignore
-            diagnostic.source = `${diagnostic.source}(${diagnostic.category})`;
-          }
-          next(uri, diagnostics);
-        }
-      }
+      outputChannel
     };
 
     const client = new LanguageClient('clangd Language Server', serverOptions, clientOptions);

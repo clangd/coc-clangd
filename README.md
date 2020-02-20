@@ -17,7 +17,7 @@ You need [clangd](https://clangd.github.io/installation.html) installed already,
 - Switch between source/header, using command `:CocCommand clangd.switchSourceHeader`
 - File status monitor, shows on statusline
 - Force diagnostics generation, default `true`
-- Diagnostic categories & inline fixes
+- Diagnostic inline fixes
 - Symbol info under cursor, using command: `:CocCommand clangd.symbolInfo`
 
 ## Configurations
