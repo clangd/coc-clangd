@@ -76,6 +76,11 @@
             "type": "string"
           },
           "description": "Arguments for clangd server"
+        },
+        "diagnostic.format": {
+          "type": "string",
+          "description": "Define the diagnostic format. Available parts: source, code, severity, message",
+          "default": "%message [%source]"
         }
       }
     },
