@@ -49,7 +49,7 @@ export class Ctx {
     };
 
     const serverOptions: ServerOptions = exec;
-    const outputChannel = workspace.createOutputChannel('clangd trace');
+    const outputChannel = workspace.createOutputChannel('clangd log');
 
     const cudaFilePattern = '**/*.{cu}';
     const clientOptions: LanguageClientOptions = {
@@ -64,7 +64,7 @@ export class Ctx {
       outputChannel
     };
 
-    const client = new LanguageClient('clangd Language Server', serverOptions, clientOptions);
+    const client = new LanguageClient('clangd', serverOptions, clientOptions);
     client.registerFeature(new ClangdExtensionFeature());
     this.context.subscriptions.push(client.start());
     this.context.subscriptions.push(services.registLanguageClient(client));
