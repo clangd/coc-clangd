@@ -25,6 +25,7 @@ This extension connects [coc.nvim][] to the [clangd][] language server.
 - File status monitor, shows on NeoVim statusline
 - Requesting fixes along with diagnostics
 - Describe symbol under the cursor: `:CocCommand clangd.symbolInfo`
+- Completions that adjust text near the cursor (e.g. correcting `.` to `->`)
 
 ## Configurations
 
