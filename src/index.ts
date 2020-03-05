@@ -1,4 +1,4 @@
-import { commands, ExtensionContext, workspace } from 'coc.nvim';
+import { commands, ExtensionContext, services, workspace } from 'coc.nvim';
 import * as cmds from './cmds';
 import { Ctx } from './ctx';
 import { FileStatus } from './file_status';
@@ -11,8 +11,15 @@ export async function activate(context: ExtensionContext): Promise<void> {
 
   const bin = ctx.resolveBin();
   if (!bin) {
-    workspace.showMessage(`clangd is not found`, 'error');
+    workspace.showMessage(`clangd is not found, you need to install clangd first. https://clangd.github.io/installation.html`, 'error');
     return;
+  }
+
+  for (const service of services.getServiceStats()) {
+    if (service.id.includes('clangd')) {
+      workspace.showMessage(`Looks like you've configured clangd in coc-settings.json, you should remove it to use coc-clangd`, 'warning');
+      return;
+    }
   }
 
   try {
