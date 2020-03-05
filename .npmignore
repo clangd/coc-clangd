@@ -7,3 +7,6 @@ tsconfig.json
 webpack.config.js
 yarn.lock
 yarn-error.log
+.github
+.eslintrc.js
+.prettierrc
