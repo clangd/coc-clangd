@@ -2,6 +2,8 @@
 
 This extension connects [coc.nvim][] to the [clangd][] language server.
 
+**The extension does not install `clangd` for you! You must [install clangd][clangd] separately.**
+
 ## Quick Start
 
 1. make sure you have [clangd][] installed already, and set up `compile_commands.json` for your project.
