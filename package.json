@@ -27,7 +27,7 @@
     "@types/which": "^1.3.2",
     "@typescript-eslint/eslint-plugin": "^2.20.0",
     "@typescript-eslint/parser": "^2.20.0",
-    "coc.nvim": "^0.0.74",
+    "coc.nvim": "^0.0.76",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
@@ -76,6 +76,11 @@
             "type": "string"
           },
           "description": "Arguments for clangd server"
+        },
+        "suggest.detailMaxLength": {
+          "type": "number",
+          "description": "Max length of detail that should be shown in popup menu.",
+          "default": 50
         },
         "diagnostic.format": {
           "type": "string",
