@@ -49,6 +49,8 @@
   "activationEvents": [
     "onLanguage:c",
     "onLanguage:cpp",
+    "onLanguage:cuda",
+    "onLanguage:arduino",
     "onLanguage:objective-c",
     "onLanguage:objective-cpp",
     "workspaceContains:**/compile_commands.json",

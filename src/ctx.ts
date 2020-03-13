@@ -49,7 +49,7 @@ export class Ctx {
     const serverOptions: ServerOptions = exec;
     const outputChannel = workspace.createOutputChannel('clangd log');
 
-    const cudaFilePattern = '**/*.{cu}';
+    const cudaFilePattern = '**/*.{cu,ino}';
     const clientOptions: LanguageClientOptions = {
       documentSelector: [
         { scheme: 'file', language: 'c' },
