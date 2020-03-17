@@ -64,7 +64,6 @@ export class Ctx {
 
     const client = new LanguageClient('clangd', serverOptions, clientOptions);
     client.registerFeature(new ClangdExtensionFeature());
-    this.context.subscriptions.push(client.start());
     this.context.subscriptions.push(services.registLanguageClient(client));
     await client.onReady();
 
