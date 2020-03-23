@@ -79,6 +79,11 @@
           },
           "description": "Arguments for clangd server"
         },
+        "clangd.semanticHighlighting": {
+          "type": "boolean",
+          "default": "true",
+          "description": "Enable semantic highlighting in clangd"
+        },
         "suggest.detailMaxLength": {
           "type": "number",
           "description": "Max length of detail that should be shown in popup menu.",

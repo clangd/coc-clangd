@@ -17,4 +17,8 @@ export class Config {
   get arguments() {
     return this.cfg.get<string[]>('arguments', []);
   }
+
+  get semanticHighlighting() {
+    return this.cfg.get('semanticHighlighting', true);
+  }
 }

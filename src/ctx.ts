@@ -3,13 +3,13 @@ import { existsSync } from 'fs';
 import { TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
 import which from 'which';
 import { Config } from './config';
+import { SemanticHighlightingFeature } from './semantic-highlighting';
 
 class ClangdExtensionFeature implements StaticFeature {
   initialize() {}
   fillClientCapabilities(capabilities: any) {
-    const textDocument = capabilities.textDocument as TextDocumentClientCapabilities;
-    // @ts-ignore: clangd extension
-    textDocument.completion?.editsNearCursor = true;
+    const textDocumentCapabilities: TextDocumentClientCapabilities & { completion: { editsNearCursor: boolean } } = capabilities.textDocument;
+    textDocumentCapabilities.completion.editsNearCursor = true;
   }
 }
 
@@ -64,6 +64,12 @@ export class Ctx {
 
     const client = new LanguageClient('clangd', serverOptions, clientOptions);
     client.registerFeature(new ClangdExtensionFeature());
+    if (this.config.semanticHighlighting) {
+      const lspCxx = await workspace.nvim.call('exists', 'g:lsp_cxx_hl_loaded');
+      if (lspCxx === 1) {
+        client.registerFeature(new SemanticHighlightingFeature(client, this.context));
+      }
+    }
     this.context.subscriptions.push(services.registLanguageClient(client));
     await client.onReady();
 
