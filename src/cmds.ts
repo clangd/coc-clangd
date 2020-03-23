@@ -28,7 +28,7 @@ export function switchSourceHeader(ctx: Ctx) {
       return;
     }
     const params: TextDocumentIdentifier = {
-      uri: doc.uri
+      uri: doc.uri,
     };
     const dest = await ctx.client.sendRequest<string>(SwitchSourceHeaderRequest.type.method, params);
     if (!dest) {
@@ -53,7 +53,7 @@ export function symbolInfo(ctx: Ctx) {
     const position = await workspace.getCursorPosition();
     const params: TextDocumentPositionParams = {
       textDocument: { uri: doc.uri },
-      position
+      position,
     };
     const details = await ctx.client.sendRequest<SymbolDetails[]>(SymbolInfoRequest.type.method, params);
     if (!details.length) {

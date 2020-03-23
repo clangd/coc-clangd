@@ -40,7 +40,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
     })
   );
 
-  ctx.client?.onNotification('textDocument/clangd.fileStatus', fileStatus => {
+  ctx.client?.onNotification('textDocument/clangd.fileStatus', (fileStatus) => {
     status.onFileUpdated(fileStatus);
   });
 }

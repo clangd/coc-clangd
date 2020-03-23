@@ -42,7 +42,7 @@ export class Ctx {
 
     const exec: Executable = {
       command: bin,
-      args: this.config.arguments
+      args: this.config.arguments,
       // options: { env: { CLANGD_TRACE: '/tmp/clangd.log' } }
     };
 
@@ -56,10 +56,10 @@ export class Ctx {
         { scheme: 'file', language: 'cpp' },
         { scheme: 'file', language: 'objective-c' },
         { scheme: 'file', language: 'objective-cpp' },
-        { scheme: 'file', pattern: cudaFilePattern }
+        { scheme: 'file', pattern: cudaFilePattern },
       ],
       initializationOptions: { clangdFileStatus: true },
-      outputChannel
+      outputChannel,
     };
 
     const client = new LanguageClient('clangd', serverOptions, clientOptions);
