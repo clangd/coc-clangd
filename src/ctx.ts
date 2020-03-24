@@ -8,8 +8,9 @@ import { SemanticHighlightingFeature } from './semantic-highlighting';
 class ClangdExtensionFeature implements StaticFeature {
   initialize() {}
   fillClientCapabilities(capabilities: any) {
-    const textDocumentCapabilities: TextDocumentClientCapabilities & { completion: { editsNearCursor: boolean } } = capabilities.textDocument;
-    textDocumentCapabilities.completion.editsNearCursor = true;
+    const textDocument = capabilities.textDocument as TextDocumentClientCapabilities;
+    // @ts-ignore: clangd extension
+    textDocument.completion?.editsNearCursor = true;
   }
 }
 

@@ -73,20 +73,19 @@ export class SemanticHighlightingFeature implements StaticFeature {
     // use https://github.com/jackguo380/vim-lsp-cxx-highlight to do highlighting
     const lines: SemanticHighlightingLine[] = params.lines.map((line) => ({ line: line.line, tokens: this.decodeTokens(line.tokens) }));
     const symbols: any[] = [];
-    const skipped: any[] = [];
+    const skipped: Range[] = [];
 
     for (const line of lines) {
       for (const token of line.tokens) {
-        symbols.push({
-          id: 0,
-          kind: token.kind,
-          ranges: [Range.create(line.line, token.character, line.line, token.character + token.length)],
-          parentKind: 'Unknown', // FIXME
-          storage: 'None', // FIXME
-        });
         if (token.kind === 'InactiveCode') {
-          skipped.push({
+          skipped.push(Range.create(line.line, token.character, line.line, token.character + token.length));
+        } else {
+          symbols.push({
+            id: 0,
+            kind: token.kind,
             ranges: [Range.create(line.line, token.character, line.line, token.character + token.length)],
+            parentKind: 'Unknown',
+            storage: 'None',
           });
         }
       }

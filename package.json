@@ -81,8 +81,8 @@
         },
         "clangd.semanticHighlighting": {
           "type": "boolean",
-          "default": "true",
-          "description": "Enable semantic highlighting in clangd"
+          "default": "false",
+          "description": "Enable semantic highlighting in clangd, requires jackguo380/vim-lsp-cxx-highlight to work"
         },
         "suggest.detailMaxLength": {
           "type": "number",
