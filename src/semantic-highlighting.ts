@@ -1,6 +1,8 @@
 import { BaseLanguageClient, ExtensionContext, State, StaticFeature, workspace } from 'coc.nvim';
 import { ClientCapabilities, NotificationType, Range, ServerCapabilities, TextDocumentClientCapabilities, VersionedTextDocumentIdentifier } from 'vscode-languageserver-protocol';
 
+// semanticHighlighting protocol: https://github.com/microsoft/vscode-languageserver-node/pull/367
+//
 // Contains the highlighting information for a specified line. Mirrors the
 // structure in the semantic highlighting proposal for LSP.
 interface SemanticHighlightingInformation {
