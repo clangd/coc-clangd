@@ -8,14 +8,12 @@ This extension connects [coc.nvim][] to the [clangd][] language server.
 
 1. make sure you have [clangd][] installed already, and set up `compile_commands.json` for your project.
 1. install [Node.js][]. `coc.nvim` and `coc-clangd` run on Node.js.
-1. install `coc.nvim`. Instructions using `vim-plug`
-   (check out [coc.nvim Wiki][] other options):
-     - Add to `.vimrc`: `vim Plug 'neoclide/coc.nvim', {'branch': 'release'}`
-     - in vim, run `:PlugInstall`
-1. In vim, run `:CocInstall coc-clangd`
+1. install `coc.nvim`. Instructions using `vim-plug` (check out [coc.nvim Wiki][] other options):
+   - add to `.vimrc`: `vim Plug 'neoclide/coc.nvim', {'branch': 'release'}`
+   - in vim, run `:PlugInstall`
+1. in vim, run `:CocInstall coc-clangd`
 
-> **Note**: If you've configured `clangd` as a languageServer in
-  `coc-settings.json`, you should remove it to avoid running clangd twice!
+> **Note**: If you've configured `clangd` as a languageServer in `coc-settings.json`, you should remove it to avoid running clangd twice!
 
 ## Protocol extensions
 
@@ -33,6 +31,7 @@ This extension connects [coc.nvim][] to the [clangd][] language server.
 - `clangd.enabled`: enable `coc-clangd`, default `true`
 - `clangd.path`: path to `clangd` executable, default `clangd`
 - `clangd.arguments`: arguments for `clangd` server
+- `clangd.semanticHighlighting`: enable semantic highlighting, requires [jackguo380/vim-lsp-cxx-highlight](https://github.com/jackguo380/vim-lsp-cxx-highlight) to work, default `false`
 
 ## License
 

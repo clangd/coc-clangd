@@ -3,6 +3,7 @@ import { existsSync } from 'fs';
 import { TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
 import which from 'which';
 import { Config } from './config';
+import { SemanticHighlightingFeature } from './semantic-highlighting';
 
 class ClangdExtensionFeature implements StaticFeature {
   initialize() {}
@@ -64,6 +65,12 @@ export class Ctx {
 
     const client = new LanguageClient('clangd', serverOptions, clientOptions);
     client.registerFeature(new ClangdExtensionFeature());
+    if (this.config.semanticHighlighting) {
+      const lspCxx = await workspace.nvim.call('exists', 'g:lsp_cxx_hl_loaded');
+      if (lspCxx === 1) {
+        client.registerFeature(new SemanticHighlightingFeature(client, this.context));
+      }
+    }
     this.context.subscriptions.push(services.registLanguageClient(client));
     await client.onReady();
 
