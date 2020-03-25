@@ -7,7 +7,7 @@ export class Config {
   }
 
   get enabled() {
-    return this.cfg.get('enabled', true);
+    return this.cfg.get('enabled') as boolean;
   }
 
   get path() {
@@ -19,6 +19,6 @@ export class Config {
   }
 
   get semanticHighlighting() {
-    return this.cfg.get('semanticHighlighting', true);
+    return this.cfg.get('semanticHighlighting') as boolean;
   }
 }
