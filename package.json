@@ -66,6 +66,11 @@
           "default": true,
           "description": "Enable coc-clangd extension"
         },
+        "clangd.disableDiagnostics": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable diagnostics from clangd"
+        },
         "clangd.path": {
           "type": "string",
           "default": "clangd",

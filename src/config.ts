@@ -10,6 +10,10 @@ export class Config {
     return this.cfg.get('enabled') as boolean;
   }
 
+  get disableDiagnostics() {
+    return this.cfg.get('disableDiagnostics') as boolean;
+  }
+
   get path() {
     return this.cfg.get('path', 'clangd');
   }

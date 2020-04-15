@@ -60,6 +60,7 @@ export class Ctx {
         { scheme: 'file', pattern: cudaFilePattern },
       ],
       initializationOptions: { clangdFileStatus: true },
+      disableDiagnostics: this.config.disableDiagnostics,
       outputChannel,
     };
 
