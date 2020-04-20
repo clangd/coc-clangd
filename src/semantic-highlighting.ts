@@ -35,16 +35,10 @@ interface SemanticHighlightingToken {
   kind: string;
 }
 
-// A line of decoded highlightings from the data clangd sent.
-export interface SemanticHighlightingLine {
-  // The zero-based line position in the text document.
-  line: number;
-  // All SemanticHighlightingTokens on the line.
-  tokens: SemanticHighlightingToken[];
-}
-
 export class SemanticHighlightingFeature implements StaticFeature {
   private scopeTable: string[][] = [];
+  // Last tokens seen: bufTokens[bufnr][linenr] = [tokens...]
+  private bufTokens: { [bufnr: number]: SemanticHighlightingToken[][] } = {};
 
   constructor(client: BaseLanguageClient, context: ExtensionContext) {
     context.subscriptions.push(
@@ -73,19 +67,29 @@ export class SemanticHighlightingFeature implements StaticFeature {
 
   async handleNotification(params: SemanticHighlightingParams) {
     // use https://github.com/jackguo380/vim-lsp-cxx-highlight to do highlighting
-    const lines: SemanticHighlightingLine[] = params.lines.map((line) => ({ line: line.line, tokens: this.decodeTokens(line.tokens) }));
+    // first, assemble the full list of tokens.
+    const doc = workspace.getDocument(params.textDocument.uri);
+    // Create implicit previous state if it doesn't exist.
+    if (!(doc.bufnr in this.bufTokens)) this.bufTokens[doc.bufnr] = [];
+    const lines = this.bufTokens[doc.bufnr];
+    // Update changed lines in place.
+    for (const line of params.lines) {
+      while (line.line >= lines.length) lines.push([]);
+      lines[line.line] = this.decodeTokens(line.tokens);
+    }
+
     const symbols: any[] = [];
     const skipped: Range[] = [];
 
-    for (const line of lines) {
-      for (const token of line.tokens) {
+    for (const [line, tokens] of lines.entries()) {
+      for (const token of tokens) {
         if (token.kind === 'InactiveCode') {
-          skipped.push(Range.create(line.line, token.character, line.line, token.character + token.length));
+          skipped.push(Range.create(line, token.character, line, token.character + token.length));
         } else {
           symbols.push({
             id: 0,
             kind: token.kind,
-            ranges: [Range.create(line.line, token.character, line.line, token.character + token.length)],
+            ranges: [Range.create(line, token.character, line, token.character + token.length)],
             parentKind: 'Unknown',
             storage: 'None',
           });
@@ -93,7 +97,6 @@ export class SemanticHighlightingFeature implements StaticFeature {
       }
     }
 
-    const doc = workspace.getDocument(params.textDocument.uri);
     await workspace.nvim.call('lsp_cxx_hl#hl#notify_symbols', [doc.bufnr, symbols]);
     if (skipped.length) {
       await workspace.nvim.call('lsp_cxx_hl#hl#notify_skipped', [doc.bufnr, skipped]);
