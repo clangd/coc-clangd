@@ -43,8 +43,8 @@ MIT
 > This extension is created by [create-coc-extension](https://github.com/fannheyward/create-coc-extension)
 
 [node.js]: https://nodejs.org/en/
-[clangd]: https://clangd.github.io/installation.html
+[clangd]: https://clangd.llvm.org/installation.html
 [coc.nvim]: https://github.com/neoclide/coc.nvim
 [coc.nvim wiki]: https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
 [lsp]: https://microsoft.github.io/language-server-protocol/specification
-[extensions]: https://clangd.github.io/extensions.html
+[extensions]: https://clangd.llvm.org/extensions.html

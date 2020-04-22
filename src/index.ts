@@ -11,7 +11,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
 
   const bin = ctx.resolveBin();
   if (!bin) {
-    workspace.showMessage(`clangd is not found, you need to install clangd first. https://clangd.github.io/installation.html`, 'error');
+    workspace.showMessage(`clangd is not found, you need to install clangd first. https://clangd.llvm.org/installation.html`, 'error');
     return;
   }
 
