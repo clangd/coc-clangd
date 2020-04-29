@@ -62,11 +62,6 @@ export class Ctx {
       initializationOptions: { clangdFileStatus: true },
       disableDiagnostics: this.config.disableDiagnostics,
       outputChannel,
-      middleware: {
-        provideOnTypeFormattingEdits: (document, position, _ch, options, token, next) => {
-          return next(document, position, '', options, token);
-        },
-      },
     };
 
     const client = new LanguageClient('clangd', serverOptions, clientOptions);
