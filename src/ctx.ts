@@ -59,7 +59,7 @@ export class Ctx {
         { scheme: 'file', language: 'objective-cpp' },
         { scheme: 'file', pattern: cudaFilePattern },
       ],
-      initializationOptions: { clangdFileStatus: true },
+      initializationOptions: { clangdFileStatus: true, fallbackFlags: this.config.fallbackFlags },
       disableDiagnostics: this.config.disableDiagnostics,
       outputChannel,
     };

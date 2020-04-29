@@ -84,6 +84,14 @@
           },
           "description": "Arguments for clangd server"
         },
+        "clangd.fallbackFlags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Fallback flags used when no specific compile command is found."
+        },
         "clangd.semanticHighlighting": {
           "type": "boolean",
           "default": false,
