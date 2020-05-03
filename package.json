@@ -90,7 +90,7 @@
             "type": "string"
           },
           "default": [],
-          "description": "Fallback flags used to parse files when no specific compile command is found."
+          "description": "Extra clang flags used to parse files when no compilation database is found."
         },
         "clangd.semanticHighlighting": {
           "type": "boolean",

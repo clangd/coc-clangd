@@ -32,7 +32,7 @@ This extension connects [coc.nvim][] to the [clangd][] language server.
 - `clangd.disableDiagnostics`: disable diagnostics from clangd, default `false`
 - `clangd.path`: path to `clangd` executable, default `clangd`
 - `clangd.arguments`: arguments for `clangd` server, default `[]`
-- `clangd.fallbackFlags`: flags used to parse files when no specific compile commands found, default `[]`
+- `clangd.fallbackFlags`: extra clang flags used to parse files when no compilation database is found., default `[]`
 - `clangd.semanticHighlighting`: enable semantic highlighting, requires [jackguo380/vim-lsp-cxx-highlight](https://github.com/jackguo380/vim-lsp-cxx-highlight) to work, default `false`
 
 ## License
