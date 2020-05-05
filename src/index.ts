@@ -2,16 +2,11 @@ import { commands, ExtensionContext, services, State, workspace } from 'coc.nvim
 import * as cmds from './cmds';
 import { Ctx } from './ctx';
 import { FileStatus } from './file_status';
+import * as install from './install';
 
 export async function activate(context: ExtensionContext): Promise<void> {
   const ctx = new Ctx(context);
   if (!ctx.config.enabled) {
-    return;
-  }
-
-  const bin = ctx.resolveBin();
-  if (!bin) {
-    workspace.showMessage(`clangd is not found, you need to install clangd first. https://clangd.llvm.org/installation.html`, 'error');
     return;
   }
 
@@ -22,8 +17,13 @@ export async function activate(context: ExtensionContext): Promise<void> {
     }
   }
 
+  const clangdPath = await install.activate(context);
+  if (!clangdPath) {
+    return;
+  }
+
   try {
-    await ctx.startServer(bin);
+    await ctx.startServer(clangdPath);
   } catch (e) {
     return;
   }

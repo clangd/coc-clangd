@@ -14,10 +14,6 @@ export class Config {
     return this.cfg.get('disableDiagnostics') as boolean;
   }
 
-  get path() {
-    return this.cfg.get('path', 'clangd');
-  }
-
   get arguments() {
     return this.cfg.get<string[]>('arguments', []);
   }

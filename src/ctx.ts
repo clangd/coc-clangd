@@ -1,7 +1,5 @@
 import { Executable, ExtensionContext, LanguageClient, LanguageClientOptions, ServerOptions, services, StaticFeature, workspace } from 'coc.nvim';
-import { existsSync } from 'fs';
 import { TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
-import which from 'which';
 import { Config } from './config';
 import { SemanticHighlightingFeature } from './semantic-highlighting';
 
@@ -20,19 +18,6 @@ export class Ctx {
 
   constructor(private readonly context: ExtensionContext) {
     this.config = new Config();
-  }
-
-  resolveBin(): string | undefined {
-    const bin = which.sync(this.config.path, { nothrow: true });
-    if (!bin) {
-      return;
-    }
-
-    if (!existsSync(bin)) {
-      return;
-    }
-
-    return bin;
   }
 
   async startServer(bin: string) {
