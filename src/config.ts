@@ -18,6 +18,10 @@ export class Config {
     return this.cfg.get<string[]>('arguments', []);
   }
 
+  get fallbackFlags() {
+    return this.cfg.get<string[]>('fallbackFlags', []);
+  }
+
   get semanticHighlighting() {
     return this.cfg.get('semanticHighlighting') as boolean;
   }

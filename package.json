@@ -1,6 +1,6 @@
 {
   "name": "coc-clangd",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "clangd extension for coc.nvim",
   "author": "Heyward Fann <fannheyward@gmail.com>",
   "license": "MIT",
@@ -24,22 +24,22 @@
   },
   "devDependencies": {
     "@clangd/install": "^0.1.1",
-    "@types/node": "^13.13.1",
+    "@types/node": "^13.13.4",
     "@types/which": "^1.3.2",
-    "@typescript-eslint/eslint-plugin": "^2.29.0",
-    "@typescript-eslint/parser": "^2.29.0",
+    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "@typescript-eslint/parser": "^2.30.0",
     "coc.nvim": "^0.0.77",
     "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.1",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.3",
     "husky": "^4.2.5",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.0.4",
+    "prettier": "^2.0.5",
     "rimraf": "^3.0.1",
     "ts-loader": "^7.0.1",
     "typescript": "^3.8.3",
     "vscode-languageserver-protocol": "^3.15.3",
-    "webpack": "^4.42.1",
+    "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },
   "husky": {
@@ -84,6 +84,14 @@
             "type": "string"
           },
           "description": "Arguments for clangd server"
+        },
+        "clangd.fallbackFlags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Extra clang flags used to parse files when no compilation database is found."
         },
         "clangd.semanticHighlighting": {
           "type": "boolean",

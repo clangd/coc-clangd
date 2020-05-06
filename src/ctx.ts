@@ -44,12 +44,14 @@ export class Ctx {
         { scheme: 'file', language: 'objective-cpp' },
         { scheme: 'file', pattern: cudaFilePattern },
       ],
-      initializationOptions: { clangdFileStatus: true },
+      initializationOptions: { clangdFileStatus: true, fallbackFlags: this.config.fallbackFlags },
       disableDiagnostics: this.config.disableDiagnostics,
       outputChannel,
       middleware: {
-        provideOnTypeFormattingEdits: (document, position, _ch, options, token, next) => {
-          return next(document, position, '', options, token);
+        provideOnTypeFormattingEdits: (document, position, ch, options, token, next) => {
+          // coc sends "\n" when exiting insert mode, when there is no newline added to the doc.
+          if (ch === '\n') ch = '';
+          return next(document, position, ch, options, token);
         },
       },
     };
