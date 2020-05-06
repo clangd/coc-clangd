@@ -44,7 +44,9 @@ This extension connects [coc.nvim][] to the [clangd][] language server.
 
 ## License
 
-MIT
+Apache 2.0 with LLVM Exception
+
+This is the [standard LLVM license](https://llvm.org/foundation/relicensing/).
 
 ---
 
