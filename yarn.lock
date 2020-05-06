@@ -32,10 +32,10 @@
   dependencies:
     msgpack-lite "^0.1.26"
 
-"@clangd/install@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@clangd/install/-/install-0.1.1.tgz#05fa3198567cff6e54e7aa28e335edc3d9c68b9e"
-  integrity sha512-UoQ6GADam0YeJr8m17QMakY9UALVKOwNxpMwIiMYziZU+n2QpuKJxx2QIDI6WTBY5s3IzAFokGd+0JUni3vMDQ==
+"@clangd/install@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@clangd/install/-/install-0.1.2.tgz#ea77f96aeb592ff18edf4aa58edd51677f6a6028"
+  integrity sha512-4HayElU8BakKTQjKcyVtv5SVZ/JzNIEMs+mZ5LEhq1h7+/T7N2TkZuP6lJCOyAg0wwPu2qCTfTuFU8SJTE9boQ==
   dependencies:
     abort-controller "^3.0.0"
     node-fetch "^2.6.0"
