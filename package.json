@@ -23,6 +23,7 @@
     "prepare": "npm-run-all clean build"
   },
   "devDependencies": {
+    "@clangd/install": "^0.1.1",
     "@types/node": "^13.13.4",
     "@types/which": "^1.3.2",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
@@ -97,6 +98,11 @@
           "default": false,
           "description": "Enable semantic highlighting in clangd, requires jackguo380/vim-lsp-cxx-highlight to work"
         },
+        "clangd.checkUpdates": {
+          "type": "boolean",
+          "default": false,
+          "description": "Check for clangd language server updates on startup."
+        },
         "suggest.detailMaxLength": {
           "type": "number",
           "description": "Max length of detail that should be shown in popup menu.",
@@ -117,6 +123,14 @@
       {
         "command": "clangd.symbolInfo",
         "title": "Resolve symbol info under the cursor"
+      },
+      {
+        "command": "clangd.install",
+        "title": "Install latest clangd language server binary release"
+      },
+      {
+        "command": "clangd.update",
+        "title": "Check for updates to clangd language server"
       }
     ]
   }
