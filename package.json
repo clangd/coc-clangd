@@ -1,6 +1,6 @@
 {
   "name": "coc-clangd",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "description": "clangd extension for coc.nvim",
   "author": "Heyward Fann <fannheyward@gmail.com>",
   "license": "MIT",
