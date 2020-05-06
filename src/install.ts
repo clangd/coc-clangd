@@ -28,9 +28,8 @@ class UI {
     coc.workspace.showMessage(`Reusing existing ${release} installation in ${this.storagePath}`);
     return true;
   }
-  promptReload(message: string) {
-    message += " Type ':CocRestart' to reload.";
-    coc.workspace.showMessage(message);
+  async promptReload() {
+    await coc.commands.executeCommand('editor.action.restart');
   }
   showHelp(message: string, url: string) {
     message += ` See ${url}.`;
