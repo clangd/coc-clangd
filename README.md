@@ -2,16 +2,15 @@
 
 This extension connects [coc.nvim][] to the [clangd][] language server.
 
-**The extension does not install `clangd` for you! You must [install clangd][clangd] separately.**
-
 ## Quick Start
 
-1. make sure you have [clangd][] installed already, and set up `compile_commands.json` for your project.
 1. install [Node.js][]. `coc.nvim` and `coc-clangd` run on Node.js.
 1. install `coc.nvim`. Instructions using `vim-plug` (check out [coc.nvim Wiki][] other options):
    - add to `.vimrc`: `vim Plug 'neoclide/coc.nvim', {'branch': 'release'}`
    - in vim, run `:PlugInstall`
 1. in vim, run `:CocInstall coc-clangd`
+1. `coc-clangd` will try to find `clangd` from your `$PATH`, if not found, you can run `:CocCommand clangd.install` to install the [latest release][] from GitHub
+1. follow [Project setup][] to generate `compile_commands.json` for your project
 
 > **Note**: If you've configured `clangd` as a languageServer in `coc-settings.json`, you should remove it to avoid running clangd twice!
 
@@ -57,3 +56,5 @@ MIT
 [coc.nvim wiki]: https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
 [lsp]: https://microsoft.github.io/language-server-protocol/specification
 [extensions]: https://clangd.llvm.org/extensions.html
+[latest release]: https://github.com/clangd/clangd/releases
+[project setup]: https://clangd.llvm.org/installation.html#project-setup
