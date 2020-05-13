@@ -32,6 +32,7 @@ export function switchSourceHeader(ctx: Ctx) {
     };
     const dest = await ctx.client.sendRequest<string>(SwitchSourceHeaderRequest.type.method, params);
     if (!dest) {
+      workspace.showMessage(`Didn't find a corresponding file.`);
       return;
     }
 
