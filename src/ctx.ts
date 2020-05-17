@@ -40,6 +40,8 @@ export class Ctx {
       documentSelector: [
         { scheme: 'file', language: 'c' },
         { scheme: 'file', language: 'cpp' },
+        { scheme: 'file', language: 'objc' },
+        { scheme: 'file', language: 'objcpp' },
         { scheme: 'file', language: 'objective-c' },
         { scheme: 'file', language: 'objective-cpp' },
         { scheme: 'file', pattern: cudaFilePattern },
