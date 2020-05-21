@@ -35,7 +35,6 @@ export class Ctx {
     const serverOptions: ServerOptions = exec;
     const outputChannel = workspace.createOutputChannel('clangd log');
 
-    const cudaFilePattern = '**/*.{cu,ino}';
     const clientOptions: LanguageClientOptions = {
       documentSelector: [
         { scheme: 'file', language: 'c' },
@@ -44,7 +43,8 @@ export class Ctx {
         { scheme: 'file', language: 'objcpp' },
         { scheme: 'file', language: 'objective-c' },
         { scheme: 'file', language: 'objective-cpp' },
-        { scheme: 'file', pattern: cudaFilePattern },
+        { scheme: 'file', language: 'cuda' },
+        { scheme: 'file', language: 'arduino' },
       ],
       initializationOptions: { clangdFileStatus: true, fallbackFlags: this.config.fallbackFlags },
       disableDiagnostics: this.config.disableDiagnostics,
