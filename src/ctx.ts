@@ -1,4 +1,5 @@
-import { Executable, ExtensionContext, LanguageClient, LanguageClientOptions, ServerOptions, services, StaticFeature, workspace } from 'coc.nvim';
+import { Executable, ExtensionContext, extensions, LanguageClient, LanguageClientOptions, ServerOptions, services, StaticFeature, workspace } from 'coc.nvim';
+import { basename } from 'path';
 import { TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
 import { Config } from './config';
 import { SemanticHighlightingFeature } from './semantic-highlighting';
@@ -70,5 +71,14 @@ export class Ctx {
     await client.onReady();
 
     this.client = client;
+  }
+
+  watch(url: string) {
+    const msg = `${basename(url)} has changed, reload clangd now?`;
+    workspace.showPrompt(msg).then(async (prompt) => {
+      if (prompt) {
+        await extensions.reloadExtension('coc-clangd');
+      }
+    });
   }
 }

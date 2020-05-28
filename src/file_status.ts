@@ -9,8 +9,8 @@ export class FileStatus implements Disposable {
 
   private statuses = new Map<string, any>();
 
-  onFileUpdated(fileStatus: any) {
-    this.statuses.set(fileStatus.uri, fileStatus);
+  onFileUpdated(status: any) {
+    this.statuses.set(status.uri, status);
     this.updateStatus();
   }
 
