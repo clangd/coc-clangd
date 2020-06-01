@@ -73,12 +73,10 @@ export class Ctx {
     this.client = client;
   }
 
-  watch(url: string) {
-    const msg = `${basename(url)} has changed, reload clangd now?`;
-    workspace.showPrompt(msg).then(async (prompt) => {
-      if (prompt) {
-        await extensions.reloadExtension('coc-clangd');
-      }
-    });
+  async watch(url: string) {
+    const msg = `${basename(url)} has changed, clangd is reloading...`;
+    workspace.showMessage(msg);
+    await extensions.reloadExtension('coc-clangd');
+    workspace.showMessage(`clangd has reloaded`);
   }
 }
