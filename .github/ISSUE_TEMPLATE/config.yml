@@ -1,0 +1,4 @@
+contact_links:
+  - name: clangd issue
+    url: https://github.com/clangd/clangd/issues
+    about: clangd bugs and ideas that aren't clearly specific to coc-clangd
