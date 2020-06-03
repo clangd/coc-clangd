@@ -25,4 +25,8 @@ export class Config {
   get semanticHighlighting() {
     return this.cfg.get('semanticHighlighting') as boolean;
   }
+
+  get showDBChangedNotification() {
+    return this.cfg.get('showDBChangedNotification') as boolean;
+  }
 }

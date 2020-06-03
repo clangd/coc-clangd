@@ -74,9 +74,12 @@ export class Ctx {
   }
 
   async watch(url: string) {
-    const msg = `${basename(url)} has changed, clangd is reloading...`;
-    workspace.showMessage(msg);
+    const notification = this.config.showDBChangedNotification;
+    if (notification) {
+      const msg = `${basename(url)} has changed, clangd is reloading...`;
+      workspace.showMessage(msg);
+    }
     await extensions.reloadExtension('coc-clangd');
-    workspace.showMessage(`clangd has reloaded`);
+    if (notification) workspace.showMessage(`clangd has reloaded`);
   }
 }

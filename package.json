@@ -100,6 +100,11 @@
           "default": false,
           "description": "Enable semantic highlighting in clangd, requires jackguo380/vim-lsp-cxx-highlight to work"
         },
+        "clangd.showDBChangedNotification": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show notifications while DB files changed"
+        },
         "clangd.checkUpdates": {
           "type": "boolean",
           "default": false,
