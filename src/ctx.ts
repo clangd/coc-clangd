@@ -1,6 +1,5 @@
-import { Executable, ExtensionContext, extensions, LanguageClient, LanguageClientOptions, ServerOptions, services, StaticFeature, workspace } from 'coc.nvim';
-import { basename } from 'path';
-import { TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
+import { Executable, ExtensionContext, LanguageClient, LanguageClientOptions, ServerOptions, services, StaticFeature, workspace } from 'coc.nvim';
+import { Disposable, TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
 import { Config } from './config';
 import { SemanticHighlightingFeature } from './semantic-highlighting';
 
@@ -73,13 +72,7 @@ export class Ctx {
     this.client = client;
   }
 
-  async watch(url: string) {
-    const notification = this.config.showDBChangedNotification;
-    if (notification) {
-      const msg = `${basename(url)} has changed, clangd is reloading...`;
-      workspace.showMessage(msg);
-    }
-    await extensions.reloadExtension('coc-clangd');
-    if (notification) workspace.showMessage(`clangd has reloaded`);
+  get subscriptions(): Disposable[] {
+    return this.context.subscriptions;
   }
 }
