@@ -55,6 +55,18 @@ export class Ctx {
           if (ch === '\n') ch = '';
           return next(document, position, ch, options, token);
         },
+        provideWorkspaceSymbols: async (query, token, next) => {
+          const symbols = await next(query, token);
+          if (!symbols) return;
+
+          return symbols.map((symbol) => {
+            if (symbol.containerName) {
+              symbol.name = `${symbol.containerName}::${symbol.name}`;
+            }
+            symbol.containerName = '';
+            return symbol;
+          });
+        },
       },
     };
 
