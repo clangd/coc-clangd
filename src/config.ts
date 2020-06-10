@@ -14,6 +14,10 @@ export class Config {
     return this.cfg.get('disableDiagnostics') as boolean;
   }
 
+  get snippetSupport() {
+    return this.cfg.get('snippetSupport') as boolean;
+  }
+
   get arguments() {
     return this.cfg.get<string[]>('arguments', []);
   }

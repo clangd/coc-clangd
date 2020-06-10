@@ -4,11 +4,14 @@ import { Config } from './config';
 import { SemanticHighlightingFeature } from './semantic-highlighting';
 
 class ClangdExtensionFeature implements StaticFeature {
+  constructor(private config: Config) {}
   initialize() {}
   fillClientCapabilities(capabilities: any) {
     const textDocument = capabilities.textDocument as TextDocumentClientCapabilities;
     // @ts-ignore: clangd extension
     textDocument.completion?.editsNearCursor = true;
+    // @ts-ignore: clangd extension
+    textDocument.completion?.completionItem?.snippetSupport = this.config.snippetSupport;
   }
 }
 
@@ -71,7 +74,7 @@ export class Ctx {
     };
 
     const client = new LanguageClient('clangd', serverOptions, clientOptions);
-    client.registerFeature(new ClangdExtensionFeature());
+    client.registerFeature(new ClangdExtensionFeature(this.config));
     if (this.config.semanticHighlighting) {
       const lspCxx = await workspace.nvim.call('exists', 'g:lsp_cxx_hl_loaded');
       if (lspCxx === 1) {

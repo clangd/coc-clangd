@@ -74,6 +74,11 @@
           "default": false,
           "description": "Disable diagnostics from clangd"
         },
+        "clangd.snippetSupport": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable snippetSupport from clangd"
+        },
         "clangd.path": {
           "type": "string",
           "default": "clangd",
