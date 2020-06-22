@@ -74,10 +74,10 @@
           "default": false,
           "description": "Disable diagnostics from clangd"
         },
-        "clangd.snippetSupport": {
+        "clangd.disableSnippetCompletion": {
           "type": "boolean",
-          "default": true,
-          "description": "Enable snippetSupport from clangd"
+          "default": false,
+          "description": "Disable completion snippet from clangd"
         },
         "clangd.path": {
           "type": "string",

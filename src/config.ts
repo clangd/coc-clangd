@@ -14,8 +14,8 @@ export class Config {
     return this.cfg.get('disableDiagnostics') as boolean;
   }
 
-  get snippetSupport() {
-    return this.cfg.get('snippetSupport') as boolean;
+  get disableSnippetCompletion() {
+    return this.cfg.get('disableSnippetCompletion') as boolean;
   }
 
   get arguments() {
