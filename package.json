@@ -79,6 +79,11 @@
           "default": false,
           "description": "Disable completion snippet from clangd"
         },
+        "clangd.compilationDatabasePath": {
+          "type": "string",
+          "default": "",
+          "description": "Specifies the directory containing the compilation database"
+        },
         "clangd.path": {
           "type": "string",
           "default": "clangd",

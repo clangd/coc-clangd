@@ -33,4 +33,8 @@ export class Config {
   get showDBChangedNotification() {
     return this.cfg.get('showDBChangedNotification') as boolean;
   }
+
+  get compilationDatabasePath() {
+    return this.cfg.get<string>('compilationDatabasePath');
+  }
 }

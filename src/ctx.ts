@@ -47,7 +47,7 @@ export class Ctx {
         { scheme: 'file', language: 'cuda' },
         { scheme: 'file', language: 'arduino' },
       ],
-      initializationOptions: { clangdFileStatus: true, fallbackFlags: this.config.fallbackFlags },
+      initializationOptions: { clangdFileStatus: true, fallbackFlags: this.config.fallbackFlags, compilationDatabasePath: this.config.compilationDatabasePath },
       disableDiagnostics: this.config.disableDiagnostics,
       // @ts-ignore
       disableSnippetCompletion: this.config.disableSnippetCompletion,
