@@ -36,6 +36,11 @@ export class Ctx {
     const serverOptions: ServerOptions = exec;
     const outputChannel = workspace.createOutputChannel('clangd log');
 
+    const initializationOptions: any = { clangdFileStatus: true, fallbackFlags: this.config.fallbackFlags };
+    if (this.config.compilationDatabasePath) {
+      initializationOptions.compilationDatabasePath = this.config.compilationDatabasePath;
+    }
+
     const clientOptions: LanguageClientOptions = {
       documentSelector: [
         { scheme: 'file', language: 'c' },
@@ -47,7 +52,7 @@ export class Ctx {
         { scheme: 'file', language: 'cuda' },
         { scheme: 'file', language: 'arduino' },
       ],
-      initializationOptions: { clangdFileStatus: true, fallbackFlags: this.config.fallbackFlags, compilationDatabasePath: this.config.compilationDatabasePath },
+      initializationOptions,
       disableDiagnostics: this.config.disableDiagnostics,
       // @ts-ignore
       disableSnippetCompletion: this.config.disableSnippetCompletion,
