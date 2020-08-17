@@ -27,6 +27,8 @@ This extension connects [coc.nvim][] to the [clangd][] language server.
 
 ## Configurations
 
+`:CocConfig` opens your global `coc-settings.json`, or `:CocLocalConfig` opens local configuration in your project `.vim/coc-settings.json`.
+
 - `clangd.enabled`: enable `coc-clangd`, default `true`
 - `clangd.arguments`: arguments for `clangd` server, default `[]`
 - `clangd.checkUpdates`: check for clangd language server updates on startup, default `false`
