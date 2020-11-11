@@ -59,6 +59,14 @@
     "workspaceContains:**/compile_commands.json",
     "workspaceContains:**/compile_flags.txt"
   ],
+  "rootPatterns": [
+    {
+      "patterns": [
+        "compile_commands.json",
+        "compile_flags.txt"
+      ]
+    }
+  ],
   "contributes": {
     "configuration": {
       "type": "object",
