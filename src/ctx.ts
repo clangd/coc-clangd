@@ -30,8 +30,10 @@ export class Ctx {
     const exec: Executable = {
       command: bin,
       args: this.config.arguments,
-      // options: { env: { CLANGD_TRACE: '/tmp/clangd.log' } }
     };
+    if (!!this.config.trace) {
+      exec.options = { env: { CLANGD_TRACE: this.config.trace } };
+    }
 
     const serverOptions: ServerOptions = exec;
     const outputChannel = workspace.createOutputChannel('clangd log');

@@ -22,6 +22,10 @@ export class Config {
     return this.cfg.get<string[]>('arguments', []);
   }
 
+  get trace() {
+    return this.cfg.get<string>('trace', '');
+  }
+
   get fallbackFlags() {
     return this.cfg.get<string[]>('fallbackFlags', []);
   }

@@ -105,6 +105,10 @@
           },
           "description": "Arguments for clangd server"
         },
+        "clangd.trace": {
+          "type": "string",
+          "description": "Names a file that clangd should log a performance trace to, in chrome trace-viewer JSON format."
+        },
         "clangd.fallbackFlags": {
           "type": "array",
           "items": {
