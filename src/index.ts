@@ -44,7 +44,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
     ctx.client!.onDidChangeState((e) => {
       if (e.newState === State.Running) {
         ctx.client?.onNotification('textDocument/clangd.fileStatus', (status) => {
-          status.onFileUpdated(status);
+          fileStatus.onFileUpdated(status);
         });
       } else if (e.newState === State.Stopped) {
         fileStatus.clear();
