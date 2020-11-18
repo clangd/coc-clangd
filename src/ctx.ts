@@ -36,7 +36,7 @@ export class Ctx {
     }
 
     const serverOptions: ServerOptions = exec;
-    const outputChannel = workspace.createOutputChannel('clangd log');
+    const outputChannel = workspace.createOutputChannel('clangd');
 
     const initializationOptions: any = { clangdFileStatus: true, fallbackFlags: this.config.fallbackFlags };
     if (this.config.compilationDatabasePath) {
