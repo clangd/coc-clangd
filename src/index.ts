@@ -30,7 +30,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
   }
 
   const fileStatus = new FileStatus();
-  const fileWatcher = workspace.createFileSystemWatcher('**/{compile_commands.json,compile_flags.txt,.clang-tidy}');
+  const fileWatcher = workspace.createFileSystemWatcher('**/{compile_commands.json,compile_flags.txt}');
   fileWatcher.onDidChange((e) => reload(e.fsPath, ctx, context));
   fileWatcher.onDidCreate((e) => reload(e.fsPath, ctx, context));
 
