@@ -1,6 +1,6 @@
 {
   "name": "coc-clangd",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "clangd extension for coc.nvim",
   "author": "Heyward Fann <fannheyward@gmail.com>",
   "license": "Apache-2.0 WITH LLVM-exception",
