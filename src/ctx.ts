@@ -1,5 +1,5 @@
 import { Executable, ExtensionContext, LanguageClient, LanguageClientOptions, ServerOptions, services, StaticFeature, workspace } from 'coc.nvim';
-import { Disposable, TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
+import { CompletionList, Disposable, Range, TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
 import { Config } from './config';
 import { SemanticHighlightingFeature } from './semantic-highlighting';
 
@@ -64,6 +64,21 @@ export class Ctx {
           // coc sends "\n" when exiting insert mode, when there is no newline added to the doc.
           if (ch === '\n') ch = '';
           return next(document, position, ch, options, token);
+        },
+        provideCompletionItem: async (document, position, context, token, next) => {
+          const list = await next(document, position, context, token);
+          if (!list) return [];
+          if (!this.config.serverCompletionRanking) return list;
+
+          const items = (Array.isArray(list) ? list : list.items).map((item) => {
+            const start = item.textEdit?.range.start;
+            if (start) {
+              const prefix = document.getText(Range.create(start, position));
+              if (prefix) item.filterText = prefix + '_' + item.filterText;
+            }
+            return item;
+          });
+          return CompletionList.create(items, true);
         },
         provideWorkspaceSymbols: async (query, token, next) => {
           const symbols = await next(query, token);
