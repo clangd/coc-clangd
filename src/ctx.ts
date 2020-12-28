@@ -85,10 +85,12 @@ export class Ctx {
           if (!symbols) return;
 
           return symbols.map((symbol) => {
-            if (symbol.containerName) {
-              symbol.name = `${symbol.containerName}::${symbol.name}`;
+            if (query.includes('::')) {
+              if (symbol.containerName) {
+                symbol.name = `${symbol.containerName}::${symbol.name}`;
+              }
+              symbol.containerName = '';
             }
-            symbol.containerName = '';
             return symbol;
           });
         },
