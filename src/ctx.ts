@@ -21,7 +21,7 @@ export class Ctx {
     this.config = new Config();
   }
 
-  async startServer(bin: string) {
+  async startServer(bin: string, ...features: StaticFeature[]) {
     const old = this.client;
     if (old) {
       await old.stop();
@@ -103,6 +103,7 @@ export class Ctx {
         client.registerFeature(new SemanticHighlightingFeature(client, this.context));
       }
     }
+    for (const feature of features) client.registerFeature(feature);
     this.context.subscriptions.push(services.registLanguageClient(client));
     await client.onReady();
 
