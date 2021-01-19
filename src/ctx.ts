@@ -1,5 +1,4 @@
-import { Executable, ExtensionContext, LanguageClient, LanguageClientOptions, ServerOptions, services, StaticFeature, window, workspace } from 'coc.nvim';
-import { Disposable, Range, TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
+import { Disposable, Executable, ExtensionContext, LanguageClient, LanguageClientOptions, Range, ServerOptions, services, StaticFeature, window, workspace } from 'coc.nvim';
 import { Config } from './config';
 import { SemanticHighlightingFeature } from './semantic-highlighting';
 
@@ -8,9 +7,8 @@ class ClangdExtensionFeature implements StaticFeature {
   dispose(): void {}
   initialize() {}
   fillClientCapabilities(capabilities: any) {
-    const textDocument = capabilities.textDocument as TextDocumentClientCapabilities;
-    // @ts-ignore: clangd extension
-    textDocument.completion?.editsNearCursor = true;
+    const extendedCompletionCapabilities = capabilities.textDocument.completion;
+    extendedCompletionCapabilities.editsNearCursor = true;
   }
 }
 
