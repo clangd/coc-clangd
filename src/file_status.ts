@@ -1,10 +1,10 @@
-import { Disposable, StatusBarItem, workspace } from 'coc.nvim';
+import { Disposable, StatusBarItem, window, workspace } from 'coc.nvim';
 
 export class FileStatus implements Disposable {
   private readonly statusBarItem: StatusBarItem;
 
   constructor() {
-    this.statusBarItem = workspace.createStatusBarItem(0);
+    this.statusBarItem = window.createStatusBarItem(0);
   }
 
   private statuses = new Map<string, any>();

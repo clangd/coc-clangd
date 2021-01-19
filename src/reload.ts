@@ -1,6 +1,6 @@
-import { StaticFeature, workspace } from 'coc.nvim';
-import { ServerCapabilities } from 'vscode-languageserver-protocol';
+import { StaticFeature, window, workspace } from 'coc.nvim';
 import { basename } from 'path';
+import { ServerCapabilities } from 'vscode-languageserver-protocol';
 import { Ctx } from './ctx';
 
 interface ClangdClientCapabilities {
@@ -11,6 +11,7 @@ interface ClangdClientCapabilities {
 // server-side reload is always supported.
 export class ReloadFeature implements StaticFeature {
   constructor(private ctx: Ctx, private activate: () => void) {}
+  dispose(): void {}
   initialize(caps: ServerCapabilities) {
     // Don't restart the server if it's able to reload config files itself.
     if ((caps as ClangdClientCapabilities).compilationDatabase?.automaticReload) {
@@ -31,7 +32,7 @@ export class ReloadFeature implements StaticFeature {
     const notification = this.ctx.config.showDBChangedNotification;
     if (notification) {
       const msg = `${basename(url)} has changed, clangd is reloading...`;
-      workspace.showMessage(msg);
+      window.showMessage(msg);
     }
 
     for (const sub of this.ctx.subscriptions) {
@@ -43,6 +44,6 @@ export class ReloadFeature implements StaticFeature {
     }
 
     this.activate();
-    if (notification) workspace.showMessage(`clangd has reloaded`);
+    if (notification) window.showMessage(`clangd has reloaded`);
   }
 }

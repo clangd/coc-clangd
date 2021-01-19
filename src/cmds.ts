@@ -1,4 +1,4 @@
-import { workspace } from 'coc.nvim';
+import { window, workspace } from 'coc.nvim';
 import { RequestType, TextDocumentIdentifier, TextDocumentPositionParams } from 'vscode-languageserver-protocol';
 import { Ctx } from './ctx';
 
@@ -32,7 +32,7 @@ export function switchSourceHeader(ctx: Ctx) {
     };
     const dest = await ctx.client.sendRequest<string>(SwitchSourceHeaderRequest.type.method, params);
     if (!dest) {
-      workspace.showMessage(`Didn't find a corresponding file.`);
+      window.showMessage(`Didn't find a corresponding file.`);
       return;
     }
 
@@ -51,7 +51,7 @@ export function symbolInfo(ctx: Ctx) {
       return;
     }
 
-    const position = await workspace.getCursorPosition();
+    const position = await window.getCursorPosition();
     const params: TextDocumentPositionParams = {
       textDocument: { uri: doc.uri },
       position,
@@ -63,6 +63,6 @@ export function symbolInfo(ctx: Ctx) {
 
     // TODO
     const detail = details[0];
-    workspace.showMessage(`name: ${detail.name}, containerName: ${detail.containerName}, usr: ${detail.usr}`);
+    window.showMessage(`name: ${detail.name}, containerName: ${detail.containerName}, usr: ${detail.usr}`);
   };
 }

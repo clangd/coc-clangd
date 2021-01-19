@@ -1,10 +1,11 @@
-import { Executable, ExtensionContext, LanguageClient, LanguageClientOptions, ServerOptions, services, StaticFeature, workspace } from 'coc.nvim';
-import { CompletionList, Disposable, Range, TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
+import { Executable, ExtensionContext, LanguageClient, LanguageClientOptions, ServerOptions, services, StaticFeature, window, workspace } from 'coc.nvim';
+import { Disposable, Range, TextDocumentClientCapabilities } from 'vscode-languageserver-protocol';
 import { Config } from './config';
 import { SemanticHighlightingFeature } from './semantic-highlighting';
 
 class ClangdExtensionFeature implements StaticFeature {
   constructor() {}
+  dispose(): void {}
   initialize() {}
   fillClientCapabilities(capabilities: any) {
     const textDocument = capabilities.textDocument as TextDocumentClientCapabilities;
@@ -36,7 +37,7 @@ export class Ctx {
     }
 
     const serverOptions: ServerOptions = exec;
-    const outputChannel = workspace.createOutputChannel('clangd');
+    const outputChannel = window.createOutputChannel('clangd');
 
     const initializationOptions: any = { clangdFileStatus: true, fallbackFlags: this.config.fallbackFlags };
     if (this.config.compilationDatabasePath) {
@@ -78,7 +79,8 @@ export class Ctx {
             }
             return item;
           });
-          return CompletionList.create(items, true);
+
+          return { items, isIncomplete: true };
         },
         provideWorkspaceSymbols: async (query, token, next) => {
           const symbols = await next(query, token);

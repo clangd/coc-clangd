@@ -1,5 +1,5 @@
-import * as coc from 'coc.nvim';
 import * as common from '@clangd/install';
+import * as coc from 'coc.nvim';
 
 class UI {
   constructor(private context: coc.ExtensionContext, private config: coc.WorkspaceConfiguration) {}
@@ -8,14 +8,14 @@ class UI {
     return this.context.storagePath;
   }
   slow<T>(title: string, result: Promise<T>) {
-    coc.workspace.showMessage(title + '...');
+    coc.window.showMessage(title + '...');
     return result;
   }
   error(s: string) {
-    coc.workspace.showMessage(s, 'error');
+    coc.window.showMessage(s, 'error');
   }
   info(s: string) {
-    coc.workspace.showMessage(s);
+    coc.window.showMessage(s);
   }
   progress<T>(title: string, _cancel: any, body: (progress: (fraction: number) => void) => Promise<T>) {
     return this.slow(
@@ -25,7 +25,7 @@ class UI {
   }
 
   async shouldReuse(release: string) {
-    coc.workspace.showMessage(`Reusing existing ${release} installation in ${this.storagePath}`);
+    coc.window.showMessage(`Reusing existing ${release} installation in ${this.storagePath}`);
     return true;
   }
   async promptReload() {
@@ -33,15 +33,15 @@ class UI {
   }
   showHelp(message: string, url: string) {
     message += ` See ${url}.`;
-    coc.workspace.showMessage(message);
+    coc.window.showMessage(message);
   }
   async promptUpdate(oldVersion: string, newVersion: string) {
     const message = `clangd ${newVersion} is available (you have ${oldVersion}). :CocCommand clangd.install, or :CocSettings to disable clangd.checkUpdates.`;
-    coc.workspace.showMessage(message);
+    coc.window.showMessage(message);
   }
   async promptInstall(version: string) {
     const message = `clangd was not found on your PATH. :CocCommand clangd.install will install ${version}.`;
-    coc.workspace.showMessage(message);
+    coc.window.showMessage(message);
   }
 
   get clangdPath(): string {

@@ -1,4 +1,4 @@
-import { BaseLanguageClient, ExtensionContext, State, StaticFeature, workspace } from 'coc.nvim';
+import { LanguageClient, ExtensionContext, State, StaticFeature, workspace } from 'coc.nvim';
 import { ClientCapabilities, NotificationType, Range, ServerCapabilities, TextDocumentClientCapabilities, VersionedTextDocumentIdentifier } from 'vscode-languageserver-protocol';
 
 // semanticHighlighting protocol: https://github.com/microsoft/vscode-languageserver-node/pull/367
@@ -40,7 +40,7 @@ export class SemanticHighlightingFeature implements StaticFeature {
   // Last tokens seen: bufTokens[bufnr][linenr] = [tokens...]
   private bufTokens: { [bufnr: number]: SemanticHighlightingToken[][] } = {};
 
-  constructor(client: BaseLanguageClient, context: ExtensionContext) {
+  constructor(client: LanguageClient, context: ExtensionContext) {
     context.subscriptions.push(
       client.onDidChangeState(({ newState }) => {
         if (newState === State.Running) {
@@ -50,6 +50,7 @@ export class SemanticHighlightingFeature implements StaticFeature {
       })
     );
   }
+  dispose(): void {}
 
   initialize(capabilities: ServerCapabilities) {
     const serverCapabilities: ServerCapabilities & { semanticHighlighting?: { scopes: string[][] } } = capabilities;
