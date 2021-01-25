@@ -29,16 +29,18 @@ This extension connects [coc.nvim][] to the [clangd][] language server.
 
 `:CocConfig` opens your global `coc-settings.json`, or `:CocLocalConfig` opens local configuration in your project `.vim/coc-settings.json`.
 
-- `clangd.enabled`: enable `coc-clangd`, default `true`
-- `clangd.arguments`: arguments for `clangd` server, default `[]`
-- `clangd.checkUpdates`: check for clangd language server updates on startup, default `false`
-- `clangd.disableDiagnostics`: disable diagnostics from clangd, default `false`
-- `clangd.disableSnippetCompletion`: disable completion snippet from clangd, default `false`
-- `clangd.compilationDatabasePath`: specifies the directory containing the compilation database, default `''`
-- `clangd.fallbackFlags`: extra clang flags used to parse files when no compilation database is found, default `[]`
-- `clangd.path`: path to `clangd` executable, default `clangd`
-- `clangd.semanticHighlighting`: enable semantic highlighting, requires [jackguo380/vim-lsp-cxx-highlight](https://github.com/jackguo380/vim-lsp-cxx-highlight) to work, default `false`
-- `clangd.serverCompletionRanking`: always rank compilation items on the server as you type, default `true`
+| Configurations | Description | Default |
+| -- | -- | -- |
+| clangd.enabled | enable `coc-clangd` | `true` |
+| clangd.arguments | arguments for `clangd` server | `[]` |
+| clangd.checkUpdates | check for clangd language server updates on startup | `false` |
+| clangd.disableDiagnostics | disable diagnostics from clangd | `false` |
+| clangd.disableSnippetCompletion | disable completion snippet from clangd | `false` |
+| clangd.compilationDatabasePath | specifies the directory containing the compilation database | `''` |
+| clangd.fallbackFlags | extra clang flags used to parse files when no compilation database is found | `[]` |
+| clangd.path | path to `clangd` executable | `clangd` |
+| clangd.semanticHighlighting | enable semantic highlighting, requires [jackguo380/vim-lsp-cxx-highlight](https://github.com/jackguo380/vim-lsp-cxx-highlight) to work | `false` |
+| clangd.serverCompletionRanking | always rank compilation items on the server as you type | `true` |
 
 ## Commands
 
