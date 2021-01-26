@@ -18,6 +18,10 @@ export class Config {
     return this.cfg.get('disableSnippetCompletion') as boolean;
   }
 
+  get disableCompletion() {
+    return this.cfg.get('disableCompletion') as boolean;
+  }
+
   get arguments() {
     return this.cfg.get<string[]>('arguments', []);
   }

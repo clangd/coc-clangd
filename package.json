@@ -79,6 +79,11 @@
           "default": false,
           "description": "Disable diagnostics from clangd"
         },
+        "clangd.disableCompletion": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable completion source from clangd"
+        },
         "clangd.disableSnippetCompletion": {
           "type": "boolean",
           "default": false,

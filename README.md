@@ -34,6 +34,7 @@ This extension connects [coc.nvim][] to the [clangd][] language server.
 | clangd.enabled | enable `coc-clangd` | `true` |
 | clangd.arguments | arguments for `clangd` server | `[]` |
 | clangd.checkUpdates | check for clangd language server updates on startup | `false` |
+| clangd.disableCompletion | disable completion source from clangd | `false` |
 | clangd.disableDiagnostics | disable diagnostics from clangd | `false` |
 | clangd.disableSnippetCompletion | disable completion snippet from clangd | `false` |
 | clangd.compilationDatabasePath | specifies the directory containing the compilation database | `''` |

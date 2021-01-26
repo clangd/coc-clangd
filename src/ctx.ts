@@ -8,7 +8,9 @@ class ClangdExtensionFeature implements StaticFeature {
   initialize() {}
   fillClientCapabilities(capabilities: any) {
     const extendedCompletionCapabilities = capabilities.textDocument.completion;
-    extendedCompletionCapabilities.editsNearCursor = true;
+    if (extendedCompletionCapabilities) {
+      extendedCompletionCapabilities.editsNearCursor = true;
+    }
   }
 }
 
@@ -55,8 +57,8 @@ export class Ctx {
       ],
       initializationOptions,
       disableDiagnostics: this.config.disableDiagnostics,
-      // @ts-ignore
       disableSnippetCompletion: this.config.disableSnippetCompletion,
+      disableCompletion: this.config.disableCompletion,
       outputChannel,
       middleware: {
         provideOnTypeFormattingEdits: (document, position, ch, options, token, next) => {
