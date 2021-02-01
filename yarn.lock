@@ -518,9 +518,9 @@ es-to-primitive@^1.2.1:
     is-symbol "^1.0.2"
 
 esbuild@^0.8.33:
-  version "0.8.34"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.34.tgz#16b4ac58f74c821d2c5a8c2f0585ca96a38ab4e6"
-  integrity sha512-tnr0V1ooakYr1aRLXQLzCn2GVG1kBTW3FWpRyC+NgrR3ntsouVpJOlTOV0BS4YLATx3/c+x3h/uBq9lWJlUAtQ==
+  version "0.8.38"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.38.tgz#04dc395e15c77bbc9d6798e9b31275546bcf7b9a"
+  integrity sha512-wSunJl8ujgBs9eVGubc8Y6fn/DkDjNyfQBVOFTY1E7sRxr8KTjmqyLIiE0M3Z4CjMnCu/rttCugwnOzY+HiwIw==
 
 escape-string-regexp@^1.0.5:
   version "1.0.5"
