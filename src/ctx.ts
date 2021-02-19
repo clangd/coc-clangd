@@ -61,6 +61,11 @@ export class Ctx {
       disableCompletion: this.config.disableCompletion,
       outputChannel,
       middleware: {
+        provideOnTypeFormattingEdits: (document, position, ch, options, token, next) => {
+          // coc sends "\n" when exiting insert mode, when there is no newline added to the doc.
+          if (ch === '\n') ch = '';
+          return next(document, position, ch, options, token);
+        },
         provideCompletionItem: async (document, position, context, token, next) => {
           const list = await next(document, position, context, token);
           if (!list) return [];
