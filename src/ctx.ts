@@ -63,6 +63,8 @@ export class Ctx {
       middleware: {
         provideOnTypeFormattingEdits: (document, position, ch, options, token, next) => {
           // coc sends "\n" when exiting insert mode, when there is no newline added to the doc.
+          const line = document.getText(Range.create(position.line, 0, position.line, position.character));
+          if (!line.trim().length) return;
           if (ch === '\n') ch = '';
           return next(document, position, ch, options, token);
         },
