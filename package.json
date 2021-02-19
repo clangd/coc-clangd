@@ -104,6 +104,21 @@
           "type": "string",
           "description": "Names a file that clangd should log a performance trace to, in chrome trace-viewer JSON format."
         },
+        "clangd.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "enumDescriptions": [
+            "No traces",
+            "Error only",
+            "Full log"
+          ],
+          "default": "off",
+          "description": "Trace requests to clangd"
+        },
         "clangd.fallbackFlags": {
           "type": "array",
           "items": {
