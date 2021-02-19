@@ -1,7 +1,7 @@
 import { commands, ExtensionContext, services, State, window, workspace } from 'coc.nvim';
 import * as cmds from './cmds';
 import { Ctx } from './ctx';
-import { FileStatus } from './file_status';
+import { FileStatus, Status } from './file_status';
 import * as install from './install';
 import { ReloadFeature } from './reload';
 
@@ -51,7 +51,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
     })
   );
 
-  ctx.client?.onNotification('textDocument/clangd.fileStatus', (status) => {
+  ctx.client?.onNotification('textDocument/clangd.fileStatus', (status: Status) => {
     fileStatus.onFileUpdated(status);
   });
 }

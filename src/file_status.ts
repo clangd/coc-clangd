@@ -1,5 +1,10 @@
 import { Disposable, StatusBarItem, window, workspace } from 'coc.nvim';
 
+export interface Status {
+  uri: string;
+  state: string;
+}
+
 export class FileStatus implements Disposable {
   private readonly statusBarItem: StatusBarItem;
 
@@ -7,9 +12,9 @@ export class FileStatus implements Disposable {
     this.statusBarItem = window.createStatusBarItem(0);
   }
 
-  private statuses = new Map<string, any>();
+  private statuses = new Map<string, Status>();
 
-  onFileUpdated(status: any) {
+  onFileUpdated(status: Status) {
     this.statuses.set(status.uri, status);
     this.updateStatus();
   }
@@ -21,7 +26,7 @@ export class FileStatus implements Disposable {
     }
 
     const status = this.statuses.get(doc.uri);
-    if (!status) {
+    if (!status || status.state === 'idle') {
       this.statusBarItem.hide();
       return;
     }
