@@ -37,7 +37,6 @@ export class Ctx {
     }
 
     const serverOptions: ServerOptions = exec;
-    const outputChannel = window.createOutputChannel('clangd');
 
     const initializationOptions: any = { clangdFileStatus: true, fallbackFlags: this.config.fallbackFlags };
     if (this.config.compilationDatabasePath) {
@@ -59,7 +58,6 @@ export class Ctx {
       disableDiagnostics: this.config.disableDiagnostics,
       disableSnippetCompletion: this.config.disableSnippetCompletion,
       disableCompletion: this.config.disableCompletion,
-      outputChannel,
       middleware: {
         provideOnTypeFormattingEdits: (document, position, ch, options, token, next) => {
           // coc sends "\n" when exiting insert mode, when there is no newline added to the doc.
