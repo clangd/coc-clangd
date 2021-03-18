@@ -1,4 +1,4 @@
-import { Disposable, Executable, ExtensionContext, LanguageClient, LanguageClientOptions, Range, ServerOptions, services, StaticFeature, window, workspace } from 'coc.nvim';
+import { Disposable, Executable, ExtensionContext, LanguageClient, LanguageClientOptions, Range, ServerOptions, services, StaticFeature, workspace } from 'coc.nvim';
 import { Config } from './config';
 import { SemanticHighlightingFeature } from './semantic-highlighting';
 
@@ -32,7 +32,7 @@ export class Ctx {
       command: bin,
       args: this.config.arguments,
     };
-    if (!!this.config.trace) {
+    if (this.config.trace) {
       exec.options = { env: { CLANGD_TRACE: this.config.trace } };
     }
 
