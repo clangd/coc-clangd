@@ -47,6 +47,7 @@ This extension connects [coc.nvim][] to the [clangd][] language server.
 
 - `clangd.switchSourceHeader`: switch between source/header files
 - `clangd.symbolInfo`: resolve symbol info under the cursor
+- `clangd.memoryUsage`: show memory usage
 - `clangd.install`: install latest clangd release from GitHub
 - `clangd.update`: check for updates to clangd from GitHub
 

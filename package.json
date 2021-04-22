@@ -151,6 +151,10 @@
         "title": "Resolve symbol info under the cursor"
       },
       {
+        "command": "clangd.memoryUsage",
+        "title": "Show memory usage"
+      },
+      {
         "command": "clangd.install",
         "title": "Install latest clangd language server binary release"
       },
