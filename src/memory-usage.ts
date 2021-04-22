@@ -60,7 +60,7 @@ export class MemoryUsageFeature implements StaticFeature {
         format(convert(usage, '<root>'));
         window.echoLines(results);
       } else {
-        window.showMessage(`Your clangd doesn't support memory usage, clangd 12+ is needed`, 'warning');
+        window.showMessage(`Your clangd doesn't support memory usage report, clangd 12+ is needed`, 'warning');
       }
     }));
   }
