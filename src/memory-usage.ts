@@ -1,6 +1,6 @@
 // Implements the "memory usage" feature.
 
-import {window, commands, ExtensionContext, LanguageClient, RequestType0, StaticFeature } from 'coc.nvim';
+import { commands, ExtensionContext, LanguageClient, RequestType0, StaticFeature, window } from 'coc.nvim';
 import { ServerCapabilities } from 'vscode-languageserver-protocol';
 
 // LSP wire format for this clangd feature.
@@ -29,10 +29,10 @@ function convert(m: WireTree, title: string): InternalTree {
     total: m._total,
     self: m._self,
     children: Object.keys(m)
-    .sort()
-    .filter(x => !x.startsWith('_'))
-    .map(e => convert(m[e] as WireTree, e))
-    .sort((x, y) => y.total - x.total),
+      .sort()
+      .filter((x) => !x.startsWith('_'))
+      .map((e) => convert(m[e] as WireTree, e))
+      .sort((x, y) => y.total - x.total),
   };
 }
 
@@ -53,16 +53,18 @@ function format(c: InternalTree) {
 export class MemoryUsageFeature implements StaticFeature {
   private memoryUsageProvider = false;
   constructor(client: LanguageClient, context: ExtensionContext) {
-    context.subscriptions.push(commands.registerCommand('clangd.memoryUsage', async () => {
-      if (this.memoryUsageProvider) {
-        const usage = (await client.sendRequest(MemoryUsageRequest.method, {})) as WireTree;
-        results.length = 0;
-        format(convert(usage, '<root>'));
-        window.echoLines(results);
-      } else {
-        window.showMessage(`Your clangd doesn't support memory usage report, clangd 12+ is needed`, 'warning');
-      }
-    }));
+    context.subscriptions.push(
+      commands.registerCommand('clangd.memoryUsage', async () => {
+        if (this.memoryUsageProvider) {
+          const usage = (await client.sendRequest(MemoryUsageRequest.method, {})) as WireTree;
+          results.length = 0;
+          format(convert(usage, '<root>'));
+          window.echoLines(results);
+        } else {
+          window.showMessage(`Your clangd doesn't support memory usage report, clangd 12+ is needed`, 'warning');
+        }
+      })
+    );
   }
 
   fillClientCapabilities() {}
@@ -73,4 +75,3 @@ export class MemoryUsageFeature implements StaticFeature {
   }
   dispose() {}
 }
-
