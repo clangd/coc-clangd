@@ -3,6 +3,7 @@ import * as cmds from './cmds';
 import { Ctx } from './ctx';
 import { FileStatus, Status } from './file_status';
 import * as install from './install';
+import * as openConfig from './open-config';
 import { ReloadFeature } from './reload';
 
 export async function activate(context: ExtensionContext): Promise<void> {
@@ -28,8 +29,8 @@ export async function activate(context: ExtensionContext): Promise<void> {
     return;
   }
 
+  openConfig.activate(context);
   const fileStatus = new FileStatus();
-
   context.subscriptions.push(
     fileStatus,
 
