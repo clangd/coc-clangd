@@ -1,7 +1,8 @@
 // Implements the "memory usage" feature.
 
-import { commands, ExtensionContext, LanguageClient, RequestType0, StaticFeature, window } from 'coc.nvim';
+import { commands, RequestType0, StaticFeature, window } from 'coc.nvim';
 import { ServerCapabilities } from 'vscode-languageserver-protocol';
+import { Ctx } from './ctx';
 
 // LSP wire format for this clangd feature.
 interface WireTree {
@@ -52,11 +53,11 @@ function format(c: InternalTree) {
 
 export class MemoryUsageFeature implements StaticFeature {
   private memoryUsageProvider = false;
-  constructor(client: LanguageClient, context: ExtensionContext) {
-    context.subscriptions.push(
+  constructor(ctx: Ctx) {
+    ctx.subscriptions.push(
       commands.registerCommand('clangd.memoryUsage', async () => {
         if (this.memoryUsageProvider) {
-          const usage = (await client.sendRequest(MemoryUsageRequest.method, {})) as WireTree;
+          const usage = (await ctx.client!.sendRequest(MemoryUsageRequest.method, {})) as WireTree;
           results.length = 0;
           format(convert(usage, '<root>'));
           window.echoLines(results);

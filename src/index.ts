@@ -1,10 +1,11 @@
 import { commands, ExtensionContext, services, State, window, workspace } from 'coc.nvim';
 import * as cmds from './cmds';
-import { Ctx } from './ctx';
+import { Ctx, ClangdExtensionFeature } from './ctx';
 import { FileStatus, Status } from './file_status';
 import * as install from './install';
 import * as openConfig from './open-config';
 import { ReloadFeature } from './reload';
+import { MemoryUsageFeature } from './memory-usage';
 
 export async function activate(context: ExtensionContext): Promise<void> {
   const ctx = new Ctx(context);
@@ -24,7 +25,10 @@ export async function activate(context: ExtensionContext): Promise<void> {
   }
 
   try {
-    await ctx.startServer(clangdPath, new ReloadFeature(ctx, () => activate(context)));
+    const extFeature = new ClangdExtensionFeature();
+    const reloadFeature = new ReloadFeature(ctx, () => activate(context));
+    const memoryUsageFeature = new MemoryUsageFeature(ctx);
+    await ctx.startServer(clangdPath, ...[extFeature, reloadFeature, memoryUsageFeature]);
   } catch (e) {
     return;
   }

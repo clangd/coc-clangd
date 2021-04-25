@@ -1,9 +1,8 @@
 import { Disposable, Executable, ExtensionContext, LanguageClient, LanguageClientOptions, Range, ServerOptions, services, StaticFeature, workspace } from 'coc.nvim';
 import { Config } from './config';
-import { MemoryUsageFeature } from './memory-usage';
 import { SemanticHighlightingFeature } from './semantic-highlighting';
 
-class ClangdExtensionFeature implements StaticFeature {
+export class ClangdExtensionFeature implements StaticFeature {
   constructor() {}
   dispose(): void {}
   initialize() {}
@@ -101,8 +100,6 @@ export class Ctx {
     };
 
     const client = new LanguageClient('clangd', serverOptions, clientOptions);
-    client.registerFeature(new ClangdExtensionFeature());
-    client.registerFeature(new MemoryUsageFeature(client, this.context));
     if (this.config.semanticHighlighting) {
       const lspCxx = await workspace.nvim.call('exists', 'g:lsp_cxx_hl_loaded');
       if (lspCxx === 1) {
