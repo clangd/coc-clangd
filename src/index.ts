@@ -3,7 +3,6 @@ import * as cmds from './cmds';
 import { Ctx, ClangdExtensionFeature } from './ctx';
 import { FileStatus, Status } from './file_status';
 import * as install from './install';
-import * as openConfig from './open-config';
 import { ReloadFeature } from './reload';
 import { MemoryUsageFeature } from './memory-usage';
 
@@ -33,13 +32,14 @@ export async function activate(context: ExtensionContext): Promise<void> {
     return;
   }
 
-  openConfig.activate(context);
   const fileStatus = new FileStatus();
   context.subscriptions.push(
     fileStatus,
 
     commands.registerCommand('clangd.switchSourceHeader', cmds.switchSourceHeader(ctx)),
     commands.registerCommand('clangd.symbolInfo', cmds.symbolInfo(ctx)),
+    commands.registerCommand('clangd.userConfig', cmds.userConfig),
+    commands.registerCommand('clangd.projectConfig', cmds.projectConfig),
 
     ctx.client!.onDidChangeState((e) => {
       if (e.newState === State.Running) {
