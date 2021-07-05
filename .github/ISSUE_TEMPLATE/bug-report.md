@@ -13,7 +13,7 @@ For hints on what information is helpful, see: https://clangd.llvm.org/troublesh
 If you can, provide a minimal chunk of code that shows the problem (either inline, or attach it if larger).
 
 **Logs**
-Please attach the clangd log from `:CocList output` if you can.
+Please attach the clangd log from `:CocCommand workspace.showOutput` if you can.
 If possible, run with `--log=verbose` - note that the logs will include the contents of open files!
 
 **System information**
