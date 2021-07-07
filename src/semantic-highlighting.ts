@@ -44,8 +44,8 @@ export class SemanticHighlightingFeature implements StaticFeature {
     context.subscriptions.push(
       client.onDidChangeState(({ newState }) => {
         if (newState === State.Running) {
-          const notification = new NotificationType<SemanticHighlightingParams, void>('textDocument/semanticHighlighting');
-          client.onNotification(notification, this.handleNotification.bind(this));
+          const notification = new NotificationType<SemanticHighlightingParams>('textDocument/semanticHighlighting');
+          client.onNotification(notification.method, this.handleNotification.bind(this));
         }
       })
     );
