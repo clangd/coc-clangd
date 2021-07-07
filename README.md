@@ -59,7 +59,7 @@ This is the [standard LLVM license](https://llvm.org/foundation/relicensing/).
 
 ---
 
-> This extension is created by [create-coc-extension](https://github.com/fannheyward/create-coc-extension)
+> This extension is built with [create-coc-extension](https://github.com/fannheyward/create-coc-extension)
 
 [node.js]: https://nodejs.org/en/
 [clangd]: https://clangd.llvm.org/installation.html
