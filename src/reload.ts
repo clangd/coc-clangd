@@ -18,7 +18,7 @@ export class ReloadFeature implements StaticFeature {
       return;
     }
 
-    const fileWatcher = workspace.createFileSystemWatcher('**/{compile_commands.json,compile_flags.txt}');
+    const fileWatcher = workspace.createFileSystemWatcher('**/{compile_commands.json,compile_flags.txt,.clangd}');
     this.ctx.subscriptions.push(
       fileWatcher,
       fileWatcher.onDidChange((e) => this.reload(e.fsPath)),

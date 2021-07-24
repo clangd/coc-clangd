@@ -44,13 +44,15 @@
     "onLanguage:objective-c",
     "onLanguage:objective-cpp",
     "workspaceContains:**/compile_commands.json",
-    "workspaceContains:**/compile_flags.txt"
+    "workspaceContains:**/compile_flags.txt",
+    "workspaceContains:**/.clangd"
   ],
   "rootPatterns": [
     {
       "patterns": [
         "compile_commands.json",
-        "compile_flags.txt"
+        "compile_flags.txt",
+        ".clangd"
       ]
     }
   ],
