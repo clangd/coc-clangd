@@ -31,9 +31,10 @@ export class Ctx {
     const exec: Executable = {
       command: bin,
       args: this.config.arguments,
+      options: { env: process.env },
     };
     if (this.config.trace) {
-      exec.options = { env: { CLANGD_TRACE: this.config.trace } };
+      exec.options!.env.CLANGD_TRACE = this.config.trace;
     }
 
     const serverOptions: ServerOptions = exec;
