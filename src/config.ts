@@ -27,7 +27,7 @@ export class Config {
   }
 
   get trace() {
-    return this.cfg.get<string>('trace', '');
+    return this.cfg.get('trace', {'file': '', 'server': 'off'});
   }
 
   get fallbackFlags() {
