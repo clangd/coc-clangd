@@ -6,6 +6,7 @@
     "declaration": false,
     "sourceMap": true,
     "outDir": "lib",
+    "noEmit": true,
     "strict": true,
     "moduleResolution": "node",
     "noImplicitAny": false,
