@@ -1,15 +1,14 @@
-import { RequestType, Uri, window, workspace } from 'coc.nvim';
+import { RequestType, TextDocumentIdentifier, TextDocumentPositionParams, Uri, window, workspace } from 'coc.nvim';
 import * as fs from 'fs';
 import * as path from 'path';
-import { TextDocumentIdentifier, TextDocumentPositionParams } from 'vscode-languageserver-protocol';
 import { Ctx } from './ctx';
 
 namespace SwitchSourceHeaderRequest {
-  export const type = new RequestType<TextDocumentIdentifier, string, void, void>('textDocument/switchSourceHeader');
+  export const type = new RequestType<TextDocumentIdentifier, string, void>('textDocument/switchSourceHeader');
 }
 
 namespace SymbolInfoRequest {
-  export const type = new RequestType<TextDocumentPositionParams, string, void, void>('textDocument/symbolInfo');
+  export const type = new RequestType<TextDocumentPositionParams, string, void>('textDocument/symbolInfo');
 }
 
 interface SymbolDetails {
