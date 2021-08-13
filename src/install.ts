@@ -1,5 +1,6 @@
 import * as common from '@clangd/install';
 import * as coc from 'coc.nvim';
+import { homedir } from 'os';
 
 class UI {
   constructor(private context: coc.ExtensionContext, private config: coc.WorkspaceConfiguration) {}
@@ -45,10 +46,10 @@ class UI {
   }
 
   get clangdPath(): string {
-    return this.config.get<string>('path')!;
+    return coc.workspace.expand(this.config.get<string>('path', ''));
   }
   set clangdPath(p: string) {
-    this.config.update('path', p, /*isUser=*/ true);
+    this.config.update('path', p.replace(homedir(), '~'), /*isUser=*/ true);
   }
 }
 
