@@ -21,6 +21,7 @@ This extension connects [coc.nvim][] to the [clangd][] language server.
 `coc-clangd` adds support for:
 
 - Switching between header and implementation file: `:CocCommand clangd.switchSourceHeader`
+  - You can open in split buffer by `:CocCommand clangd.switchSourceHeader vsplit`
 - File status monitor, shows on NeoVim statusline
 - Describe symbol under the cursor: `:CocCommand clangd.symbolInfo`
 - Completions that adjust text near the cursor (e.g. correcting `.` to `->`)

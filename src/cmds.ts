@@ -19,7 +19,7 @@ interface SymbolDetails {
 }
 
 export function switchSourceHeader(ctx: Ctx) {
-  return async () => {
+  return async (openCommand: string) => {
     if (!ctx.client) {
       return;
     }
@@ -37,7 +37,7 @@ export function switchSourceHeader(ctx: Ctx) {
       return;
     }
 
-    await workspace.jumpTo(dest);
+    await workspace.jumpTo(dest, null, openCommand);
   };
 }
 
