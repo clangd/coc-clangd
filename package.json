@@ -40,6 +40,7 @@
     "onLanguage:cuda",
     "onLanguage:objc",
     "onLanguage:objcpp",
+    "onLanguage:opencl",
     "onLanguage:arduino",
     "onLanguage:objective-c",
     "onLanguage:objective-cpp",
