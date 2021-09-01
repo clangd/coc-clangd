@@ -23,7 +23,7 @@ export class Config {
   }
 
   get arguments() {
-    return this.cfg.get<string[]>('arguments', []);
+    return this.cfg.get<string[]>('arguments', []).map(arg => workspace.expand(arg));
   }
 
   get trace() {
