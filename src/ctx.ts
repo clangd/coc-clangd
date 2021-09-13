@@ -53,7 +53,6 @@ export class Ctx {
         { scheme: 'file', language: 'objective-cpp' },
         { scheme: 'file', language: 'opencl' },
         { scheme: 'file', language: 'cuda' },
-        { scheme: 'file', language: 'arduino' },
       ],
       initializationOptions,
       disableDiagnostics: this.config.disableDiagnostics,

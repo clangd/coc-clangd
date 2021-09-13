@@ -41,7 +41,6 @@
     "onLanguage:objc",
     "onLanguage:objcpp",
     "onLanguage:opencl",
-    "onLanguage:arduino",
     "onLanguage:objective-c",
     "onLanguage:objective-cpp",
     "workspaceContains:**/compile_commands.json",
