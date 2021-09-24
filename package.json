@@ -18,6 +18,7 @@
   "scripts": {
     "clean": "rimraf lib",
     "build": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
     "lint": "eslint src --ext ts",
     "prepare": "node esbuild.js"
   },
