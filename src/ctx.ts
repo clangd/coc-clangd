@@ -1,4 +1,17 @@
-import { Disposable, Executable, ExtensionContext, LanguageClient, LanguageClientOptions, Range, ServerOptions, services, StaticFeature, workspace } from 'coc.nvim';
+import {
+  CompletionItemKind,
+  Disposable,
+  Executable,
+  ExtensionContext,
+  InsertTextFormat,
+  LanguageClient,
+  LanguageClientOptions,
+  Range,
+  ServerOptions,
+  services,
+  StaticFeature,
+  workspace,
+} from 'coc.nvim';
 import { Config } from './config';
 import { SemanticHighlightingFeature } from './semantic-highlighting';
 
@@ -71,16 +84,29 @@ export class Ctx {
           if (!list) return [];
           if (!this.config.serverCompletionRanking) return list;
 
-          const items = (Array.isArray(list) ? list : list.items).map((item) => {
-            const start = item.textEdit?.range.start;
-            if (start) {
-              const prefix = document.getText(Range.create(start, position));
-              if (prefix) item.filterText = prefix + '_' + item.filterText;
-            }
-            return item;
-          });
+          const tail = (await workspace.nvim.eval(`strpart(getline('.'), col('.') - 1)`)) as string;
+          const semicolon = /^\s*$/.test(tail);
 
-          return { items, isIncomplete: true };
+          const items = Array.isArray(list) ? list : list.items;
+          for (const item of items) {
+            if (this.config.serverCompletionRanking) {
+              const start = item.textEdit?.range.start;
+              if (start) {
+                const prefix = document.getText(Range.create(start, position));
+                if (prefix) item.filterText = prefix + '_' + item.filterText;
+              }
+            }
+
+            if (semicolon && item.insertTextFormat === InsertTextFormat.Snippet && item.textEdit) {
+              const { textEdit } = item;
+              const { newText } = textEdit;
+              if (item.kind === CompletionItemKind.Function || (item.kind === CompletionItemKind.Text && newText.slice(-1) === ')')) {
+                item.textEdit = { range: textEdit.range, newText: newText + ';' };
+              }
+            }
+          }
+
+          return Array.isArray(list) ? items : { items, isIncomplete: list.isIncomplete };
         },
         provideWorkspaceSymbols: async (query, token, next) => {
           const symbols = await next(query, token);
