@@ -52,27 +52,22 @@ function format(c: InternalTree) {
 }
 
 export class MemoryUsageFeature implements StaticFeature {
-  private memoryUsageProvider = false;
-  constructor(ctx: Ctx) {
-    ctx.subscriptions.push(
-      commands.registerCommand('clangd.memoryUsage', async () => {
-        if (this.memoryUsageProvider) {
-          const usage = (await ctx.client!.sendRequest(MemoryUsageRequest.method, {})) as WireTree;
-          results.length = 0;
-          format(convert(usage, '<root>'));
-          window.echoLines(results);
-        } else {
-          window.showMessage(`Your clangd doesn't support memory usage report, clangd 12+ is needed`, 'warning');
-        }
-      })
-    );
-  }
+  constructor(private ctx: Ctx) {}
 
   fillClientCapabilities() {}
   fillInitializeParams() {}
 
   initialize(capabilities: ServerCapabilities) {
-    this.memoryUsageProvider = 'memoryUsageProvider' in capabilities;
+    if ('memoryUsageProvider' in capabilities) {
+      this.ctx.subscriptions.push(
+        commands.registerCommand('clangd.memoryUsage', async () => {
+          const usage = (await this.ctx.client!.sendRequest(MemoryUsageRequest.method, {})) as WireTree;
+          results.length = 0;
+          format(convert(usage, '<root>'));
+          window.echoLines(results);
+        })
+      );
+    }
   }
   dispose() {}
 }
