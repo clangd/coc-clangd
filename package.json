@@ -28,7 +28,7 @@
     "@types/which": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
-    "coc.nvim": "^0.0.81-next.5",
+    "coc.nvim": "^0.0.81-next.7",
     "esbuild": "^0.13.4",
     "eslint": "^8.0.0",
     "rimraf": "^3.0.1",
@@ -154,6 +154,10 @@
       }
     },
     "commands": [
+      {
+        "command": "clangd.ast",
+        "title": "Show AST"
+      },
       {
         "command": "clangd.switchSourceHeader",
         "title": "Switch between source/header"

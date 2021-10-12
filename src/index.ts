@@ -5,6 +5,7 @@ import { FileStatus, Status } from './file_status';
 import * as install from './install';
 import { ReloadFeature } from './reload';
 import { MemoryUsageFeature } from './memory-usage';
+import { ASTFeature } from './ast';
 
 export async function activate(context: ExtensionContext): Promise<void> {
   const ctx = new Ctx(context);
@@ -24,10 +25,11 @@ export async function activate(context: ExtensionContext): Promise<void> {
   }
 
   try {
+    const astFeature = new ASTFeature(ctx);
     const extFeature = new ClangdExtensionFeature();
     const reloadFeature = new ReloadFeature(ctx, () => activate(context));
     const memoryUsageFeature = new MemoryUsageFeature(ctx);
-    await ctx.startServer(clangdPath, ...[extFeature, reloadFeature, memoryUsageFeature]);
+    await ctx.startServer(clangdPath, ...[astFeature, extFeature, reloadFeature, memoryUsageFeature]);
   } catch (e) {
     return;
   }

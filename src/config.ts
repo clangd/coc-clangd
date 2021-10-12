@@ -23,11 +23,11 @@ export class Config {
   }
 
   get arguments() {
-    return this.cfg.get<string[]>('arguments', []).map(arg => workspace.expand(arg));
+    return this.cfg.get<string[]>('arguments', []).map((arg) => workspace.expand(arg));
   }
 
   get trace() {
-    return this.cfg.get('trace', {'file': '', 'server': 'off'});
+    return this.cfg.get('trace', { file: '', server: 'off' });
   }
 
   get fallbackFlags() {

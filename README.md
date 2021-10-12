@@ -30,25 +30,26 @@ This extension connects [coc.nvim][] to the [clangd][] language server.
 
 `:CocConfig` opens your global `coc-settings.json`, or `:CocLocalConfig` opens local configuration in your project `.vim/coc-settings.json`.
 
-| Configurations | Description | Default |
-| -- | -- | -- |
-| clangd.enabled | enable `coc-clangd` | `true` |
-| clangd.arguments | arguments for `clangd` server | `[]` |
-| clangd.checkUpdates | check for clangd language server updates on startup | `false` |
-| clangd.disableCompletion | disable completion source from clangd | `false` |
-| clangd.disableDiagnostics | disable diagnostics from clangd | `false` |
-| clangd.disableSnippetCompletion | disable completion snippet from clangd | `false` |
-| clangd.compilationDatabasePath | specifies the directory containing the compilation database | `''` |
-| clangd.fallbackFlags | extra clang flags used to parse files when no compilation database is found | `[]` |
-| clangd.path | path to `clangd` executable | `clangd` |
-| clangd.semanticHighlighting | enable semantic highlighting, requires [jackguo380/vim-lsp-cxx-highlight](https://github.com/jackguo380/vim-lsp-cxx-highlight) to work | `false` |
-| clangd.serverCompletionRanking | always rank compilation items on the server as you type | `true` |
+| Configurations                  | Description                                                                                                                            | Default  |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| clangd.enabled                  | enable `coc-clangd`                                                                                                                    | `true`   |
+| clangd.arguments                | arguments for `clangd` server                                                                                                          | `[]`     |
+| clangd.checkUpdates             | check for clangd language server updates on startup                                                                                    | `false`  |
+| clangd.disableCompletion        | disable completion source from clangd                                                                                                  | `false`  |
+| clangd.disableDiagnostics       | disable diagnostics from clangd                                                                                                        | `false`  |
+| clangd.disableSnippetCompletion | disable completion snippet from clangd                                                                                                 | `false`  |
+| clangd.compilationDatabasePath  | specifies the directory containing the compilation database                                                                            | `''`     |
+| clangd.fallbackFlags            | extra clang flags used to parse files when no compilation database is found                                                            | `[]`     |
+| clangd.path                     | path to `clangd` executable                                                                                                            | `clangd` |
+| clangd.semanticHighlighting     | enable semantic highlighting, requires [jackguo380/vim-lsp-cxx-highlight](https://github.com/jackguo380/vim-lsp-cxx-highlight) to work | `false`  |
+| clangd.serverCompletionRanking  | always rank compilation items on the server as you type                                                                                | `true`   |
 
 ## Commands
 
 - `clangd.switchSourceHeader`: switch between source/header files
 - `clangd.symbolInfo`: resolve symbol info under the cursor
 - `clangd.memoryUsage`: show memory usage
+- `clangd.ast`: show AST
 - `clangd.install`: install latest clangd release from GitHub
 - `clangd.update`: check for updates to clangd from GitHub
 
