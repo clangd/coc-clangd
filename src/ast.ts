@@ -38,7 +38,7 @@ export class ASTFeature implements StaticFeature {
 
   // The "Show AST" command is enabled if the server advertises the capability.
   initialize(capabilities: any) {
-    if ('astProvider' in capabilities) {
+    if ('astProvider' in capabilities && typeof window['createTreeView'] === 'function') {
       // The adapter holds the currently inspected node.
       const adapter = new TreeAdapter();
       // Create the AST view, showing data from the adapter.
@@ -47,7 +47,7 @@ export class ASTFeature implements StaticFeature {
         tree,
         // Ensure the AST view is visible exactly when the adapter has a node.
         // clangd.ast.hasData controls the view visibility (package.json).
-        adapter.onDidChangeTreeData((_) => {
+        adapter.onDidChangeTreeData(() => {
           // Work around https://github.com/microsoft/vscode/issues/90005
           // Show the AST tree even if it's been collapsed or closed.
           // reveal(root) fails here: "Data tree node not found".
