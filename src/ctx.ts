@@ -89,6 +89,9 @@ export class Ctx {
 
           const items = Array.isArray(list) ? list : list.items;
           for (const item of items) {
+            // @ts-expect-error
+            if (item.score) item.score = Math.max(1, item.score) + item.score / 1000;
+
             if (this.config.serverCompletionRanking) {
               const start = item.textEdit?.range.start;
               if (start) {
