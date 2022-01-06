@@ -82,7 +82,6 @@ export class Ctx {
         provideCompletionItem: async (document, position, context, token, next) => {
           const list = await next(document, position, context, token);
           if (!list) return [];
-          if (!this.config.serverCompletionRanking) return list;
 
           const tail = (await workspace.nvim.eval(`strpart(getline('.'), col('.') - 1)`)) as string;
           const semicolon = /^\s*$/.test(tail);
