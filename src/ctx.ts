@@ -83,6 +83,8 @@ export class Ctx {
           const list = await next(document, position, context, token);
           if (!list) return [];
 
+          const { triggerKind, triggerCharacter, option } = context;
+          const mayPointMem = triggerKind === 2 && triggerCharacter === '.' && option && option.input === '';
           const tail = (await workspace.nvim.eval(`strpart(getline('.'), col('.') - 1)`)) as string;
           const semicolon = /^\s*$/.test(tail);
 
@@ -91,6 +93,9 @@ export class Ctx {
             // @ts-expect-error
             if (item.score) item.score = Math.max(1, item.score) + item.score / 1000;
 
+            if (mayPointMem && item.insertText === `->${item.filterText}` && item.insertTextFormat === InsertTextFormat.Snippet) {
+              item.filterText = `.${item.filterText}`;
+            }
             if (semicolon && item.insertTextFormat === InsertTextFormat.Snippet && item.textEdit) {
               const { textEdit } = item;
               const { newText } = textEdit;
