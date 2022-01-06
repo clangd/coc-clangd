@@ -42,7 +42,6 @@ This extension connects [coc.nvim][] to the [clangd][] language server.
 | clangd.fallbackFlags            | extra clang flags used to parse files when no compilation database is found                                                            | `[]`     |
 | clangd.path                     | path to `clangd` executable                                                                                                            | `clangd` |
 | clangd.semanticHighlighting     | enable semantic highlighting, requires [jackguo380/vim-lsp-cxx-highlight](https://github.com/jackguo380/vim-lsp-cxx-highlight) to work | `false`  |
-| clangd.serverCompletionRanking  | always rank compilation items on the server as you type                                                                                | `true`   |
 
 ## Commands
 

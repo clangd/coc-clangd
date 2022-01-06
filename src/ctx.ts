@@ -91,14 +91,6 @@ export class Ctx {
             // @ts-expect-error
             if (item.score) item.score = Math.max(1, item.score) + item.score / 1000;
 
-            if (this.config.serverCompletionRanking) {
-              const start = item.textEdit?.range.start;
-              if (start) {
-                const prefix = document.getText(Range.create(start, position));
-                if (prefix) item.filterText = prefix + '_' + item.filterText;
-              }
-            }
-
             if (semicolon && item.insertTextFormat === InsertTextFormat.Snippet && item.textEdit) {
               const { textEdit } = item;
               const { newText } = textEdit;
