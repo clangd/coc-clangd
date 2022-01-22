@@ -121,11 +121,6 @@
           "default": [],
           "description": "Extra clang flags used to parse files when no compilation database is found."
         },
-        "clangd.semanticHighlighting": {
-          "type": "boolean",
-          "default": false,
-          "description": "Enable semantic highlighting in clangd, requires jackguo380/vim-lsp-cxx-highlight to work"
-        },
         "clangd.showDBChangedNotification": {
           "type": "boolean",
           "default": true,

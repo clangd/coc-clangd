@@ -34,10 +34,6 @@ export class Config {
     return this.cfg.get<string[]>('fallbackFlags', []);
   }
 
-  get semanticHighlighting() {
-    return this.cfg.get('semanticHighlighting') as boolean;
-  }
-
   get showDBChangedNotification() {
     return this.cfg.get('showDBChangedNotification') as boolean;
   }

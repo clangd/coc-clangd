@@ -13,7 +13,6 @@ import {
   workspace,
 } from 'coc.nvim';
 import { Config } from './config';
-import { SemanticHighlightingFeature } from './semantic-highlighting';
 
 export class ClangdExtensionFeature implements StaticFeature {
   constructor() {}
@@ -125,12 +124,6 @@ export class Ctx {
     };
 
     const client = new LanguageClient('clangd', serverOptions, clientOptions);
-    if (this.config.semanticHighlighting) {
-      const lspCxx = await workspace.nvim.call('exists', 'g:lsp_cxx_hl_loaded');
-      if (lspCxx === 1) {
-        client.registerFeature(new SemanticHighlightingFeature(client, this.context));
-      }
-    }
     for (const feature of features) client.registerFeature(feature);
     this.context.subscriptions.push(services.registLanguageClient(client));
     await client.onReady();
