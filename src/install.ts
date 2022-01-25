@@ -29,6 +29,10 @@ class UI {
     coc.window.showMessage(`Reusing existing ${release} installation in ${this.storagePath}`);
     return true;
   }
+  async promptDelete(path: string) : Promise<boolean|undefined> {
+    coc.window.showMessage(`Deleting previous clangd installation in ${path}`);
+    return true;
+  }
   async promptReload() {
     await coc.commands.executeCommand('editor.action.restart');
   }
@@ -50,6 +54,12 @@ class UI {
   }
   set clangdPath(p: string) {
     this.config.update('path', p.replace(homedir(), '~'), /*isUser=*/ true);
+  }
+  get cleanupPath(): string|undefined {
+    return this.context.globalState.get('clangd.install.cleanupPath');
+  }
+  set cleanupPath(p: string|undefined) {
+    this.context.globalState.update('clangd.install.cleanupPath', p);
   }
 }
 
