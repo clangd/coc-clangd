@@ -55,6 +55,13 @@ export class Ctx {
       initializationOptions.compilationDatabasePath = this.config.compilationDatabasePath;
     }
 
+    const disabledFeatures: string[] = [];
+    if (this.config.disableDiagnostics) {
+      disabledFeatures.push('diagnostics');
+    }
+    if (this.config.disableCompletion) {
+      disabledFeatures.push('completion');
+    }
     const clientOptions: LanguageClientOptions = {
       documentSelector: [
         { scheme: 'file', language: 'c' },
@@ -67,9 +74,8 @@ export class Ctx {
         { scheme: 'file', language: 'cuda' },
       ],
       initializationOptions,
-      disableDiagnostics: this.config.disableDiagnostics,
+      disabledFeatures,
       disableSnippetCompletion: this.config.disableSnippetCompletion,
-      disableCompletion: this.config.disableCompletion,
       middleware: {
         provideOnTypeFormattingEdits: (document, position, ch, options, token, next) => {
           // coc sends "\n" when exiting insert mode, when there is no newline added to the doc.

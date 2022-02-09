@@ -39,33 +39,14 @@ export class ASTFeature implements StaticFeature {
   // The "Show AST" command is enabled if the server advertises the capability.
   initialize(capabilities: any) {
     if ('astProvider' in capabilities && typeof window['createTreeView'] === 'function') {
-      // The adapter holds the currently inspected node.
-      const adapter = new TreeAdapter();
-      // Create the AST view, showing data from the adapter.
-      const tree = window.createTreeView('clangd.AST', { treeDataProvider: adapter });
       this.ctx.subscriptions.push(
-        tree,
-        // Ensure the AST view is visible exactly when the adapter has a node.
-        // clangd.ast.hasData controls the view visibility (package.json).
-        adapter.onDidChangeTreeData(() => {
-          // Work around https://github.com/microsoft/vscode/issues/90005
-          // Show the AST tree even if it's been collapsed or closed.
-          // reveal(root) fails here: "Data tree node not found".
-          if (adapter.hasRoot()) {
-            // @ts-ignore
-            tree.reveal(null);
-          }
-        }),
-        // window.registerTreeDataProvider('clangd.ast', adapter),
-        // Create the "Show AST" command for the context menu.
-        // It's only shown if the feature is dynamicaly available (package.json)
         commands.registerCommand('clangd.ast', async () => {
           if (!this.ctx.client) return;
 
           let range: Range | null = null;
           const { document, position } = await workspace.getCurrentState();
           const mode = (await workspace.nvim.call('visualmode')) as string;
-          if (mode) range = await workspace.getSelectedRange(mode, workspace.getDocument(document.uri));
+          if (mode) range = await window.getSelectedRange(mode);
           if (!range) range = Range.create(position, position);
 
           const params: ASTParams = {
@@ -78,7 +59,9 @@ export class ASTFeature implements StaticFeature {
             return;
           }
           const winid = (await workspace.nvim.eval('win_getid()')) as number;
+          const adapter = new TreeAdapter();
           adapter.setRoot(item, Uri.parse(document.uri), winid);
+          const tree = window.createTreeView('clangd.AST', { treeDataProvider: adapter });
           tree.show();
         })
       );
