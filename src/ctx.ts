@@ -72,6 +72,7 @@ export class Ctx {
         { scheme: 'file', language: 'objective-cpp' },
         { scheme: 'file', language: 'opencl' },
         { scheme: 'file', language: 'cuda' },
+        { scheme: 'file', language: 'asm' },
       ],
       initializationOptions,
       disabledFeatures,
