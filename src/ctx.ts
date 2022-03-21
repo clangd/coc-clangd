@@ -1,11 +1,13 @@
 import {
   CompletionItemKind,
   Disposable,
+  DocumentSelector,
   Executable,
   ExtensionContext,
   InsertTextFormat,
   LanguageClient,
   LanguageClientOptions,
+  LinesTextDocument,
   Range,
   ServerOptions,
   services,
@@ -26,12 +28,27 @@ export class ClangdExtensionFeature implements StaticFeature {
   }
 }
 
+const documentSelector: DocumentSelector = [
+  { scheme: 'file', language: 'c' },
+  { scheme: 'file', language: 'cpp' },
+  { scheme: 'file', language: 'objc' },
+  { scheme: 'file', language: 'objcpp' },
+  { scheme: 'file', language: 'objective-c' },
+  { scheme: 'file', language: 'objective-cpp' },
+  { scheme: 'file', language: 'opencl' },
+  { scheme: 'file', language: 'cuda' },
+];
+
 export class Ctx {
   public readonly config: Config;
   client: LanguageClient | null = null;
 
   constructor(private readonly context: ExtensionContext) {
     this.config = new Config();
+  }
+
+  isClangDocument(document: LinesTextDocument) {
+    return workspace.match(documentSelector, document);
   }
 
   async startServer(bin: string, ...features: StaticFeature[]) {
@@ -63,16 +80,7 @@ export class Ctx {
       disabledFeatures.push('completion');
     }
     const clientOptions: LanguageClientOptions = {
-      documentSelector: [
-        { scheme: 'file', language: 'c' },
-        { scheme: 'file', language: 'cpp' },
-        { scheme: 'file', language: 'objc' },
-        { scheme: 'file', language: 'objcpp' },
-        { scheme: 'file', language: 'objective-c' },
-        { scheme: 'file', language: 'objective-cpp' },
-        { scheme: 'file', language: 'opencl' },
-        { scheme: 'file', language: 'cuda' },
-      ],
+      documentSelector,
       initializationOptions,
       disabledFeatures,
       disableSnippetCompletion: this.config.disableSnippetCompletion,

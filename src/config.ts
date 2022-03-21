@@ -45,4 +45,12 @@ export class Config {
   get serverCompletionRanking() {
     return this.cfg.get('serverCompletionRanking') as boolean;
   }
+
+  get inlayHints() {
+    const virtualText = workspace.isNvim && workspace.nvim.hasFunction('nvim_buf_set_virtual_text');
+    return {
+      enable: virtualText && (this.cfg.get('inlayHints.enable') as boolean),
+      sep: this.cfg.get('inlayHints.sep', '‣'),
+    };
+  }
 }
