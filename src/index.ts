@@ -1,7 +1,7 @@
 import { commands, ExtensionContext, services, State, window, workspace } from 'coc.nvim';
 import * as cmds from './cmds';
 import { Ctx, ClangdExtensionFeature } from './ctx';
-import { FileStatus, Status } from './file_status';
+import { FileStatus, Status } from './file-status';
 import * as install from './install';
 import { ReloadFeature } from './reload';
 import { MemoryUsageFeature } from './memory-usage';
