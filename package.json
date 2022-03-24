@@ -31,6 +31,7 @@
     "coc.nvim": "^0.0.81-next.15",
     "esbuild": "^0.14.2",
     "eslint": "^8.0.1",
+    "fs-jetpack": "^4.3.1",
     "rimraf": "^3.0.1",
     "typescript": "^4.4.3",
     "vscode-languageserver-protocol": "^3.16.0"
@@ -87,7 +88,7 @@
         },
         "clangd.path": {
           "type": "string",
-          "default": "clangd",
+          "default": "",
           "description": "The path to clangd executable, e.g.: /usr/bin/clangd"
         },
         "clangd.arguments": {

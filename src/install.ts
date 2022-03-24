@@ -1,6 +1,8 @@
 import * as common from '@clangd/install';
 import * as coc from 'coc.nvim';
-import { homedir } from 'os';
+import { homedir, platform } from 'os';
+import * as path from 'path';
+import { find } from 'fs-jetpack';
 
 class UI {
   constructor(private context: coc.ExtensionContext, private config: coc.WorkspaceConfiguration) {}
@@ -46,7 +48,19 @@ class UI {
   }
 
   get clangdPath(): string {
-    return coc.workspace.expand(this.config.get<string>('path', ''));
+    let p = this.config.get<string>('path', '');
+    const clangdExe = (platform() == 'win32') ? 'clangd.exe' : 'clangd';
+    if (p == '') {
+      const defaultPath = path.join(this.storagePath, 'install');
+      const exes = find(defaultPath, { matching:  `**/${clangdExe}`, files: true, directories: false });
+      if (exes.length > 0) {
+        p = exes[0];
+      }
+    }
+    if (p == '') {
+      p = clangdExe;
+    }
+    return coc.workspace.expand(p);
   }
   set clangdPath(p: string) {
     this.config.update('path', p.replace(homedir(), '~'), /*isUser=*/ true);
