@@ -120,6 +120,7 @@ export class InlayHintsFeature implements StaticFeature {
     const inlayHints = {};
     const sep = this.ctx.config.inlayHints.sep;
     for (const hint of decorations.parameter) {
+      if (!hint.label.length) continue;
       const start = hint.range.start.character;
       const end = hint.range.end.character;
       const line = doc.getline(hint.range.start.line);
@@ -134,6 +135,7 @@ export class InlayHintsFeature implements StaticFeature {
     }
 
     for (const hint of decorations.type) {
+      if (!hint.label.length) continue;
       const chunks: [[string, string]] = [[`${sep}${hint.label}`, 'CocHintSign']];
       if (inlayHints[hint.position.line] === undefined) {
         inlayHints[hint.position.line] = chunks;
