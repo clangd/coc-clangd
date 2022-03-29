@@ -50,10 +50,12 @@ class UI {
     let p = this.config.get<string>('path', '');
     const clangdExe = process.platform === 'win32' ? 'clangd.exe' : 'clangd';
     if (p === '') {
-      const exes = find(this.storagePath, { matching: `**/${clangdExe}`, files: true, directories: false });
-      if (exes.length > 0) {
-        p = exes[0];
-      }
+      try {
+        const exes = find(this.storagePath, { matching: `**/${clangdExe}`, files: true, directories: false });
+        if (exes.length > 0) {
+          p = exes[0];
+        }
+      } catch (e) {}
     }
     if (p === '') {
       p = clangdExe;
