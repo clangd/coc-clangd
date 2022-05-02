@@ -173,6 +173,8 @@ export class InlayHintsFeature implements StaticFeature {
 
     const param = { textDocument: { uri } };
 
-    return this.ctx.client!.sendRequest(InlayHintsRequest.type, param, tokenSource.token);
+    return this.ctx.client!.sendRequest(InlayHintsRequest.type, param, tokenSource.token).then(res => res, err => {
+      return this.ctx.client!.handleFailedRequest(InlayHintsRequest.type, tokenSource.token, err, null);
+    });
   }
 }
