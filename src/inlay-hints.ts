@@ -146,7 +146,11 @@ export class InlayHintsFeature implements StaticFeature {
     }
 
     Object.keys(inlayHints).forEach((line) => {
-      doc.buffer.setVirtualText(this.namespace, Number(line), inlayHints[line], {});
+      if (workspace.has('nvim-0.6.0')) {
+        doc.buffer.setExtMark(this.namespace, Number(line), 0, { virt_text_pos: 'eol', hl_mode: 'combine', virt_text: inlayHints[line] });
+      } else {
+        doc.buffer.setVirtualText(this.namespace, Number(line), inlayHints[line], {});
+      }
     });
   }
 
