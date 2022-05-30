@@ -42,6 +42,10 @@ export class Config {
     return this.cfg.get<string>('compilationDatabasePath');
   }
 
+  get compilationDatabaseCandidates() {
+    return this.cfg.get<string[]>('compilationDatabaseCandidates');
+  }
+
   get serverCompletionRanking() {
     return this.cfg.get('serverCompletionRanking') as boolean;
   }
