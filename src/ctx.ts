@@ -79,13 +79,13 @@ export class Ctx {
     if (this.config.disableCompletion) {
       disabledFeatures.push('completion');
     }
-    if (this.config.disableProgressWindow) {
+    if (this.config.disableProgressNotifications) {
       disabledFeatures.push('progress');
     }
     const clientOptions: LanguageClientOptions = {
       documentSelector,
       initializationOptions,
-      progressOnInitialization: !this.config.disableProgressWindow,
+      progressOnInitialization: !this.config.disableProgressNotifications,
       disabledFeatures,
       disableSnippetCompletion: this.config.disableSnippetCompletion,
       middleware: {

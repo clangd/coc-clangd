@@ -22,8 +22,8 @@ export class Config {
     return this.cfg.get('disableCompletion') as boolean;
   }
 
-  get disableProgressWindow() {
-    return this.cfg.get('disableProgressWindow') as boolean;
+  get disableProgressNotifications() {
+    return this.cfg.get('disableProgressNotifications') as boolean;
   }
 
   get arguments() {
