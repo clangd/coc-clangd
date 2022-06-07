@@ -81,6 +81,11 @@
           "default": false,
           "description": "Disable completion snippet from clangd"
         },
+        "clangd.disableProgressWindow": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable indexing progress notifications from clangd"
+        },
         "clangd.compilationDatabasePath": {
           "type": "string",
           "default": "",

@@ -22,6 +22,10 @@ export class Config {
     return this.cfg.get('disableCompletion') as boolean;
   }
 
+  get disableProgressWindow() {
+    return this.cfg.get('disableProgressWindow') as boolean;
+  }
+
   get arguments() {
     return this.cfg.get<string[]>('arguments', []).map((arg) => workspace.expand(arg));
   }
