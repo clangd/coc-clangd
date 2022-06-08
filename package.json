@@ -91,6 +91,11 @@
           "default": "",
           "description": "Specifies the directory containing the compilation database"
         },
+        "clangd.compilationDatabaseCandidates": {
+          "type": "array",
+          "default": [],
+          "description": "Specifies the directories that may contain a compilation database"
+        },
         "clangd.path": {
           "type": "string",
           "default": "",
