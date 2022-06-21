@@ -22,6 +22,10 @@ export class Config {
     return this.cfg.get('disableCompletion') as boolean;
   }
 
+  get disableProgressNotifications() {
+    return this.cfg.get('disableProgressNotifications') as boolean;
+  }
+
   get arguments() {
     return this.cfg.get<string[]>('arguments', []).map((arg) => workspace.expand(arg));
   }
@@ -40,6 +44,10 @@ export class Config {
 
   get compilationDatabasePath() {
     return this.cfg.get<string>('compilationDatabasePath');
+  }
+
+  get compilationDatabaseCandidates() {
+    return this.cfg.get<string[]>('compilationDatabaseCandidates');
   }
 
   get serverCompletionRanking() {

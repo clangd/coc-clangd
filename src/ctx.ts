@@ -15,6 +15,7 @@ import {
   workspace,
 } from 'coc.nvim';
 import { Config } from './config';
+import { closestCompilationDatabase } from './database-and-flags';
 
 export class ClangdExtensionFeature implements StaticFeature {
   constructor() {}
@@ -70,6 +71,11 @@ export class Ctx {
     const initializationOptions: any = { clangdFileStatus: true, fallbackFlags: this.config.fallbackFlags };
     if (this.config.compilationDatabasePath) {
       initializationOptions.compilationDatabasePath = this.config.compilationDatabasePath;
+    } else if (this.config.compilationDatabaseCandidates) {
+      const db_path = closestCompilationDatabase(workspace.cwd, this.config.compilationDatabaseCandidates);
+      if (db_path) {
+        initializationOptions.compilationDatabasePath = db_path;
+      }
     }
 
     const disabledFeatures: string[] = [];
@@ -79,9 +85,13 @@ export class Ctx {
     if (this.config.disableCompletion) {
       disabledFeatures.push('completion');
     }
+    if (this.config.disableProgressNotifications) {
+      disabledFeatures.push('progress');
+    }
     const clientOptions: LanguageClientOptions = {
       documentSelector,
       initializationOptions,
+      progressOnInitialization: !this.config.disableProgressNotifications,
       disabledFeatures,
       disableSnippetCompletion: this.config.disableSnippetCompletion,
       middleware: {

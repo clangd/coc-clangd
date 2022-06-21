@@ -11,3 +11,4 @@ yarn-error.log
 .github
 .eslintrc.js
 .prettierrc
+.editorconfig

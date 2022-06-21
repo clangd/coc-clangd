@@ -1,6 +1,6 @@
 {
   "name": "coc-clangd",
-  "version": "0.21.4",
+  "version": "0.22.0",
   "description": "clangd extension for coc.nvim",
   "author": "Heyward Fann <fannheyward@gmail.com>",
   "license": "Apache-2.0 WITH LLVM-exception",
@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@clangd/install": "^0.1.4",
-    "@types/node": "12.20.50",
+    "@types/node": "12.20.54",
     "@types/which": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
@@ -81,10 +81,20 @@
           "default": false,
           "description": "Disable completion snippet from clangd"
         },
+        "clangd.disableProgressNotifications": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable indexing progress notifications from clangd"
+        },
         "clangd.compilationDatabasePath": {
           "type": "string",
           "default": "",
           "description": "Specifies the directory containing the compilation database"
+        },
+        "clangd.compilationDatabaseCandidates": {
+          "type": "array",
+          "default": [],
+          "description": "Specifies the directories that may contain a compilation database"
         },
         "clangd.path": {
           "type": "string",
