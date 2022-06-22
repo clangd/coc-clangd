@@ -125,7 +125,7 @@ export class InlayHintsFeature implements StaticFeature {
       const end = hint.range.end.character;
       const line = doc.getline(hint.range.start.line);
       const symbol = `${line.substring(start, end)}`;
-      const chunks: [[string, string]] = [[`${sep}${hint.label}${symbol}`, 'CocHintSign']];
+      const chunks: [[string, string]] = [[`${sep}${hint.label}${symbol}`, 'CocHintVirtualText']];
       if (inlayHints[hint.position.line] === undefined) {
         inlayHints[hint.position.line] = chunks;
       } else {
@@ -136,7 +136,7 @@ export class InlayHintsFeature implements StaticFeature {
 
     for (const hint of decorations.type) {
       if (!hint.label.length) continue;
-      const chunks: [[string, string]] = [[`${sep}${hint.label}`, 'CocHintSign']];
+      const chunks: [[string, string]] = [[`${sep}${hint.label}`, 'CocHintVirtualText']];
       if (inlayHints[hint.position.line] === undefined) {
         inlayHints[hint.position.line] = chunks;
       } else {
@@ -146,7 +146,11 @@ export class InlayHintsFeature implements StaticFeature {
     }
 
     Object.keys(inlayHints).forEach((line) => {
-      doc.buffer.setVirtualText(this.namespace, Number(line), inlayHints[line], {});
+      if (workspace.has('nvim-0.6.0')) {
+        doc.buffer.setExtMark(this.namespace, Number(line), 0, { virt_text_pos: 'eol', hl_mode: 'combine', virt_text: inlayHints[line] });
+      } else {
+        doc.buffer.setVirtualText(this.namespace, Number(line), inlayHints[line], {});
+      }
     });
   }
 
