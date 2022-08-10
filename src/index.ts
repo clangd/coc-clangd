@@ -2,7 +2,6 @@ import { commands, ExtensionContext, services, State, window, workspace } from '
 import * as cmds from './cmds';
 import { Ctx, ClangdExtensionFeature } from './ctx';
 import { FileStatus, Status } from './file-status';
-import { InlayHintsFeature } from './inlay-hints';
 import * as install from './install';
 import { ReloadFeature } from './reload';
 import { MemoryUsageFeature } from './memory-usage';
@@ -30,8 +29,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
     const extFeature = new ClangdExtensionFeature();
     const reloadFeature = new ReloadFeature(ctx, () => activate(context));
     const memoryUsageFeature = new MemoryUsageFeature(ctx);
-    const inlayFeature = new InlayHintsFeature(ctx);
-    await ctx.startServer(clangdPath, ...[astFeature, extFeature, reloadFeature, memoryUsageFeature, inlayFeature]);
+    await ctx.startServer(clangdPath, ...[astFeature, extFeature, reloadFeature, memoryUsageFeature]);
   } catch (e) {
     return;
   }
