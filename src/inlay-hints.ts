@@ -1,4 +1,4 @@
-import { CancellationTokenSource, commands, Disposable, Document, events, Position, Range, RequestType, StaticFeature, TextDocumentIdentifier, workspace } from 'coc.nvim';
+import { CancellationTokenSource, Disposable, Document, events, Position, Range, RequestType, StaticFeature, TextDocumentIdentifier, workspace } from 'coc.nvim';
 import { ServerCapabilities } from 'vscode-languageserver-protocol';
 import { Ctx } from './ctx';
 
@@ -37,14 +37,11 @@ interface ClangSourceFile {
 }
 
 export class InlayHintsFeature implements StaticFeature {
-  private enabled = false;
   private namespace = 0;
   private sourceFiles = new Map<string, ClangSourceFile>(); // keys are URIs
   private readonly disposables: Disposable[] = [];
 
-  constructor(private readonly ctx: Ctx) {
-    this.enabled = !!ctx.config.inlayHints.enable;
-  }
+  constructor(private readonly ctx: Ctx) {}
 
   fillClientCapabilities() {}
   fillInitializeParams() {}
@@ -53,42 +50,31 @@ export class InlayHintsFeature implements StaticFeature {
     this.namespace = await workspace.nvim.createNamespace('clangdInlayHints');
 
     const serverCapabilities: ServerCapabilities & { clangdInlayHintsProvider?: boolean } = capabilities;
-    if (serverCapabilities.clangdInlayHintsProvider && this.ctx.config.inlayHints.enable) {
-      commands.registerCommand('clangd.inlayHints.toggle', async () => {
-        const doc = await workspace.document;
-        if (!doc) return;
-
-        if (this.enabled) {
-          this.enabled = false;
-          doc.buffer.clearNamespace(this.namespace);
-        } else {
-          this.enabled = true;
-          await this.syncAndRenderHints(doc);
-        }
-      });
-
-      events.on('InsertLeave', async (bufnr) => await this.syncAndRenderHints(workspace.getDocument(bufnr)));
-
-      workspace.onDidChangeTextDocument(
-        async (e) => {
-          if (events.insertMode) return;
-          await this.syncAndRenderHints(workspace.getDocument(e.bufnr));
-        },
-        this,
-        this.disposables
-      );
-
-      workspace.onDidOpenTextDocument(
-        async (e) => {
-          await this.syncAndRenderHints(workspace.getDocument(e.bufnr));
-        },
-        this,
-        this.disposables
-      );
-
-      const current = await workspace.document;
-      await this.syncAndRenderHints(current);
+    if (!serverCapabilities.clangdInlayHintsProvider || serverCapabilities.inlayHintProvider || !this.ctx.config.inlayHints.enable) {
+      return;
     }
+
+    events.on('InsertLeave', async (bufnr) => await this.syncAndRenderHints(workspace.getDocument(bufnr)));
+
+    workspace.onDidChangeTextDocument(
+      async (e) => {
+        if (events.insertMode) return;
+        await this.syncAndRenderHints(workspace.getDocument(e.bufnr));
+      },
+      this,
+      this.disposables
+    );
+
+    workspace.onDidOpenTextDocument(
+      async (e) => {
+        await this.syncAndRenderHints(workspace.getDocument(e.bufnr));
+      },
+      this,
+      this.disposables
+    );
+
+    const current = await workspace.document;
+    await this.syncAndRenderHints(current);
   }
 
   dispose() {
@@ -156,7 +142,7 @@ export class InlayHintsFeature implements StaticFeature {
 
   private async syncAndRenderHints(doc: Document) {
     if (!doc) return;
-    if (!this.enabled) return;
+    if (!this.ctx.config.inlayHints.enable) return;
     if (!this.ctx.isClangDocument(doc.textDocument)) return;
 
     const uri = doc.uri.toString();
