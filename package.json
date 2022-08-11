@@ -9,7 +9,7 @@
     "coc.nvim"
   ],
   "engines": {
-    "coc": "^0.0.82"
+    "coc": "^0.0.80"
   },
   "repository": {
     "type": "git",
