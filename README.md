@@ -52,6 +52,7 @@ This extension connects [coc.nvim][] to the [clangd][] language server.
 - `clangd.ast`: show AST
 - `clangd.install`: install latest clangd release from GitHub
 - `clangd.update`: check for updates to clangd from GitHub
+- `clangd.inlayHints.toggle`: toggles displaying Inlay Hints
 
 ## License
 
