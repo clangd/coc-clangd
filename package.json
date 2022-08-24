@@ -151,16 +151,6 @@
           "type": "boolean",
           "default": false,
           "description": "Check for clangd language server updates on startup."
-        },
-        "suggest.detailMaxLength": {
-          "type": "number",
-          "description": "Max length of detail that should be shown in popup menu.",
-          "default": 50
-        },
-        "diagnostic.format": {
-          "type": "string",
-          "description": "Define the diagnostic format. Available parts: source, code, severity, message",
-          "default": "%message\n[%source:%code]"
         }
       }
     },
