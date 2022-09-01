@@ -29,7 +29,7 @@
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "coc.nvim": "^0.0.82",
-    "esbuild": "^0.14.2",
+    "esbuild": "^0.15.6",
     "eslint": "^8.0.1",
     "fs-jetpack": "^4.3.1",
     "rimraf": "^3.0.1",
