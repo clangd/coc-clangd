@@ -35,7 +35,7 @@ export class Config {
   }
 
   get fallbackFlags() {
-    return this.cfg.get<string[]>('fallbackFlags', []);
+    return this.cfg.get<string[]>('fallbackFlags', []).map((flag) => workspace.expand(flag));
   }
 
   get showDBChangedNotification() {
