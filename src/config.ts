@@ -55,9 +55,9 @@ export class Config {
   }
 
   get inlayHints() {
-    const virtualText = workspace.isNvim && workspace.nvim.hasFunction('nvim_buf_set_virtual_text');
     return {
-      enable: virtualText && (this.cfg.get('inlayHints.enable') as boolean),
+      // @ts-ignore
+      enable: workspace.env.virtualText && this.cfg.get('inlayHints.enable', true),
       sep: this.cfg.get('inlayHints.sep', '‣'),
     };
   }
