@@ -42,7 +42,6 @@ This extension connects [coc.nvim][] to the [clangd][] language server.
 | clangd.compilationDatabasePath        | specifies the directory containing the compilation database                          | `''`     |
 | clangd.fallbackFlags                  | extra clang flags used to parse files when no compilation database is found          | `[]`     |
 | clangd.path                           | path to `clangd` executable                                                          | `clangd` |
-| clangd.inlayHints.enable              | whether to enable the Inlay Hints feature                                            | `true`   |
 
 ## Commands
 

@@ -55,9 +55,10 @@ export class Config {
   }
 
   get inlayHints() {
+    const enable = workspace.getConfiguration('inlayHint').get('enable', true);
     return {
       // @ts-ignore
-      enable: workspace.env.virtualText && this.cfg.get('inlayHints.enable', true),
+      enable: workspace.env.virtualText && enable,
       sep: this.cfg.get('inlayHints.sep', '‣'),
     };
   }

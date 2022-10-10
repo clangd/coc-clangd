@@ -124,16 +124,6 @@
           "default": "off",
           "description": "Trace requests to clangd"
         },
-        "clangd.inlayHints.enable": {
-          "type": "boolean",
-          "default": true,
-          "description": "Enable inlay hints"
-        },
-        "clangd.inlayHints.sep": {
-          "type": "string",
-          "default": "‣",
-          "description": "Separator text for typeHints in virtual text"
-        },
         "clangd.fallbackFlags": {
           "type": "array",
           "items": {
