@@ -40,6 +40,7 @@ This extension connects [coc.nvim][] to the [clangd][] language server.
 | clangd.disableSnippetCompletion       | disable completion snippet from clangd                                               | `false`  |
 | clangd.disableProgressNotifications   | disable indexing progress notifications from clangd                                  | `false`  |
 | clangd.compilationDatabasePath        | specifies the directory containing the compilation database                          | `''`     |
+| clangd.compilationDatabaseCandidates  | specifies directories that may contain the compilation database, you can use `${workspaceFolder}` variables <https://code.visualstudio.com/docs/editor/variables-reference>               | `[]`     |
 | clangd.fallbackFlags                  | extra clang flags used to parse files when no compilation database is found          | `[]`     |
 | clangd.path                           | path to `clangd` executable                                                          | `clangd` |
 

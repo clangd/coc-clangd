@@ -14,8 +14,9 @@ import {
   StaticFeature,
   workspace,
 } from 'coc.nvim';
+import { existsSync } from 'fs';
+import { join } from 'path';
 import { Config } from './config';
-import { closestCompilationDatabase } from './database-and-flags';
 
 export class ClangdExtensionFeature implements StaticFeature {
   constructor() {}
@@ -71,11 +72,9 @@ export class Ctx {
     const initializationOptions: any = { clangdFileStatus: true, fallbackFlags: this.config.fallbackFlags };
     if (this.config.compilationDatabasePath) {
       initializationOptions.compilationDatabasePath = this.config.compilationDatabasePath;
-    } else if (this.config.compilationDatabaseCandidates) {
-      const db_path = closestCompilationDatabase(workspace.cwd, this.config.compilationDatabaseCandidates);
-      if (db_path) {
-        initializationOptions.compilationDatabasePath = db_path;
-      }
+    } else if (this.config.compilationDatabaseCandidates.length) {
+      const closest = this.closestCompilationDatabase(this.config.compilationDatabaseCandidates);
+      if (closest) initializationOptions.compilationDatabasePath = closest;
     }
 
     const disabledFeatures: string[] = [];
@@ -160,5 +159,19 @@ export class Ctx {
 
   get subscriptions(): Disposable[] {
     return this.context.subscriptions;
+  }
+
+  private closestCompilationDatabase(candidates: string[]): string {
+    const expandendCandidates = candidates.map(c => workspace.expand(c));
+
+    // Return the first (sorting matters!) candidate directory that contains a
+    // compilation database. Otherwise return the empty string.
+    for (const candidate of expandendCandidates) {
+      if (existsSync(join(candidate, 'compile_commands.json'))) {
+        return candidate;
+      }
+    }
+
+    return '';
   }
 }
