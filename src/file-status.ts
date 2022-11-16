@@ -1,4 +1,5 @@
 import { Disposable, StatusBarItem, window, workspace } from 'coc.nvim';
+import { Config } from './config';
 
 export interface Status {
   uri: string;
@@ -8,7 +9,7 @@ export interface Status {
 export class FileStatus implements Disposable {
   private readonly statusBarItem: StatusBarItem;
 
-  constructor() {
+  constructor(private readonly config: Config) {
     this.statusBarItem = window.createStatusBarItem(0);
   }
 
@@ -20,6 +21,9 @@ export class FileStatus implements Disposable {
   }
 
   async updateStatus() {
+    if (this.config.disableFileStatus) {
+      return;
+    }
     const doc = await workspace.document;
     if (!doc) {
       return;

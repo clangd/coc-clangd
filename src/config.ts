@@ -26,6 +26,10 @@ export class Config {
     return this.cfg.get('disableProgressNotifications') as boolean;
   }
 
+  get disableFileStatus() {
+    return this.cfg.get('disableFileStatus') as boolean;
+  }
+
   get arguments() {
     return this.cfg.get<string[]>('arguments', []).map((arg) => workspace.expand(arg));
   }

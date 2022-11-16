@@ -36,7 +36,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
     return;
   }
 
-  const fileStatus = new FileStatus();
+  const fileStatus = new FileStatus(ctx.config);
   context.subscriptions.push(
     fileStatus,
 

@@ -84,6 +84,11 @@
           "default": false,
           "description": "Disable indexing progress notifications from clangd"
         },
+        "clangd.disableFileStatus": {
+          "type": "boolean",
+          "default": false,
+          "description": "Disable fileStatus from clangd"
+        },
         "clangd.compilationDatabasePath": {
           "type": "string",
           "default": "",
