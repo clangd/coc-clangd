@@ -44,9 +44,7 @@
     "onLanguage:objcpp",
     "onLanguage:opencl",
     "onLanguage:objective-c",
-    "onLanguage:objective-cpp",
-    "workspaceContains:**/compile_commands.json",
-    "workspaceContains:**/compile_flags.txt"
+    "onLanguage:objective-cpp"
   ],
   "rootPatterns": [
     {
