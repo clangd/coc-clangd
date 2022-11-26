@@ -24,17 +24,17 @@
   },
   "devDependencies": {
     "@clangd/install": "^0.1.16",
-    "@types/node": "12.20.55",
+    "@types/node": "14",
     "@types/which": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
-    "coc.nvim": "^0.0.82",
+    "coc.nvim": "^0.0.83-next.9",
     "esbuild": "^0.15.6",
     "eslint": "^8.0.1",
     "fs-jetpack": "^5.0.0",
     "rimraf": "^3.0.1",
     "typescript": "^4.4.3",
-    "vscode-languageserver-protocol": "^3.16.0"
+    "vscode-languageserver-protocol": "^3.17.2"
   },
   "activationEvents": [
     "onLanguage:c",
