@@ -49,6 +49,9 @@
   "rootPatterns": [
     {
       "patterns": [
+        ".clangd",
+        ".clang-tidy",
+        ".clang-format",
         "compile_commands.json",
         "compile_flags.txt"
       ]
