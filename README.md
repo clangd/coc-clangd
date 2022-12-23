@@ -44,6 +44,10 @@ This extension connects [coc.nvim][] to the [clangd][] language server.
 | clangd.fallbackFlags                  | extra clang flags used to parse files when no compilation database is found          | `[]`     |
 | clangd.path                           | path to `clangd` executable                                                          | `clangd` |
 
+Note:
+
+Semantic highlighting is disabled by default in coc.nvim, you can enable it with `semanticTokens.enable`.
+
 ## Commands
 
 - `clangd.switchSourceHeader`: switch between source/header files
