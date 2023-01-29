@@ -28,7 +28,7 @@
     "@types/which": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
-    "coc.nvim": "^0.0.83-next.9",
+    "coc.nvim": "^0.0.83-next.17",
     "esbuild": "^0.16.14",
     "eslint": "^8.0.1",
     "fs-jetpack": "^5.0.0",

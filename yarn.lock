@@ -441,10 +441,10 @@ chalk@^4.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-coc.nvim@^0.0.83-next.9:
-  version "0.0.83-next.9"
-  resolved "https://registry.yarnpkg.com/coc.nvim/-/coc.nvim-0.0.83-next.9.tgz#8f7de8c98fa37019286852d3b7229fb91517ab83"
-  integrity sha512-ek5+EgA9N92/6Wt07TAYpavmBgXZto4Dmwmm56oyBl/w4wy3Tod7LfpCp4k9M4xCxhxPtrflIcxvhdDUPIeMuw==
+coc.nvim@^0.0.83-next.17:
+  version "0.0.83-next.17"
+  resolved "https://registry.yarnpkg.com/coc.nvim/-/coc.nvim-0.0.83-next.17.tgz#a1c4baa10927886366241ca0fd3acc7c941a5546"
+  integrity sha512-VjGnxjbvBOboddNQMI5rZnS0HS0tdft9pbnwste5CncPNJaxfz5wEdWd7eFtifukE8STdLltPMNsoO0vul5r/A==
 
 color-convert@^2.0.1:
   version "2.0.1"
