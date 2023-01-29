@@ -40,6 +40,7 @@ export class InlayHintsFeature implements StaticFeature {
     // If the clangd server supports LSP 3.17 inlay hints, these are handled by
     // the vscode-languageclient library - don't send custom requests too!
     if (!serverCapabilities.clangdInlayHintsProvider ||
+      languages.registerInlayHintsProvider === undefined ||
       serverCapabilities.inlayHintProvider)
       return;
     this.context.subscriptions.push(languages.registerInlayHintsProvider(
