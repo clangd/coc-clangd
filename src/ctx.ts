@@ -12,6 +12,7 @@ import {
   ServerOptions,
   services,
   StaticFeature,
+  TextEdit,
   workspace,
 } from 'coc.nvim';
 import { existsSync } from 'fs';
@@ -30,7 +31,7 @@ export class ClangdExtensionFeature implements StaticFeature {
   }
 }
 
-const documentSelector: DocumentSelector = [
+export const documentSelector: DocumentSelector = [
   { scheme: 'file', language: 'c' },
   { scheme: 'file', language: 'cpp' },
   { scheme: 'file', language: 'objc' },
@@ -125,7 +126,7 @@ export class Ctx {
               const { textEdit } = item;
               const { newText } = textEdit;
               if (item.kind === CompletionItemKind.Function || (item.kind === CompletionItemKind.Text && newText.slice(-1) === ')')) {
-                item.textEdit = { range: textEdit.range, newText: newText + ';' };
+                item.textEdit = { range: (textEdit as TextEdit).range, newText: newText + ';' };
               }
             }
           }
