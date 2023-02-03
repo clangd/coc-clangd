@@ -3,7 +3,7 @@ name: Bug report
 about: A problem with coc-clangd
 title: ''
 labels: bug
-assignees: ''
+assignees: fannheyward
 
 ---
 

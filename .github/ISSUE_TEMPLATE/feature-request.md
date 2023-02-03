@@ -3,7 +3,7 @@ name: Feature request
 about: Suggest an idea for coc-clangd
 title: ''
 labels: enhancement
-assignees: ''
+assignees: fannheyward
 
 ---
 
