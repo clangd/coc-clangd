@@ -30,10 +30,10 @@ This extension connects [coc.nvim][] to the [clangd][] language server.
 
 `:CocConfig` opens your global `coc-settings.json`. `:CocLocalConfig` opens local configuration for your project (`$PROJECTROOT/.vim/coc-settings.json`)
 
-| Configurations                        | Description                                                                          | Default  |
-| -------------------------------       | ------------------------------------------------------------------------------------ | -------- |
+| Configurations                        | Description                                                                          | Default  | example
+| -------------------------------       | ------------------------------------------------------------------------------------ | -------- |----------
 | clangd.enabled                        | enable `coc-clangd`                                                                  | `true`   |
-| clangd.arguments                      | arguments for `clangd` server                                                        | `[]`     |
+| clangd.arguments                      | arguments for `clangd` server                                                        | `[]`     | `["--query-driver=/**/arm-none-eabi*", "--log=verbose"]`
 | clangd.checkUpdates                   | check for clangd language server updates on startup                                  | `false`  |
 | clangd.disableCompletion              | disable completion source from clangd                                                | `false`  |
 | clangd.disableDiagnostics             | disable diagnostics from clangd                                                      | `false`  |
