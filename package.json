@@ -118,7 +118,7 @@
         "clangd.trace.file": {
           "type": "string",
           "default": "",
-          "description": "Names a file that clangd should log a performance trace to, in chrome trace-viewer JSON format."
+          "description": "Names a file that clangd should log a performance trace to, in chrome trace-viewer JSON format, can be loaded in `chrome://tracing`."
         },
         "clangd.trace.server": {
           "type": "string",
