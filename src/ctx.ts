@@ -8,7 +8,6 @@ import {
   LanguageClient,
   LanguageClientOptions,
   LinesTextDocument,
-  Range,
   ServerOptions,
   services,
   StaticFeature,
@@ -98,13 +97,6 @@ export class Ctx {
       disabledFeatures,
       disableSnippetCompletion: this.config.disableSnippetCompletion,
       middleware: {
-        provideOnTypeFormattingEdits: (document, position, ch, options, token, next) => {
-          // coc sends "\n" when exiting insert mode, when there is no newline added to the doc.
-          const line = document.getText(Range.create(position.line, 0, position.line, position.character));
-          if (!line.trim().length) return;
-          if (ch === '\n') ch = '';
-          return next(document, position, ch, options, token);
-        },
         provideCompletionItem: async (document, position, context, token, next) => {
           const list = await next(document, position, context, token);
           if (!list) return [];
