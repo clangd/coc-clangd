@@ -26,9 +26,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: build
+      - name: Install yarn
         run: |
-          npm install
-      - name: lint
+          curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
+      - name: yarn build
         run: |
-          npm run lint
+          yarn
+      - name: yarn lint
+        run: |
+          yarn lint
