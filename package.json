@@ -16,7 +16,6 @@
     "url": "https://github.com/clangd/coc-clangd.git"
   },
   "scripts": {
-    "clean": "rimraf lib",
     "build": "node esbuild.js",
     "watch": "node esbuild.js --watch",
     "lint": "eslint src --ext ts",
@@ -24,15 +23,14 @@
   },
   "devDependencies": {
     "@clangd/install": "^0.1.16",
-    "@types/node": "20",
+    "@types/node": "16",
     "@types/which": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
-    "coc.nvim": "^0.0.83-next.17",
+    "coc.nvim": "^0.0.83-next.18",
     "esbuild": "^0.19.2",
     "eslint": "^8.0.1",
     "fs-jetpack": "^5.0.0",
-    "rimraf": "^5.0.0",
     "typescript": "^5.0.3",
     "unzipper": "^0.10.14",
     "vscode-languageserver-protocol": "^3.17.2"
