@@ -8,7 +8,7 @@ async function start() {
     mainFields: ['module', 'main'],
     external: ['coc.nvim'],
     platform: 'node',
-    target: 'node10.12',
+    target: 'node16.18',
     outfile: 'lib/index.js',
   });
 }
