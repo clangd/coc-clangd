@@ -6,8 +6,7 @@ tsconfig.json
 .DS_Store
 webpack.config.js
 esbuild.js
-yarn.lock
-yarn-error.log
+package-lock.json
 .github
 .eslintrc.js
 .prettierrc
