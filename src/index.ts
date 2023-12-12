@@ -1,11 +1,11 @@
-import { commands, ExtensionContext, services, State, window, workspace } from 'coc.nvim';
+import { ExtensionContext, State, commands, services, window, workspace } from 'coc.nvim';
+import { ASTFeature } from './ast';
 import * as cmds from './cmds';
-import { Ctx, ClangdExtensionFeature } from './ctx';
+import { ClangdExtensionFeature, Ctx } from './ctx';
 import { FileStatus, Status } from './file-status';
 import { InlayHintsFeature } from './inlay-hints';
 import * as install from './install';
 import { MemoryUsageFeature } from './memory-usage';
-import { ASTFeature } from './ast';
 
 export async function activate(context: ExtensionContext): Promise<void> {
   const ctx = new Ctx(context);
@@ -43,6 +43,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
     commands.registerCommand('clangd.userConfig', cmds.userConfig),
     commands.registerCommand('clangd.projectConfig', cmds.projectConfig),
 
+    // biome-ignore lint/style/noNonNullAssertion: client is not null
     ctx.client!.onDidChangeState((e) => {
       if (e.newState === State.Running) {
         ctx.client?.onNotification('textDocument/clangd.fileStatus', (status) => {

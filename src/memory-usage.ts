@@ -1,6 +1,6 @@
 // Implements the "memory usage" feature.
 
-import { commands, RequestType0, StaticFeature, window } from 'coc.nvim';
+import { RequestType0, StaticFeature, commands, window } from 'coc.nvim';
 import { Ctx } from './ctx';
 
 // LSP wire format for this clangd feature.
@@ -43,7 +43,7 @@ function format(c: InternalTree) {
     results.push(msg);
   }
   if (['background_index', 'tuscheduler', 'dynamic_index'].includes(c.title)) {
-    results.push(' └ ' + msg);
+    results.push(` └ ${msg}`);
   }
   for (const child of c.children) {
     format(child);
@@ -56,11 +56,12 @@ export class MemoryUsageFeature implements StaticFeature {
   fillClientCapabilities() {}
   fillInitializeParams() {}
 
+  // biome-ignore lint/suspicious/noExplicitAny:
   initialize(capabilities: any) {
     if ('memoryUsageProvider' in capabilities) {
       this.ctx.subscriptions.push(
         commands.registerCommand('clangd.memoryUsage', async () => {
-          const usage = (await this.ctx.client!.sendRequest(MemoryUsageRequest.method, {})) as WireTree;
+          const usage = (await this.ctx.client?.sendRequest(MemoryUsageRequest.method, {})) as WireTree;
           results.length = 0;
           format(convert(usage, '<root>'));
           window.echoLines(results);

@@ -35,7 +35,7 @@ export class FileStatus implements Disposable {
       return;
     }
 
-    this.statusBarItem.text = `clangd: ` + status.state;
+    this.statusBarItem.text = `clangd: ${status.state}`;
     this.statusBarItem.show();
   }
 

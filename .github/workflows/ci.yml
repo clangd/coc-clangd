@@ -29,6 +29,9 @@ jobs:
       - name: npm ci
         run: |
           npm ci
+      - name: npm format
+        run: |
+          npm run format
       - name: npm lint
         run: |
-          npm run lint
+          npm run check

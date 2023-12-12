@@ -1,3 +1,5 @@
+import { existsSync } from 'fs';
+import { join } from 'path';
 import {
   CompletionItemKind,
   Disposable,
@@ -9,19 +11,17 @@ import {
   LanguageClientOptions,
   LinesTextDocument,
   ServerOptions,
-  services,
   StaticFeature,
   TextEdit,
+  services,
   workspace,
 } from 'coc.nvim';
-import { existsSync } from 'fs';
-import { join } from 'path';
 import { Config } from './config';
 
 export class ClangdExtensionFeature implements StaticFeature {
-  constructor() {}
   dispose(): void {}
   initialize() {}
+  // biome-ignore lint/suspicious/noExplicitAny:
   fillClientCapabilities(capabilities: any) {
     const extendedCompletionCapabilities = capabilities.textDocument.completion;
     if (extendedCompletionCapabilities) {
@@ -69,7 +69,11 @@ export class Ctx {
 
     const serverOptions: ServerOptions = exec;
 
-    const initializationOptions: any = { clangdFileStatus: true, fallbackFlags: this.config.fallbackFlags };
+    // biome-ignore lint/suspicious/noExplicitAny:
+    const initializationOptions: any = {
+      clangdFileStatus: true,
+      fallbackFlags: this.config.fallbackFlags,
+    };
     if (this.config.compilationDatabasePath) {
       initializationOptions.compilationDatabasePath = this.config.compilationDatabasePath;
     } else if (this.config.compilationDatabaseCandidates.length) {
@@ -118,7 +122,10 @@ export class Ctx {
               const { textEdit } = item;
               const { newText } = textEdit;
               if (item.kind === CompletionItemKind.Function || (item.kind === CompletionItemKind.Text && newText.slice(-1) === ')')) {
-                item.textEdit = { range: (textEdit as TextEdit).range, newText: newText + ';' };
+                item.textEdit = {
+                  range: (textEdit as TextEdit).range,
+                  newText: `${newText};`,
+                };
               }
             }
           }
@@ -155,7 +162,7 @@ export class Ctx {
   }
 
   private closestCompilationDatabase(candidates: string[]): string {
-    const expandendCandidates = candidates.map(c => workspace.expand(c));
+    const expandendCandidates = candidates.map((c) => workspace.expand(c));
 
     // Return the first (sorting matters!) candidate directory that contains a
     // compilation database. Otherwise return the empty string.

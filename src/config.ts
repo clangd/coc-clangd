@@ -1,4 +1,4 @@
-import { workspace, WorkspaceConfiguration } from 'coc.nvim';
+import { WorkspaceConfiguration, workspace } from 'coc.nvim';
 export class Config {
   private cfg: WorkspaceConfiguration;
 

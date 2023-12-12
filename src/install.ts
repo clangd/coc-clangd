@@ -1,7 +1,7 @@
+import { homedir } from 'os';
 import * as common from '@clangd/install';
 import * as coc from 'coc.nvim';
 import { find } from 'fs-jetpack';
-import { homedir } from 'os';
 
 class UI {
   constructor(private context: coc.ExtensionContext, private config: coc.WorkspaceConfiguration) {}
@@ -19,6 +19,7 @@ class UI {
   info(s: string) {
     coc.window.showInformationMessage(s);
   }
+  // biome-ignore lint/suspicious/noExplicitAny:
   progress<T>(title: string, _cancel: any, body: (progress: (fraction: number) => void) => Promise<T>) {
     return this.slow(
       title,
@@ -34,8 +35,7 @@ class UI {
     await coc.commands.executeCommand('editor.action.restart');
   }
   showHelp(message: string, url: string) {
-    message += ` See ${url}.`;
-    coc.window.showInformationMessage(message);
+    coc.window.showInformationMessage(`${message}. See ${url}.`);
   }
   async promptUpdate(oldVersion: string, newVersion: string) {
     const message = `clangd ${newVersion} is available (you have ${oldVersion}). :CocCommand clangd.install, or :CocSettings to disable clangd.checkUpdates.`;
@@ -51,7 +51,11 @@ class UI {
     const clangdExe = process.platform === 'win32' ? 'clangd.exe' : 'clangd';
     if (p === '') {
       try {
-        const exes = find(this.storagePath, { matching: `**/${clangdExe}`, files: true, directories: false });
+        const exes = find(this.storagePath, {
+          matching: `**/${clangdExe}`,
+          files: true,
+          directories: false,
+        });
         if (exes.length > 0) {
           p = exes[0];
         }

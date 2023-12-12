@@ -4,13 +4,13 @@ import {
   InlayHint,
   InlayHintKind,
   InlayHintsProvider,
-  languages,
   LinesTextDocument,
   Position,
   Range,
   RequestType,
   StaticFeature,
   TextDocumentIdentifier,
+  languages,
 } from 'coc.nvim';
 
 import { Ctx, documentSelector } from './ctx';
@@ -39,6 +39,7 @@ export class InlayHintsFeature implements StaticFeature {
   fillClientCapabilities() {}
   fillInitializeParams() {}
 
+  // biome-ignore lint/suspicious/noExplicitAny:
   initialize(capabilities: any) {
     // If the clangd server supports LSP 3.17 inlay hints, these are handled by
     // the vscode-languageclient library - don't send custom requests too!
@@ -57,8 +58,8 @@ class Provider implements InlayHintsProvider {
   constructor(private context: Ctx) {}
 
   decodeKind(kind: string): InlayHintKind | undefined {
-    if (kind == 'type') return InlayHintKind.Type;
-    if (kind == 'parameter') return InlayHintKind.Parameter;
+    if (kind === 'type') return InlayHintKind.Type;
+    if (kind === 'parameter') return InlayHintKind.Parameter;
     return undefined;
   }
 
@@ -73,12 +74,15 @@ class Provider implements InlayHintsProvider {
   }
 
   async provideInlayHints(document: LinesTextDocument, range: Range, token: CancellationToken): Promise<InlayHint[]> {
+    if (!this.context.client) {
+      return [];
+    }
     const request: protocol.InlayHintsParams = {
       textDocument: { uri: document.uri },
       range,
     };
 
-    const result = await this.context.client!.sendRequest(protocol.InlayHintsRequest.type, request, token);
+    const result = await this.context.client.sendRequest(protocol.InlayHintsRequest.type, request, token);
     return result.map(this.decode, this);
   }
 }

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 async function start() {
   await require('esbuild').build({
     entryPoints: ['src/index.ts'],

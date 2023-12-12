@@ -6,6 +6,7 @@ tsconfig.json
 .DS_Store
 webpack.config.js
 esbuild.js
+biome.json
 package-lock.json
 .github
 .eslintrc.js
