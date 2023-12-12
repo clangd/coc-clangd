@@ -10,14 +10,14 @@ class UI {
     return this.context.storagePath;
   }
   slow<T>(title: string, result: Promise<T>) {
-    coc.window.showMessage(title + '...');
+    coc.window.showInformationMessage(`${title}...}`);
     return result;
   }
   error(s: string) {
-    coc.window.showMessage(s, 'error');
+    coc.window.showErrorMessage(s);
   }
   info(s: string) {
-    coc.window.showMessage(s);
+    coc.window.showInformationMessage(s);
   }
   progress<T>(title: string, _cancel: any, body: (progress: (fraction: number) => void) => Promise<T>) {
     return this.slow(
@@ -27,7 +27,7 @@ class UI {
   }
 
   async shouldReuse(release: string) {
-    coc.window.showMessage(`Reusing existing ${release} installation in ${this.storagePath}`);
+    coc.window.showInformationMessage(`Reusing existing ${release} installation in ${this.storagePath}`);
     return true;
   }
   async promptReload() {
@@ -35,15 +35,15 @@ class UI {
   }
   showHelp(message: string, url: string) {
     message += ` See ${url}.`;
-    coc.window.showMessage(message);
+    coc.window.showInformationMessage(message);
   }
   async promptUpdate(oldVersion: string, newVersion: string) {
     const message = `clangd ${newVersion} is available (you have ${oldVersion}). :CocCommand clangd.install, or :CocSettings to disable clangd.checkUpdates.`;
-    coc.window.showMessage(message);
+    coc.window.showInformationMessage(message);
   }
   async promptInstall(version: string) {
     const message = `clangd was not found on your PATH. :CocCommand clangd.install will install ${version}.`;
-    coc.window.showMessage(message);
+    coc.window.showInformationMessage(message);
   }
 
   get clangdPath(): string {

@@ -33,7 +33,7 @@ export function switchSourceHeader(ctx: Ctx) {
     };
     const dest = await ctx.client.sendRequest<string>(SwitchSourceHeaderRequest.type.method, params);
     if (!dest) {
-      window.showMessage(`Didn't find a corresponding file.`);
+      window.showInformationMessage(`Didn't find a corresponding file.`);
       return;
     }
 
@@ -64,7 +64,7 @@ export function symbolInfo(ctx: Ctx) {
 
     // TODO
     const detail = details[0];
-    window.showMessage(`name: ${detail.name}, containerName: ${detail.containerName}, usr: ${detail.usr}`);
+    window.showInformationMessage(`name: ${detail.name}, containerName: ${detail.containerName}, usr: ${detail.usr}`);
   };
 }
 
@@ -98,7 +98,7 @@ export function userConfig() {
   if (file) {
     openConfigFile(file);
   } else {
-    window.showMessage("Couldn't get global configuration directory", 'warning');
+    window.showWarningMessage("Couldn't get global configuration directory");
   }
 }
 
@@ -107,6 +107,6 @@ export function projectConfig() {
     const folder = workspace.workspaceFolders[0];
     openConfigFile(path.join(Uri.parse(folder.uri).fsPath, '.clangd'));
   } else {
-    window.showMessage('No project is open', 'warning');
+    window.showWarningMessage('No project is open');
   }
 }

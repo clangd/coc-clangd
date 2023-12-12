@@ -1,7 +1,6 @@
 // Implements the "memory usage" feature.
 
 import { commands, RequestType0, StaticFeature, window } from 'coc.nvim';
-import { ServerCapabilities } from 'vscode-languageserver-protocol';
 import { Ctx } from './ctx';
 
 // LSP wire format for this clangd feature.
@@ -57,7 +56,7 @@ export class MemoryUsageFeature implements StaticFeature {
   fillClientCapabilities() {}
   fillInitializeParams() {}
 
-  initialize(capabilities: ServerCapabilities) {
+  initialize(capabilities: any) {
     if ('memoryUsageProvider' in capabilities) {
       this.ctx.subscriptions.push(
         commands.registerCommand('clangd.memoryUsage', async () => {

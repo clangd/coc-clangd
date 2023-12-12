@@ -4,7 +4,6 @@ import { Ctx, ClangdExtensionFeature } from './ctx';
 import { FileStatus, Status } from './file-status';
 import { InlayHintsFeature } from './inlay-hints';
 import * as install from './install';
-import { ReloadFeature } from './reload';
 import { MemoryUsageFeature } from './memory-usage';
 import { ASTFeature } from './ast';
 
@@ -16,7 +15,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
 
   const service = services.getService('clangd');
   if (service) {
-    window.showMessage(`Looks like you've configured clangd in coc-settings.json, you should remove it to use coc-clangd`, 'warning');
+    window.showWarningMessage("Looks like you've configured clangd in coc-settings.json, you should remove it to use coc-clangd");
     return;
   }
 
@@ -28,10 +27,9 @@ export async function activate(context: ExtensionContext): Promise<void> {
   try {
     const astFeature = new ASTFeature(ctx);
     const extFeature = new ClangdExtensionFeature();
-    const reloadFeature = new ReloadFeature(ctx, () => activate(context));
     const memoryUsageFeature = new MemoryUsageFeature(ctx);
     const inlayFeature = new InlayHintsFeature(ctx);
-    await ctx.startServer(clangdPath, ...[astFeature, extFeature, reloadFeature, memoryUsageFeature, inlayFeature]);
+    await ctx.startServer(clangdPath, ...[astFeature, extFeature, memoryUsageFeature, inlayFeature]);
   } catch (e) {
     return;
   }

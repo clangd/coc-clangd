@@ -12,7 +12,6 @@ import {
   StaticFeature,
   TextDocumentIdentifier,
 } from 'coc.nvim';
-import { ServerCapabilities } from 'vscode-languageserver-protocol';
 
 import { Ctx, documentSelector } from './ctx';
 
@@ -40,11 +39,10 @@ export class InlayHintsFeature implements StaticFeature {
   fillClientCapabilities() {}
   fillInitializeParams() {}
 
-  initialize(capabilities: ServerCapabilities) {
-    const serverCapabilities: ServerCapabilities & { clangdInlayHintsProvider?: boolean; inlayHintProvider?: any } = capabilities;
+  initialize(capabilities: any) {
     // If the clangd server supports LSP 3.17 inlay hints, these are handled by
     // the vscode-languageclient library - don't send custom requests too!
-    if (!serverCapabilities.clangdInlayHintsProvider || languages.registerInlayHintsProvider === undefined || serverCapabilities.inlayHintProvider) {
+    if (!capabilities.clangdInlayHintsProvider || languages.registerInlayHintsProvider === undefined || capabilities.inlayHintProvider) {
       return;
     }
     this.context.subscriptions.push(languages.registerInlayHintsProvider(documentSelector, new Provider(this.context)));
