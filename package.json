@@ -32,8 +32,7 @@
     "eslint": "^8.0.1",
     "fs-jetpack": "^5.0.0",
     "typescript": "^5.0.3",
-    "unzipper": "^0.10.14",
-    "vscode-languageserver-protocol": "^3.17.2"
+    "unzipper": "^0.10.14"
   },
   "activationEvents": [
     "onLanguage:c",
