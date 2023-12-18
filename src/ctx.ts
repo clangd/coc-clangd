@@ -75,7 +75,7 @@ export class Ctx {
       fallbackFlags: this.config.fallbackFlags,
     };
     if (this.config.compilationDatabasePath) {
-      initializationOptions.compilationDatabasePath = this.config.compilationDatabasePath;
+      initializationOptions.compilationDatabasePath = workspace.expand(this.config.compilationDatabasePath);
     } else if (this.config.compilationDatabaseCandidates.length) {
       const closest = this.closestCompilationDatabase(this.config.compilationDatabaseCandidates);
       if (closest) initializationOptions.compilationDatabasePath = closest;
