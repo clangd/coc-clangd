@@ -26,7 +26,6 @@
     "@biomejs/biome": "^1.4.1",
     "@clangd/install": "^0.1.16",
     "@types/node": "16",
-    "@types/which": "^3.0.0",
     "coc.nvim": "^0.0.83-next.18",
     "esbuild": "^0.19.2",
     "fs-jetpack": "^5.0.0",
