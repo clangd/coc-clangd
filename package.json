@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/clangd/coc-clangd.git"
+    "url": "git+https://github.com/clangd/coc-clangd.git"
   },
   "scripts": {
     "build": "node esbuild.js",
