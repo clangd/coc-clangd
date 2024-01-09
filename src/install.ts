@@ -4,7 +4,10 @@ import * as coc from 'coc.nvim';
 import { find } from 'fs-jetpack';
 
 class UI {
-  constructor(private context: coc.ExtensionContext, private config: coc.WorkspaceConfiguration) {}
+  constructor(
+    private context: coc.ExtensionContext,
+    private config: coc.WorkspaceConfiguration
+  ) {}
 
   get storagePath(): string {
     return this.context.storagePath;
