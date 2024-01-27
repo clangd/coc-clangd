@@ -73,7 +73,7 @@ class UI {
     this.config.update('path', p.replace(homedir(), '~'), /*isUser=*/ true);
   }
 
-  localize(message: string, ...args: Array<string|number|boolean>) {
+  localize(message: string, ...args: Array<string | number | boolean>) {
     let ret = message;
     for (const i in args) {
       ret.replace(`{${i}}`, args[i].toString());
