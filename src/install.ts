@@ -74,7 +74,7 @@ class UI {
   }
 
   localize(message: string, ...args: Array<string | number | boolean>) {
-    let ret = message;
+    const ret = message;
     for (const i in args) {
       ret.replace(`{${i}}`, args[i].toString());
     }
