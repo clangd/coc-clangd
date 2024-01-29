@@ -72,6 +72,14 @@ class UI {
   set clangdPath(p: string) {
     this.config.update('path', p.replace(homedir(), '~'), /*isUser=*/ true);
   }
+
+  localize(message: string, ...args: Array<string | number | boolean>) {
+    const ret = message;
+    for (const i in args) {
+      ret.replace(`{${i}}`, args[i].toString());
+    }
+    return ret;
+  }
 }
 
 // Returns the clangd path to use, or null if clangd is not installed.
