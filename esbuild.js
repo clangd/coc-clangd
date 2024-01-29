@@ -3,6 +3,7 @@ async function start() {
     entryPoints: ['src/index.ts'],
     bundle: true,
     minify: true,
+    keepNames: true,
     sourcemap: process.env.NODE_ENV === 'development',
     mainFields: ['module', 'main'],
     external: ['coc.nvim'],

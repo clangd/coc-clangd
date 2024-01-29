@@ -13,7 +13,7 @@ class UI {
     return this.context.storagePath;
   }
   slow<T>(title: string, result: Promise<T>) {
-    coc.window.showInformationMessage(`${title}...}`);
+    coc.window.showInformationMessage(`${title}...`);
     return result;
   }
   error(s: string) {
@@ -74,9 +74,9 @@ class UI {
   }
 
   localize(message: string, ...args: Array<string | number | boolean>) {
-    const ret = message;
+    let ret = message;
     for (const i in args) {
-      ret.replace(`{${i}}`, args[i].toString());
+      ret = ret.replace(`{${i}}`, args[i].toString());
     }
     return ret;
   }
