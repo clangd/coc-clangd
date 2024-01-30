@@ -29,7 +29,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
     const extFeature = new ClangdExtensionFeature();
     const memoryUsageFeature = new MemoryUsageFeature(ctx);
     const inlayFeature = new InlayHintsFeature(ctx);
-    await ctx.startServer(clangdPath, ...[astFeature, extFeature, memoryUsageFeature, inlayFeature]);
+    await ctx.startServer(clangdPath, astFeature, extFeature, memoryUsageFeature, inlayFeature);
   } catch (e) {
     return;
   }
