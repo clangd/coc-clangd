@@ -1,4 +1,4 @@
-import { homedir } from 'os';
+import { homedir } from 'node:os';
 import * as common from '@clangd/install';
 import * as coc from 'coc.nvim';
 import { find } from 'fs-jetpack';

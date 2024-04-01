@@ -1,7 +1,7 @@
 // Implements the "memory usage" feature.
 
-import { RequestType0, StaticFeature, commands, window } from 'coc.nvim';
-import { Ctx } from './ctx';
+import { RequestType0, type StaticFeature, commands, window } from 'coc.nvim';
+import type { Ctx } from './ctx';
 
 // LSP wire format for this clangd feature.
 interface WireTree {

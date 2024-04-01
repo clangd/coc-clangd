@@ -1,5 +1,5 @@
-import { Disposable, StatusBarItem, window, workspace } from 'coc.nvim';
-import { Config } from './config';
+import { type Disposable, type StatusBarItem, window, workspace } from 'coc.nvim';
+import type { Config } from './config';
 
 export interface Status {
   uri: string;

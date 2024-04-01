@@ -1,7 +1,7 @@
-import * as fs from 'fs';
-import * as path from 'path';
-import { RequestType, TextDocumentIdentifier, TextDocumentPositionParams, Uri, window, workspace } from 'coc.nvim';
-import { Ctx } from './ctx';
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import { RequestType, type TextDocumentIdentifier, type TextDocumentPositionParams, Uri, window, workspace } from 'coc.nvim';
+import type { Ctx } from './ctx';
 
 namespace SwitchSourceHeaderRequest {
   export const type = new RequestType<TextDocumentIdentifier, string, void>('textDocument/switchSourceHeader');

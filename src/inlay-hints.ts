@@ -1,19 +1,19 @@
 import {
-  CancellationToken,
-  FeatureState,
-  InlayHint,
+  type CancellationToken,
+  type FeatureState,
+  type InlayHint,
   InlayHintKind,
-  InlayHintsProvider,
-  LinesTextDocument,
-  Position,
-  Range,
+  type InlayHintsProvider,
+  type LinesTextDocument,
+  type Position,
+  type Range,
   RequestType,
-  StaticFeature,
-  TextDocumentIdentifier,
+  type StaticFeature,
+  type TextDocumentIdentifier,
   languages,
 } from 'coc.nvim';
 
-import { Ctx, documentSelector } from './ctx';
+import { type Ctx, documentSelector } from './ctx';
 
 namespace protocol {
   export interface InlayHint {

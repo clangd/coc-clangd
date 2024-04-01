@@ -4,9 +4,9 @@ import {
   Emitter,
   Range,
   RequestType,
-  StaticFeature,
-  TextDocumentIdentifier,
-  TreeDataProvider,
+  type StaticFeature,
+  type TextDocumentIdentifier,
+  type TreeDataProvider,
   TreeItem,
   TreeItemCollapsibleState,
   Uri,
@@ -14,7 +14,7 @@ import {
   window,
   workspace,
 } from 'coc.nvim';
-import { Ctx } from './ctx';
+import type { Ctx } from './ctx';
 
 // The wire format: we send a position, and get back a tree of ASTNode.
 interface ASTParams {

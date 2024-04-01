@@ -1,8 +1,8 @@
-import { ExtensionContext, State, commands, services, window, workspace } from 'coc.nvim';
+import { type ExtensionContext, State, commands, services, window, workspace } from 'coc.nvim';
 import { ASTFeature } from './ast';
 import * as cmds from './cmds';
 import { ClangdExtensionFeature, Ctx } from './ctx';
-import { FileStatus, Status } from './file-status';
+import { FileStatus, type Status } from './file-status';
 import { InlayHintsFeature } from './inlay-hints';
 import * as install from './install';
 import { MemoryUsageFeature } from './memory-usage';

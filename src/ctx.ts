@@ -1,18 +1,18 @@
-import { existsSync } from 'fs';
-import { join } from 'path';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import {
   CompletionItemKind,
-  Disposable,
-  DocumentSelector,
-  Executable,
-  ExtensionContext,
+  type Disposable,
+  type DocumentSelector,
+  type Executable,
+  type ExtensionContext,
   InsertTextFormat,
   LanguageClient,
-  LanguageClientOptions,
-  LinesTextDocument,
-  ServerOptions,
-  StaticFeature,
-  TextEdit,
+  type LanguageClientOptions,
+  type LinesTextDocument,
+  type ServerOptions,
+  type StaticFeature,
+  type TextEdit,
   services,
   workspace,
 } from 'coc.nvim';
