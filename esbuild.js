@@ -2,7 +2,6 @@ async function start() {
   await require('esbuild').build({
     entryPoints: ['src/index.ts'],
     bundle: true,
-    minify: true,
     keepNames: true,
     sourcemap: process.env.NODE_ENV === 'development',
     mainFields: ['module', 'main'],
