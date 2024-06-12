@@ -91,9 +91,6 @@ export class Ctx {
     if (this.config.disableProgressNotifications) {
       disabledFeatures.push('progress');
     }
-    if (!this.config.inlayHints.enable) {
-      disabledFeatures.push('inlayHint');
-    }
     const clientOptions: LanguageClientOptions = {
       documentSelector,
       initializationOptions,

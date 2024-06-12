@@ -57,13 +57,4 @@ export class Config {
   get serverCompletionRanking() {
     return this.cfg.get('serverCompletionRanking') as boolean;
   }
-
-  get inlayHints() {
-    const enable = workspace.getConfiguration('inlayHint').get('enable', true);
-    return {
-      // @ts-ignore
-      enable: workspace.env.virtualText && enable,
-      sep: this.cfg.get('inlayHints.sep', '‣'),
-    };
-  }
 }

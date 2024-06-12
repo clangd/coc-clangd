@@ -3,7 +3,6 @@ import { ASTFeature } from './ast';
 import * as cmds from './cmds';
 import { ClangdExtensionFeature, Ctx } from './ctx';
 import { FileStatus, type Status } from './file-status';
-import { InlayHintsFeature } from './inlay-hints';
 import * as install from './install';
 import { MemoryUsageFeature } from './memory-usage';
 
@@ -28,8 +27,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
     const astFeature = new ASTFeature(ctx);
     const extFeature = new ClangdExtensionFeature();
     const memoryUsageFeature = new MemoryUsageFeature(ctx);
-    const inlayFeature = new InlayHintsFeature(ctx);
-    await ctx.startServer(clangdPath, astFeature, extFeature, memoryUsageFeature, inlayFeature);
+    await ctx.startServer(clangdPath, astFeature, extFeature, memoryUsageFeature);
   } catch (e) {
     return;
   }
