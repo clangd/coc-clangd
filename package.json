@@ -23,13 +23,13 @@
     "prepare": "node esbuild.js"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.5.0",
+    "@biomejs/biome": "^1.8.1",
     "@clangd/install": "^0.1.18",
     "@types/node": "16",
     "coc.nvim": "^0.0.83-next.18",
-    "esbuild": "^0.21.4",
+    "esbuild": "^0.21.5",
     "fs-jetpack": "^5.1.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.5"
   },
   "activationEvents": [
     "onLanguage:c",
