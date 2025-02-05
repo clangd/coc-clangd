@@ -138,6 +138,9 @@ export class Ctx {
               if (symbol.containerName) {
                 symbol.name = `${symbol.containerName}::${symbol.name}`;
               }
+              if (query.startsWith('::')) {
+                symbol.name = `::${symbol.name}`;
+              }
               symbol.containerName = '';
             }
             return symbol;
