@@ -60,7 +60,7 @@ export class Ctx {
     }
 
     const exec: Executable = {
-      command: bin,
+      command: `${bin}`,
       args: this.config.arguments,
       options: {
         shell: process.platform === 'win32',
