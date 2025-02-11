@@ -27,7 +27,7 @@
     "@clangd/install": "^0.1.18",
     "@types/node": "16",
     "coc.nvim": "^0.0.83-next.18",
-    "esbuild": "^0.24.0",
+    "esbuild": "^0.25.0",
     "fs-jetpack": "^5.1.0",
     "typescript": "^5.5.3"
   },
