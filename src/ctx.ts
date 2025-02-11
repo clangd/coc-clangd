@@ -62,6 +62,9 @@ export class Ctx {
     const exec: Executable = {
       command: bin,
       args: this.config.arguments,
+      options: {
+        shell: process.platform === 'win32',
+      },
     };
     if (this.config.trace.file) {
       exec.options = { env: { CLANGD_TRACE: this.config.trace.file } };
