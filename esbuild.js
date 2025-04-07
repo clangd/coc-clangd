@@ -5,7 +5,7 @@ async function start() {
     keepNames: true,
     sourcemap: process.env.NODE_ENV === 'development',
     mainFields: ['module', 'main'],
-    external: ['coc.nvim'],
+    external: ['coc.nvim', '@aws-sdk/client-s3'],
     platform: 'node',
     target: 'node16.18',
     outfile: 'lib/index.js',
