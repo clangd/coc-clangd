@@ -1,6 +1,7 @@
 // Implements the "ast dump" feature: textDocument/ast.
 
 import {
+  commands,
   Emitter,
   Range,
   RequestType,
@@ -10,7 +11,6 @@ import {
   TreeItem,
   TreeItemCollapsibleState,
   Uri,
-  commands,
   window,
   workspace,
 } from 'coc.nvim';
@@ -37,9 +37,9 @@ export class ASTFeature implements StaticFeature {
   fillClientCapabilities() {}
 
   // The "Show AST" command is enabled if the server advertises the capability.
-  // biome-ignore lint/suspicious/noExplicitAny:
+  // biome-ignore lint/suspicious/noExplicitAny: x
   initialize(capabilities: any) {
-    // biome-ignore lint/complexity/useLiteralKeys:
+    // biome-ignore lint/complexity/useLiteralKeys: x
     if ('astProvider' in capabilities && typeof window['createTreeView'] === 'function') {
       this.ctx.subscriptions.push(
         commands.registerCommand('clangd.ast', async () => {

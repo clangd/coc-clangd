@@ -1,6 +1,6 @@
 // Implements the "memory usage" feature.
 
-import { RequestType0, type StaticFeature, commands, window } from 'coc.nvim';
+import { commands, RequestType0, type StaticFeature, window } from 'coc.nvim';
 import type { Ctx } from './ctx';
 
 // LSP wire format for this clangd feature.
@@ -56,7 +56,7 @@ export class MemoryUsageFeature implements StaticFeature {
   fillClientCapabilities() {}
   fillInitializeParams() {}
 
-  // biome-ignore lint/suspicious/noExplicitAny:
+  // biome-ignore lint/suspicious/noExplicitAny: x
   initialize(capabilities: any) {
     if ('memoryUsageProvider' in capabilities) {
       this.ctx.subscriptions.push(

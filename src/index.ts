@@ -1,4 +1,4 @@
-import { type ExtensionContext, State, commands, services, window, workspace } from 'coc.nvim';
+import { commands, type ExtensionContext, State, services, window, workspace } from 'coc.nvim';
 import { ASTFeature } from './ast';
 import * as cmds from './cmds';
 import { ClangdExtensionFeature, Ctx } from './ctx';
@@ -28,7 +28,7 @@ export async function activate(context: ExtensionContext): Promise<void> {
     const extFeature = new ClangdExtensionFeature();
     const memoryUsageFeature = new MemoryUsageFeature(ctx);
     await ctx.startServer(clangdPath, astFeature, extFeature, memoryUsageFeature);
-  } catch (e) {
+  } catch (_e) {
     return;
   }
 

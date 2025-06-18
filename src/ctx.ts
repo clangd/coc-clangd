@@ -12,8 +12,8 @@ import {
   type LinesTextDocument,
   type ServerOptions,
   type StaticFeature,
-  type TextEdit,
   services,
+  type TextEdit,
   workspace,
 } from 'coc.nvim';
 import { Config } from './config';
@@ -21,7 +21,7 @@ import { Config } from './config';
 export class ClangdExtensionFeature implements StaticFeature {
   dispose(): void {}
   initialize() {}
-  // biome-ignore lint/suspicious/noExplicitAny:
+  // biome-ignore lint/suspicious/noExplicitAny: x
   fillClientCapabilities(capabilities: any) {
     const extendedCompletionCapabilities = capabilities.textDocument.completion;
     if (extendedCompletionCapabilities) {
@@ -72,7 +72,7 @@ export class Ctx {
 
     const serverOptions: ServerOptions = exec;
 
-    // biome-ignore lint/suspicious/noExplicitAny:
+    // biome-ignore lint/suspicious/noExplicitAny: x
     const initializationOptions: any = {
       clangdFileStatus: true,
       fallbackFlags: this.config.fallbackFlags,

@@ -22,7 +22,7 @@ class UI {
   info(s: string) {
     coc.window.showInformationMessage(s);
   }
-  // biome-ignore lint/suspicious/noExplicitAny:
+  // biome-ignore lint/suspicious/noExplicitAny: x
   progress<T>(title: string, _cancel: any, body: (progress: (fraction: number) => void) => Promise<T>) {
     return this.slow(
       title,
@@ -62,7 +62,7 @@ class UI {
         if (exes.length > 0) {
           p = exes[0];
         }
-      } catch (e) {}
+      } catch (_e) {}
     }
     if (p === '') {
       p = clangdExe;

@@ -72,15 +72,15 @@ function getUserConfigFile(): string {
   let dir: string;
   switch (process.platform) {
     case 'win32':
-      // biome-ignore lint/style/noNonNullAssertion:
+      // biome-ignore lint/style/noNonNullAssertion: x
       dir = process.env.LOCALAPPDATA!;
       break;
     case 'darwin':
-      // biome-ignore lint/style/noNonNullAssertion:
+      // biome-ignore lint/style/noNonNullAssertion: x
       dir = path.join(process.env.HOME!, 'Library', 'Preferences');
       break;
     default:
-      // biome-ignore lint/style/noNonNullAssertion:
+      // biome-ignore lint/style/noNonNullAssertion: x
       dir = process.env.XDG_CONFIG_HOME || path.join(process.env.HOME!, '.config');
       break;
   }
