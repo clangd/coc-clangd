@@ -25,7 +25,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.0.0",
     "@clangd/install": "^0.1.18",
-    "@types/node": "16",
+    "@types/node": "24",
     "coc.nvim": "^0.0.83-next.18",
     "esbuild": "^0.25.0",
     "fs-jetpack": "^5.1.0",
