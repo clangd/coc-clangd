@@ -172,8 +172,12 @@ export class Ctx {
     for (const candidate of expandendCandidates) {
       const compileCommandsPath = join(candidate, 'compile_commands.json');
       if (existsSync(compileCommandsPath)) {
-        const realPath = realpathSync(compileCommandsPath);
-        return dirname(realPath);
+        try {
+          const realPath = realpathSync(compileCommandsPath);
+          return dirname(realPath);
+        } catch {
+          return dirname(compileCommandsPath);
+        }
       }
     }
 
