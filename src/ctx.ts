@@ -1,5 +1,5 @@
-import { existsSync } from 'node:fs';
-import { join } from 'node:path';
+import { existsSync, realpathSync } from 'node:fs';
+import { dirname, join } from 'node:path';
 import {
   CompletionItemKind,
   type Disposable,
@@ -170,8 +170,10 @@ export class Ctx {
     // Return the first (sorting matters!) candidate directory that contains a
     // compilation database. Otherwise return the empty string.
     for (const candidate of expandendCandidates) {
-      if (existsSync(join(candidate, 'compile_commands.json'))) {
-        return candidate;
+      const compileCommandsPath = join(candidate, 'compile_commands.json');
+      if (existsSync(compileCommandsPath)) {
+        const realPath = realpathSync(compileCommandsPath);
+        return dirname(realPath);
       }
     }
 
