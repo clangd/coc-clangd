@@ -29,7 +29,7 @@
     "coc.nvim": "^0.0.83-next.18",
     "esbuild": "^0.28.0",
     "fs-jetpack": "^5.1.0",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   },
   "activationEvents": [
     "onLanguage:c",
