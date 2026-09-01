@@ -23,11 +23,11 @@
     "prepare": "node esbuild.js"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.15",
+    "@biomejs/biome": "^2.5.11",
     "@clangd/install": "^0.1.20",
-    "@types/node": "16",
-    "coc.nvim": "^0.0.83-next.18",
-    "esbuild": "^0.28.0",
+    "@types/node": "26",
+    "coc.nvim": "^0.0.83-next.27",
+    "esbuild": "^0.28.2",
     "fs-jetpack": "^5.1.0",
     "typescript": "^7.0.2"
   },
@@ -179,5 +179,8 @@
         "title": "Check for updates to clangd language server"
       }
     ]
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
   }
 }
